@@ -3,8 +3,19 @@ require('dotenv').config();
 const path = require('path');
 const bodyParser = require('body-parser');
 
+const usersRoute = require('../db/routes/Users.routes');
+const badgesRoute = require('../db/routes/Badges.routes');
 
-const Users = require('../db/models/Users.js');
+
+
+const {
+  VoterBadge,
+  MayorBadge,
+  SosBadge,
+  GubBadge,
+  VeepBadge,
+  PotusBadge
+} = require('../db/models/Badges');
 
 
 
@@ -18,34 +29,14 @@ const app = express();
 app.use(express.static(DIR));
 app.use(bodyParser.json());
 
+///////////////         routes for database            ///////////////
+
+app.use(usersRoute);
+app.use(badgesRoute);
+
 app.get('/', (req, res) => {
   res.sendFile(html_file);
 });
-
-app.post('/api/user', async (req, res) => {
-  const { firstName, lastName, DOB } = req.body;
-  const user = await Users.create({
-    firstName,
-    lastName,
-    DOB
-  })
-  try {
-    res.send(user).status(200).end();
-  }
-  catch (err) {
-    console.error('error in post! ', err);
-  }
-});
-
-app.get('/api/user', (req, res) => {
-  Users.find()
-    .then((users) => {
-      console.log(users);
-
-    })
-
-})
-
 
 
 connectDB()
