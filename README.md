@@ -39,6 +39,8 @@ _All this and more with MyVote!_
 
 ### Schema
 
+![Schema](assets/myVote.png)
+
 ### Tech Stack
 
 ![MyVote Tech_stack](assets/myVote_techstack.jpg)
