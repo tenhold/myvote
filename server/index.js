@@ -4,7 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 
-const Users = require('../db/Users.js');
+const Users = require('../db/models/Users.js');
 
 
 
