@@ -51,7 +51,7 @@ _All this and more with MyVote!_
 - Create new Cluster named myvotecluster
 - Create a new Database user
   - under Database Access, add new database user
-  - give user read adn write any database access
+  - give user read and write any database access
 - Add IP access
   - under Network Access, add ip address
   - add your current ip address
