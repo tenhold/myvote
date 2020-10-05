@@ -1,24 +1,5 @@
 const { Schema, model, connection } = require('mongoose');
 
-
-
-// const createBadgeSchema = (number, badge) => {
-//   return new Schema({
-//     _id: {
-//       required: true,
-//       type: Number,
-//       default: number
-//     },
-//     badge: {
-//       required: true,
-//       type: String,
-//       default: badge
-//     },
-//     url: String // might need to be a link to S3 where the image is actually stored
-//   });
-// };
-
-
 const createBadgeSchema = (number, imageURL) => {
   return new Schema({
     _id: {
