@@ -20,6 +20,7 @@ const sosRoute = require('../db/routes/Sos.routes');
 const gubRoute = require('../db/routes/Gub.routes');
 const veepRoute = require('../db/routes/Veep.routes');
 const potusRoute = require('../db/routes/Potus.routes');
+const ballotRoute = require('../db/routes/Ballot.routes');
 
 const DIR = path.join(__dirname, '../build');
 const html_file = path.join(DIR, 'index.html');
@@ -55,7 +56,7 @@ app.use(sosRoute);
 app.use(gubRoute);
 app.use(veepRoute);
 app.use(potusRoute);
-///////////////////////////////////////////////////////////////////////
+app.use(ballotRoute);
 
 app.get('/', (req, res) => {
   res.sendFile(html_file);

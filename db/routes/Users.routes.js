@@ -9,7 +9,8 @@ router.get('/', async (req, res) => {
 
   }
   catch (err) {
-    res.status(500).send('ERROR in user GET');
+    console.error('ERROR in user GET');
+    res.sendStatus(500);
   }
 });
 
@@ -38,8 +39,8 @@ router.post('/add', async (req, res) => {
     res.status(201).send(user);
   }
   catch (err) {
-    console.error('error in post! ', err);
-    res.status(500).send('ERROR in user POST');
+    console.error('ERROR in user POST');
+    res.sendStatus(500);
   }
 });
 

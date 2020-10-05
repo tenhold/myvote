@@ -5,20 +5,22 @@ router.post('/api/mayor_badge', async (req, res) => {
   const { url } = req.body;
   try {
     const mayor = await MayorBadge.create({ url });
-    mayor ? res.status(201).send(mayor) : res.sendStatus(404);
+    res.status(201).send(mayor);
   }
   catch (err) {
-    res.send('POST error mayor BADGE:', err);
+    console.error('POST error mayor BADGE:', err);
+    res.sendStatus(500);
   }
 });
 
 router.get('/api/mayor_badge', async (req, res) => {
   try {
     const mayor = await MayorBadge.find();
-    mayor ? res.status(200).send(mayor) : res.sendStatus(404);
+    res.status(200).send(mayor);
   }
   catch (err) {
-    res.status(500).send('GET error mayor BADGE: ', err);
+    console.error('GET error mayor BADGE: ', err);
+    res.sendStatus(500);
   }
 });
 
