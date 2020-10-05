@@ -1,10 +1,15 @@
 const { Schema, model } = require('mongoose');
 
 const usersSchema = new Schema({
-  email: {
+  voter_device_id: {  // retreved from the we vote api
+    type: String,
     unique: true,
-    required: true,
-    type: String
+    // required: true
+  },
+  email: {
+    type: String,
+    unique: true,
+    required: true
   },
   password: String,
   salt: String,

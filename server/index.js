@@ -5,8 +5,13 @@ const bodyParser = require("body-parser");
 const connectDB = require("../db/index");
 const { SERVER_PORT } = process.env;
 
+<<<<<<< HEAD
 const usersRoute = require("../db/routes/Users.routes");
 const badgesRoute = require("../db/routes/Badges.routes");
+=======
+const usersRoute = require('../db/routes/Users.routes');
+const voterRoute = require('../db/routes/Voter.routes');
+>>>>>>> f5f5980... [Add] badges routes
 
 const DIR = path.join(__dirname, "../build");
 const html_file = path.join(DIR, "index.html");
@@ -17,7 +22,7 @@ app.use(bodyParser.json());
 
 ///////////////         routes for database            ///////////////
 app.use(usersRoute);
-app.use(badgesRoute);
+app.use(voterRoute);
 
 app.get("/", (req, res) => {
   res.sendFile(html_file);
