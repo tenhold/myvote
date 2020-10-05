@@ -2,25 +2,11 @@ const express = require('express');
 require('dotenv').config();
 const path = require('path');
 const bodyParser = require('body-parser');
+const connectDB = require('../db/index');
+const { SERVER_PORT } = process.env;
 
 const usersRoute = require('../db/routes/Users.routes');
 const badgesRoute = require('../db/routes/Badges.routes');
-
-
-
-const {
-  VoterBadge,
-  MayorBadge,
-  SosBadge,
-  GubBadge,
-  VeepBadge,
-  PotusBadge
-} = require('../db/models/Badges');
-
-
-
-const connectDB = require('../db/index');
-const { SERVER_PORT } = process.env;
 
 const DIR = path.join(__dirname, '../client');
 const html_file = path.join(DIR, 'index.html');
@@ -33,6 +19,7 @@ app.use(bodyParser.json());
 
 app.use(usersRoute);
 app.use(badgesRoute);
+
 
 app.get('/', (req, res) => {
   res.sendFile(html_file);

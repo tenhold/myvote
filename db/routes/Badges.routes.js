@@ -1,4 +1,14 @@
 const router = require('express').Router();
+const {
+  VoterBadge,
+  MayorBadge,
+  SosBadge,
+  GubBadge,
+  VeepBadge,
+  PotusBadge
+} = require('../db/models/Badges');
+
+
 
 
 router.post('/api/voter_badge', async (req, res) => {
