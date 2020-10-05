@@ -1,7 +1,7 @@
 // const MongoClient = require('mongodb').MongoClient;
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-require('dotenv').config();
+require("dotenv").config();
 
 const { MONGODB_USERNAME, MONGODB_PASSWORD } = process.env;
 
@@ -10,11 +10,13 @@ const URI = `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@myvotecluster
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true });
-    console.info('db connected!');
-  }
-  catch (err) {
-    console.error('db connection error ', err);
+    await mongoose.connect(URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.info("db connected!");
+  } catch (err) {
+    console.error("db connection error ", err);
   }
 };
 
