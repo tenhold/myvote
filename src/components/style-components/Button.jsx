@@ -15,13 +15,14 @@ class PledgeButton extends React.Component {
   }
 
   handleClick() {
-    const { user: { _id } } = this.props;
+    const { _id } = this.props.user;
     const { clicked } = this.state;
     if (!clicked) {
       axios.put(`/api/user/${_id}`)
         .then(id => {
-          console.log(id)
+          console.log('hello', id)
         })
+        .catch(err => console.error('ERROR in axios PUT: ', err));
     }
 
   }
