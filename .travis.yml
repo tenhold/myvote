@@ -8,7 +8,14 @@ cache:
 
 before_install:
   - npm install
+
+before_deploy:
   - npm run build
+
+script:
+  - zip -r myvoteapp.zip build
+  - mkdir -p myvote_deploy
+  - mv myvoteapp.zip myvote_deploy/myvoteapp.zip
 
 deploy:
   - provider: s3
@@ -30,9 +37,3 @@ deploy:
     region: us-east-1
     on:
       branch: dev
-
-  script:
-    - zip -r myvoteapp.zip build
-    - mkdir -p myvote_deploy
-    - mv myvoteapp.zip myvote_deploy/myvoteapp.zip
-    
