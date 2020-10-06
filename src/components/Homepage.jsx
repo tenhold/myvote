@@ -9,6 +9,7 @@ import MyBallot from './MyBallot.jsx';
 import Login from './Login.jsx';
 import Logout from './Logout.jsx';
 import MySupport from './MySupport.jsx';
+import logoLg from '../../assets/myvote_lg.png';
 
 export default class Homepage extends React.Component {
   constructor(props) {
@@ -45,18 +46,7 @@ export default class Homepage extends React.Component {
     } else if (page === 'signup') {
       return <Signup changePage={this.changePage} />;
     }
-
-    // else {
-    //   return (
-    //     <Login
-    //       handleClick={(homepage) => {
-    //         this.changePage('homepage', homepage);
-    //       }}
-    //     />
-    //   );
-    // }
   }
-
   render() {
     const { page } = this.state;
     return (
