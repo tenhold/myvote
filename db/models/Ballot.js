@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const ballotSchema = new Schema({
   // what info do we need to store.
+<<<<<<< HEAD
   userId: {
     type: String,
     unique: true,
@@ -21,3 +22,6 @@ const ballotSchema = new Schema({
 const Ballot = model('Ballot', ballotSchema);
 
 module.exports = Ballot;
+=======
+});
+>>>>>>> 670e1d0... [Feature] Add React file structure and components. Add Homepage navigation bar.

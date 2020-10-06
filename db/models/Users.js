@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const usersSchema = new Schema({
+<<<<<<< HEAD
   voter_device_id: {  // retreved from the we vote api
     type: String,
     unique: true,
@@ -10,6 +11,12 @@ const usersSchema = new Schema({
     type: String,
     unique: true,
     required: true
+=======
+  email: {
+    unique: true,
+    required: true,
+    type: String
+>>>>>>> 670e1d0... [Feature] Add React file structure and components. Add Homepage navigation bar.
   },
   password: String,
   salt: String,
