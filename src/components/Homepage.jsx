@@ -17,10 +17,24 @@ export default class Homepage extends React.Component {
 
     this.state = {
       page: 'homepage', // Default page rendered
+      rating: null,
+      users: [],
+      user: '' // will load the current logged in user unique id ie. _id
     };
 
     this.changePage = this.changePage.bind(this);
     this.renderSelectedPage = this.renderSelectedPage.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get('/api/users')
+      .then(users => {
+        const { data } = users;
+        this.setState({
+          users: data,
+          user: data[0]
+        });
+      });
   }
 
   changePage(option) {
@@ -48,24 +62,19 @@ export default class Homepage extends React.Component {
     }
   }
   render() {
-    const { page } = this.state;
+    const { page, user } = this.state;
     return (
       <div>
         <div>
-          <Greeting page={page} />
+          <Greeting page={page} user={user} />
           <NavBar changePage={this.changePage} page={page} />
         </div>
-        <center>
-          <img src={logoLg} />
-        </center>
-        <h1>
-          <center>Welcome to MyVote.</center>
-        </h1>
-        <h3>
-          <center>Election info at your fingertips.</center>
-        </h3>
-        <div className='main'>{this.renderSelectedPage()}</div>
+        <div>
+          <center><img src={logoLg} /></center>
+        </div>
+        <PledgeButton user={user} />
       </div>
+      
     );
   }
 }
