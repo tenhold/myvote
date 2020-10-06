@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Users = require('../models/Users');
 
 
-router.get('/api/user', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const users = await Users.find();
     res.status(200).send(users);
@@ -13,7 +13,7 @@ router.get('/api/user', async (req, res) => {
   }
 });
 
-router.post('/api/user', async (req, res) => {
+router.post('/add', async (req, res) => {
   const {
     email,
     password,
@@ -45,9 +45,11 @@ router.post('/api/user', async (req, res) => {
 
 ////////////////            myPledge put request              ////////////////
 
-router.put('api/user/:id', async (req, res) => {
-  // const { _id } = req.params;
-  console.log('hellllllllllllooooooooo');
+router.patch('/:id', async (req, res) => {
+  const { id } = req.params;
+  console.log(req.body)
+  const getUser = await Users.findById(id);
+  console.log(getUser);
 });
 
 

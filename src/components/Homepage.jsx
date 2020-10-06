@@ -93,7 +93,7 @@ export default class Homepage extends React.Component {
     return (
       <div>
         <div>
-          <Greeting page={page} />
+          <Greeting page={page} user={user} />
           <NavBar changePage={this.changePage} page={page} />
         </div>
         <div>

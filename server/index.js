@@ -31,7 +31,7 @@ app.use('/auth', authRoutes);
 ///////////////////////////////////////////////////////////////////////
 
 ///////////////         routes for database            ///////////////
-app.use(usersRoute);
+app.use('/api/users', usersRoute);
 app.use(voterRoute);
 app.use(mayorRoute);
 app.use(sosRoute);
