@@ -10,7 +10,7 @@ before_install:
   - npm i
 
 script:
-  - npm run prod
+  - npm run build
 
 deploy:
   - provider: s3
