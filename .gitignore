@@ -8,11 +8,13 @@
 .vscode
 
 # authentication
-<<<<<<< HEAD
+
 /../../config/keys.js
 
 # app.min.js
 /build/app.min.js
-=======
 /./server/config/keys.js
->>>>>>> 7f9bacf... [Feature] - Create new users and add to db upon login. No duplicate users.
+/../../config/keys.js
+
+# app.min.js
+/build/app.min.js
