@@ -16,6 +16,7 @@ class PledgeButton extends React.Component {
 
   handleClick() {
     const { _id } = this.props.user;
+    console.log('ID????????', _id);
     const { clicked } = this.state;
     if (!clicked) {
       axios.patch(`/api/users/${_id}`)
