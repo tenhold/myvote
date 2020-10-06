@@ -14,7 +14,8 @@
 # app.min.js
 /build/app.min.js
 /./server/config/keys.js
-/../../config/keys.js
+
 
 # app.min.js
 /build/app.min.js
+
