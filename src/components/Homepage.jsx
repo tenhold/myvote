@@ -41,12 +41,6 @@ export default class Homepage extends React.Component {
           <NavBar />
         </div>
           <center><img src={logoLg} /></center>
-        {/* <h1>
-          <center>Welcome to MyVote.</center>
-        </h1> */}
-        {/* <h3>
-          <center>Election info at your fingertips.</center>
-        </h3> */}
       </div>
     );
   }
