@@ -9,3 +9,6 @@
 
 # authentication
 /../../config/keys.js
+
+# app.min.js
+/build/app.min.js
