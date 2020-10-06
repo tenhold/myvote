@@ -7,7 +7,7 @@ cache:
     - node_modules
 
 before_install:
-  - npm i
+  - npm install
 
 script:
   - npm run build
