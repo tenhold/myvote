@@ -20,12 +20,14 @@ deploy:
     bucket: myvoteapp
     application: MyVoteApp
     deployment_group: MyVote-Dev
+    upload-dir: travis-builds
     on:
       branch: dev
   - provider: codedeploy
     access_key_id: $AWS_KEY
     secret_access_key: $AWS_SECRET
     bucket: myvoteapp
+    key: travis-builds
     application: MyVoteApp
     deployment_group: MyVote-Dev
     region: us-east-1
