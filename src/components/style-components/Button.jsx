@@ -30,7 +30,7 @@ class PledgeButton extends React.Component {
   render() {
     return (
       <>
-        <h3 onClick={this.handleClick}>button</h3>
+        <h3 className='pledge-btn' onClick={this.handleClick}>Pledge</h3>
       </>
     );
   }
