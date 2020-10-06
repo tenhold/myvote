@@ -43,7 +43,7 @@ export default class Homepage extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/api/user')
+    axios.get('/api/users')
       .then(users => {
         const { data } = users;
         this.setState({
