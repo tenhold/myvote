@@ -16,20 +16,25 @@ deploy:
   - provider: s3
     access_key_id: $AWS_KEY
     secret_access_key: $AWS_SECRET
-    local_dir: build
+    local_dir: myvote_deploy
     bucket: myvoteapp
     application: MyVoteApp
     deployment_group: MyVote-Dev
-    upload-dir: travis-builds
     on:
       branch: dev
   - provider: codedeploy
     access_key_id: $AWS_KEY
     secret_access_key: $AWS_SECRET
     bucket: myvoteapp
-    key: travis-builds
+    key: myvoteapp.zip
     application: MyVoteApp
     deployment_group: MyVote-Dev
     region: us-east-1
     on:
       branch: dev
+
+  script:
+    - zip -r myvoteapp.zip build
+    - mkdir -p myvote_deploy
+    - mv myvoteapp.zip myvote_deploy/myvoteapp.zip
+    
