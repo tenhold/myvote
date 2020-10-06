@@ -1,7 +1,8 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const usersSchema = new Schema({
-  voter_device_id: {  // retreved from the we vote api
+  voter_device_id: {
+    // retreved from the we vote api
     type: String,
     unique: true,
     // required: true
@@ -9,7 +10,7 @@ const usersSchema = new Schema({
   email: {
     type: String,
     unique: true,
-    required: true
+    required: true,
   },
   password: String,
   salt: String,
@@ -23,27 +24,27 @@ const usersSchema = new Schema({
   },
   DOB: {
     type: String,
-    default: null
+    default: null,
   },
   party: {
     type: String,
-    default: 'independent'
+    default: "independent",
   },
   address: {
     type: String,
-    required: true
+    required: true,
   },
   vote: {
     type: Number,
-    default: 1
+    default: 1,
   },
   badgeUrl: String,
   badgeId: {
     type: Number,
-    default: 1
-  }
+    default: 1,
+  },
 });
 
-const Users = model('Users', usersSchema);
+const Users = model("Users", usersSchema);
 
 module.exports = Users;

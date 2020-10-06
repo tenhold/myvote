@@ -1,11 +1,11 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const ballotSchema = new Schema({
   // what info do we need to store.
   userId: {
     type: String,
     unique: true,
-    required: true
+    required: true,
   },
   president: String,
   house: String,
@@ -15,9 +15,9 @@ const ballotSchema = new Schema({
   trafficCourt: String,
   juvenileCourt: String,
   criminalCourt: String,
-  civilCourt: String
+  civilCourt: String,
 });
 
-const Ballot = model('Ballot', ballotSchema);
+const Ballot = model("Ballot", ballotSchema);
 
 module.exports = Ballot;

@@ -1,8 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./styles.scss";
+import Homepage from "./components/Homepage.jsx";
 
-const Index = () => {
-  return <div>MyVote</div>;
-};
-ReactDOM.render(<Index />, document.getElementById("root"));
+ReactDOM.render(<Homepage />, document.getElementById("root"));
