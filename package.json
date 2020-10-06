@@ -23,6 +23,7 @@
   "homepage": "https://github.com/slatzz/myvote#readme",
   "dependencies": {
     "bootstrap": "^4.5.2",
+    "axios": "^0.20.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "install": "^0.13.0",

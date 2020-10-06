@@ -1,14 +1,31 @@
 import React from 'react';
 // import ReactDOM from "react-dom";
-import moment from 'moment';
-import NavBar from './style-components/NavBar.jsx';
-import Greeting from './style-components/Greeting.jsx';
-import MyProfile from './MyProfile.jsx';
-import MyElection from './MyElection.jsx';
-import MyBallot from './MyBallot.jsx';
-import Login from './Login.jsx';
-import Logout from './Logout.jsx';
-import MySupport from './MySupport.jsx';
+import moment from "moment";
+import axios from 'axios';
+import NavBar from "./style-components/NavBar.jsx";
+import Greeting from "./style-components/Greeting.jsx";
+import PledgeButton from './style-components/Button.jsx';
+import logoLg from '../../assets/myvote_lg.png';
+
+// export default class Homepage extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       isClicked: true,
+//     };
+
+//     // Helper functions here
+//   }
+//   //compoundDidMount
+//   render() {
+//     return (
+//       <div>
+//         <NavBar />
+//         <h1>Welcome to MyVote!</h1>
+//       </div>
+//     );
+//   }
+// }
 
 export default class Homepage extends React.Component {
   constructor(props) {
@@ -16,10 +33,24 @@ export default class Homepage extends React.Component {
 
     this.state = {
       page: 'homepage', // Default page rendered
+      rating: null,
+      users: [],
+      user: '' // will load the current logged in user unique id ie. _id
     };
 
     this.changePage = this.changePage.bind(this);
     this.renderSelectedPage = this.renderSelectedPage.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get('/api/user')
+      .then(users => {
+        const { data } = users;
+        this.setState({
+          users: data,
+          user: data[0]
+        });
+      });
   }
 
   changePage(option) {
@@ -58,24 +89,19 @@ export default class Homepage extends React.Component {
   }
 
   render() {
-    const { page } = this.state;
+    const { page, user } = this.state;
     return (
       <div>
         <div>
           <Greeting page={page} />
           <NavBar changePage={this.changePage} page={page} />
         </div>
-        <center>
-          <img src={logoLg} />
-        </center>
-        <h1>
-          <center>Welcome to MyVote.</center>
-        </h1>
-        <h3>
-          <center>Election info at your fingertips.</center>
-        </h3>
-        <div className='main'>{this.renderSelectedPage()}</div>
+        <div>
+          <center><img src={logoLg} /></center>
+        </div>
+        <PledgeButton user={user} />
       </div>
+      
     );
   }
 }
