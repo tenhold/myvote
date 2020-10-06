@@ -1,11 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const authRoutes = require('./auth-routes/auth.js');
-require('dotenv').config();
+const homeRoutes = require('./auth-routes/homepage.js');
+const passport = require('passport');
 const path = require('path');
 const bodyParser = require('body-parser');
 const connectDB = require('../db/index');
 const { SERVER_PORT } = process.env;
-// const template = require('../src/components');
+const cookieSession = require('cookie-session');
+const keys = require('./config/keys.js');
 
 //////////////////            ROUTES TO DATABASE            /////////////////
 /////////////////////////////////////////////////////////////////////////////
@@ -22,12 +25,26 @@ const DIR = path.join(__dirname, '../build');
 const html_file = path.join(DIR, 'index.html');
 const app = express();
 
-// app.use(express.static(__dirname + '../build'));
 app.use(express.static(DIR));
 app.use(bodyParser.json());
 
+// app.set('view engine', 'html');
+
 ////////////////        routes for authentication       ///////////////
+app.use(
+  cookieSession({
+    // cookie goes stale after a day
+    maxAge: 24 * 60 * 60 * 1000, // hours, minutes, seconds, milliseconds
+    keys: [keys.session.cookieKey], // encrypt cookie
+  })
+);
+
+// Initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/auth', authRoutes);
+app.use('/homepage', homeRoutes);
 ///////////////////////////////////////////////////////////////////////
 
 ///////////////         routes for database            ///////////////
