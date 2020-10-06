@@ -3,6 +3,7 @@ import React from "react";
 import moment from "moment";
 import NavBar from "./style-components/NavBar.jsx";
 import Greeting from "./style-components/Greeting.jsx";
+import logoLg from '../../assets/myvote_lg.png';
 
 // export default class Homepage extends React.Component {
 //   constructor(props) {
@@ -39,12 +40,13 @@ export default class Homepage extends React.Component {
           <Greeting />
           <NavBar />
         </div>
-        <h1>
+          <center><img src={logoLg} /></center>
+        {/* <h1>
           <center>Welcome to MyVote.</center>
-        </h1>
-        <h3>
+        </h1> */}
+        {/* <h3>
           <center>Election info at your fingertips.</center>
-        </h3>
+        </h3> */}
       </div>
     );
   }
