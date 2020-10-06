@@ -49,7 +49,6 @@ router.patch('/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const updateUser = await Users.findByIdAndUpdate(id, { $inc: { vote: 1 } });
-    console.log(updateUser);
     updateUser ? res.status(200).send(updateUser) : res.sendStatus(404);
   } catch (err) {
     console.error('error in patch! ', err);
