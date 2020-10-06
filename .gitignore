@@ -6,3 +6,6 @@
 
 #.vscode
 .vscode
+
+# authentication
+/../../config/keys.js
