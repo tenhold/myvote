@@ -17,10 +17,11 @@ deploy:
     access_key_id: $AWS_KEY
     secret_access_key: $AWS_SECRET
     local_dir: build
-    skip_cleanup: true
     bucket: myvoteapp
     application: MyVoteApp
     deployment_group: MyVote-Dev
+    on:
+      branch: dev
   - provider: codedeploy
     access_key_id: $AWS_KEY
     secret_access_key: $AWS_SECRET
@@ -28,3 +29,5 @@ deploy:
     application: MyVoteApp
     deployment_group: MyVote-Dev
     region: us-east-1
+    on:
+      branch: dev
