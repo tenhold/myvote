@@ -1,6 +1,7 @@
 import React from 'react';
 // import ReactDOM from "react-dom";
 import moment from 'moment';
+import axios from 'axios';
 import NavBar from './style-components/NavBar.jsx';
 import Greeting from './style-components/Greeting.jsx';
 import MyProfile from './MyProfile.jsx';
@@ -9,6 +10,7 @@ import MyBallot from './MyBallot.jsx';
 import Login from './Login.jsx';
 import Logout from './Logout.jsx';
 import MySupport from './MySupport.jsx';
+import PledgeButton from './style-components/Button.jsx';
 import logoLg from '../../assets/myvote_lg.png';
 
 export default class Homepage extends React.Component {
