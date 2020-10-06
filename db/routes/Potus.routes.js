@@ -6,20 +6,23 @@ router.post('/api/potus_badge', async (req, res) => {
   const { url } = req.body;
   try {
     const potus = await PotusBadge.create({ url });
-    potus ? res.status(201).send(potus) : res.sendStatus(404);
+    res.status(201).send(potus);
   }
   catch (err) {
-    res.send('POST error potus BADGE:', err);
+    console.error('POST error potus BADGE:', err);
+    res.sendStatus(500);
+
   }
 });
 
 router.get('/api/potus_badge', async (req, res) => {
   try {
     const potus = await PotusBadge.find();
-    potus ? res.status(200).send(potus) : res.sendStatus(404);
+    res.status(200).send(potus);
   }
   catch (err) {
-    res.status(500).send('GET error potus BADGE: ', err);
+    console.error('GET error potus BADGE: ', err);
+    res.sendStatus(500);
   }
 });
 

@@ -7,15 +7,42 @@ const ballotSchema = new Schema({
     unique: true,
     required: true,
   },
-  president: String,
-  house: String,
-  senate: String,
-  districtAttorney: String,
-  schoolBoard: String,
-  trafficCourt: String,
-  juvenileCourt: String,
-  criminalCourt: String,
-  civilCourt: String,
+  president: {
+    type: String,
+    default: null
+  },
+  house: {
+    type: String,
+    default: null
+  },
+  senate: {
+    type: String,
+    default: null
+  },
+  districtAttorney: {
+    type: String,
+    default: null
+  },
+  schoolBoard: {
+    type: String,
+    default: null
+  },
+  trafficCourt: {
+    type: String,
+    default: null
+  },
+  juvenileCourt: {
+    type: String,
+    default: null
+  },
+  criminalCourt: {
+    type: String,
+    default: null
+  },
+  civilCourt: {
+    type: String,
+    default: null
+  }
 });
 
 const Ballot = model("Ballot", ballotSchema);

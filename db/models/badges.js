@@ -1,4 +1,4 @@
-const { Schema, model, connection } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
 const createBadgeSchema = (number, imageURL) => {
   return new Schema({
