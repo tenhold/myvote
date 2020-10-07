@@ -1,11 +1,3 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import './styles.scss';
-// import Homepage from './components/Homepage.jsx';
-// import Login from './components/Login.jsx';
-
-// ReactDOM.render(<Login />, document.getElementById('root'));
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Homepage from './components/Homepage.jsx';
@@ -15,7 +7,20 @@ import MyElection from './components/MyElection.jsx';
 import MyProfile from './components/MyProfile.jsx';
 import MySupport from './components/MySupport.jsx';
 import Login from './components/Login.jsx';
-import { BrowserRouter, Route } from 'react-router-dom';
+import NavBar from './components/style-components/NavBar.jsx';
+import {
+  BrowserRouter,
+  Route,
+  Link,
+  Redirect,
+  withRouter,
+} from 'react-router-dom';
+
+// const PrivateRoute = ({ component: Component, ...rest }) => (
+//   <Route {...rest} render={() => (
+
+//   )}/>
+// )
 
 class Index extends React.Component {
   constructor(props) {
@@ -55,21 +60,49 @@ class Index extends React.Component {
   //   }
   render() {
     return (
-      <BrowserRouter>
-        <div className='Index'>
-          <NavBar />
+      <div className='Index'>
+        {/* <Login /> */}
+        <br></br>
+        <BrowserRouter>
+          <div>
+            <ul>
+              <li>
+                <Link to='/login'>Login</Link>
+              </li>
+              <li>
+                <Link to='/homepage'>Home</Link>
+              </li>
+              <li>
+                <Link to='/myprofile'>MyProfile</Link>
+              </li>
+              <li>
+                <Link to='/myballot'>MyBallot</Link>
+              </li>
+              <li>
+                <Link to='/myelection'>MyElection</Link>
+              </li>
+              <li>
+                <Link to='/mysupport'>MySupport</Link>
+              </li>
+              <li>
+                <Link to='/logout'>Logout</Link>
+              </li>
+            </ul>
+          </div>
+          <Route path='/login' component={Login}></Route>
           <Route path='/homepage' component={Homepage}></Route>
           <Route path='/myprofile' component={MyProfile}></Route>
           <Route path='/myballot' component={MyBallot}></Route>
           <Route path='/myelection' component={MyElection}></Route>
           <Route path='/mysupport' component={MySupport}></Route>
           <Route path='/logout' component={Logout}></Route>
-        </div>
-      </BrowserRouter>
+          <Route path='/homepage' component={Homepage} />
+        </BrowserRouter>
+      </div>
     );
   }
 }
 
 export default Index;
 
-ReactDOM.render(<Login />, document.getElementById('root'));
+ReactDOM.render(<Index />, document.getElementById('root'));

@@ -30,7 +30,7 @@ app.use(cors());
 app.use(express.static(DIR));
 app.use(bodyParser.json());
 
-// app.set('view engine', 'html');
+app.set('view engine', 'html');
 
 ////////////////        routes for authentication       ///////////////
 app.use(
@@ -67,7 +67,7 @@ app.use(potusRoute);
 app.use(ballotRoute);
 
 app.get('/', (req, res) => {
-  res.send(html_file);
+  res.render(html_file);
 });
 
 connectDB().then(() => {
