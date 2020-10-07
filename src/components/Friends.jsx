@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 
 class Friends extends Component {
   constructor(props) {
@@ -8,9 +9,11 @@ class Friends extends Component {
 
   render() {
     return(
-      <>
-        <h3>Hi Friends!!!!</h3>
-      </>
+      <Container>
+        <Row>
+          <input type='text' placeholder='find a friend' />
+        </Row>
+      </Container>
     );
   }
 }
