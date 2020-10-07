@@ -1,41 +1,35 @@
 import React, { Component } from 'react';
 import NavBar from '../components/style-components/NavBar.jsx';
-// import Greeting from '../components/style-components/Greeting.jsx';
-import { suppressDeprecationWarnings } from 'moment';
+import Greeting from '../components/style-components/Greeting.jsx';
 
-import electionData from '../../data.json';
+import getCandidateList from '../../server/helpers/candidateList';
 
 class MyElection extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      election: electionData
+
     }
   }
 
   componentDidMount() {
-    const { ballot_item_list } = this.state.election;
-
-    const candidateNames = ballot_item_list.filter(data => {
-      if (data.ballot_item_display_name === 'President of the United States') {
-        return data.candidate_list;
-      }
-    })
-    // .map(pres => pres)
-
-
-    console.log(candidateNames)
+    getCandidateList()
   }
 
   render() {
+    {}
     return (
       <div className='container'>
-        {/* <Greeting /> */}
+        <Greeting />
         <NavBar />
-        <p></p>
         <h4 className='center'>MyElection</h4>
-        <center>I choose u Pikachu</center>
+        <ul>
+          {/* {getCandidateList('President of the United States').map(candidate => (
+            <li>{candidate}</li>
+          ))} */}
+        </ul>
+        {/* <center>I choose u Pikachu</center> */}
       </div>
     );
   }

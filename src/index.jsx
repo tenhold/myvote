@@ -53,7 +53,6 @@ class Index extends React.Component {
 
   render() {
     const { page, user, users } = this.state;
-
     return (
       <div className='Index'>
         <Greeting page={page} user={user} />
