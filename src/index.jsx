@@ -14,6 +14,7 @@ import MyBallot from './components/MyBallot.jsx';
 import MyElection from './components/MyElection.jsx';
 import MyProfile from './components/MyProfile.jsx';
 import MySupport from './components/MySupport.jsx';
+import Login from './components/Login.jsx';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 class Index extends React.Component {
@@ -71,4 +72,4 @@ class Index extends React.Component {
 
 export default Index;
 
-ReactDOM.render(<Homepage />, document.getElementById('root'));
+ReactDOM.render(<Login />, document.getElementById('root'));

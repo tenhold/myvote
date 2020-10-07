@@ -23,11 +23,11 @@ const veepRoute = require('../db/routes/Veep.routes');
 const potusRoute = require('../db/routes/Potus.routes');
 const ballotRoute = require('../db/routes/Ballot.routes');
 
-// const DIR = path.join(__dirname, '../build');
-// const html_file = path.join(DIR, 'index.html');
+const DIR = path.join(__dirname, '../build');
+const html_file = path.join(DIR, 'index.html');
 const app = express();
 app.use(cors());
-// app.use(express.static(DIR));
+app.use(express.static(DIR));
 app.use(bodyParser.json());
 
 // app.set('view engine', 'html');
@@ -38,6 +38,13 @@ app.use(
     // cookie goes stale after a day
     maxAge: 24 * 60 * 60 * 1000, // hours, minutes, seconds, milliseconds
     keys: [keys.session.cookieKey], // encrypt cookie
+  })
+);
+
+app.use(
+  cors({
+    origin: 'http://localhost:8080',
+    credentials: true,
   })
 );
 
@@ -59,9 +66,9 @@ app.use(veepRoute);
 app.use(potusRoute);
 app.use(ballotRoute);
 
-// app.get('/', (req, res) => {
-//   res.sendFile(html_file);
-// });
+app.get('/', (req, res) => {
+  res.send(html_file);
+});
 
 connectDB().then(() => {
   app.listen(SERVER_PORT, () => {
