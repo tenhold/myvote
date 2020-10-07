@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import NavBar from '../components/style-components/NavBar.jsx';
 import Greeting from '../components/style-components/Greeting.jsx';
 
@@ -6,13 +7,14 @@ import createVoterId from '../../server/helpers/createVoterId';
 import getCandidateList from '../../server/helpers/candidateList';
 
 class MyElection extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props) {        // should have the current user logged in information
+    super(props);  
 
     this.state = {
       ballotList: []
     }
-    console.log(props)
+  
+    this.getCandidateList = this.getCandidateList.bind(this);
   }
 
   componentDidMount() {
@@ -30,7 +32,32 @@ class MyElection extends Component {
       });
     
   }
-
+  getCandidateList(race, voterId, state) {
+    axios.get(`https://api.wevoteusa.org/apis/v1/allBallotItemsRetrieve`, {
+      params: {
+        voter_device_id: voterId,
+        google_civic_election_id: 1000112,
+        state_code: state || 'la'
+      }
+    })
+      .then(data => {
+        // console.log('axios GETTTTTTTTT', data.data.ballot_item_list);
+        const { ballot_item_list } = data.data;
+        const race = ballot_item_list.reduce((ballotRace, curBallotRace) => {
+          if (curBallotRace.ballot_item_display_name === race) {
+            ballotRace = curBallotRace.candidate_list;
+          }
+          return ballotRace;
+        }, {});
+        this.setState({
+          races
+        });
+      })
+      .catch(err => console.err('error in axios get', err))
+  }
+  
+  
+  
   render() {
     const { ballotList } = this.state;
     if (!ballotList.length) {
