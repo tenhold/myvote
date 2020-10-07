@@ -15,6 +15,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/add', async (req, res) => {
+  console.log(req.body);
   const {
     email,
     password,
@@ -48,8 +49,13 @@ router.post('/add', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
   const { id } = req.params;
+  // const { voter_device_id } = req.body;
   try {
-    const updateUser = await Users.findByIdAndUpdate(id, { $inc: { vote: 1 } });
+    const updateUser = await Users.findByIdAndUpdate(id, {
+      $inc: { vote: 1 },
+      // voter_device_id: voter_device_id
+    });
+
     updateUser ? res.status(200).send(updateUser) : res.sendStatus(404);
   } catch (err) {
     console.error('error in patch! ', err);
