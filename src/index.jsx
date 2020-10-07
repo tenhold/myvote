@@ -1,5 +1,10 @@
+//////////////////  import bootstrap  ///////////////////////
+import { Container, Row, Col } from 'react-bootstrap';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
+import Friends from './components/Friends.jsx';
 import Homepage from './components/Homepage.jsx';
 import Logout from './components/Logout.jsx';
 import MyBallot from './components/MyBallot.jsx';
@@ -7,7 +12,10 @@ import MyElection from './components/MyElection.jsx';
 import MyProfile from './components/MyProfile.jsx';
 import MySupport from './components/MySupport.jsx';
 import Login from './components/Login.jsx';
+import PledgeButton from './components/style-components/Button.jsx';
 import NavBar from './components/style-components/NavBar.jsx';
+import Greeting from './components/style-components/Greeting.jsx';
+import logoLg from '../assets/myvote_lg.png';
 import {
   BrowserRouter,
   Route,
@@ -16,53 +24,57 @@ import {
   withRouter,
 } from 'react-router-dom';
 
-// const PrivateRoute = ({ component: Component, ...rest }) => (
-//   <Route {...rest} render={() => (
-
-//   )}/>
-// )
-
 class Index extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      page: 'homepage', // Default page rendered
+      users: [],
+      user: '', // will load the current logged in user unique id ie. _id
     };
-
-    // this.changePage = this.changePage.bind(this);
-    // this.renderSelectedPage = this.renderSelectedPage.bind(this);
   }
 
-  //   changePage(option) {
-  //     this.setState({
-  //       page: option,
-  //     });
-  //   }
+  componentDidMount() {
+    axios.get('/api/users').then((users) => {
+      const { data } = users;
+      this.setState({
+        users: data,
+        user: data[0],
+      });
+    });
 
-  //   renderSelectedPage() {
-  //     const { page } = this.state;
-  //     if (page === 'login') {
-  //       return <Login changePage={this.changePage} />;
-  //     } else if (page === 'myProfile') {
-  //       return <MyProfile changePage={this.changePage} />;
-  //     } else if (page === 'myElection') {
-  //       return <MyElection changePage={this.changePage} />;
-  //     } else if (page === 'myBallot') {
-  //       return <MyBallot changePage={this.changePage} />;
-  //     } else if (page === 'mySupport') {
-  //       return <MySupport changePage={this.changePage} />;
-  //     } else if (page === 'logout') {
-  //       return <Logout />;
-  //     } else if (page === 'signup') {
-  //       return <Signup changePage={this.changePage} />;
-  //     }
-  //   }
+    axios
+      .get('https://api.wevoteusa.org/apis/v1/deviceIdGenerate')
+      .then((voterInfo) => {
+        const { voter_device_id } = voterInfo.data;
+        console.log('voter info', voter_device_id);
+      });
+  }
+
   render() {
+    const { page, user, users } = this.state;
+
     return (
       <div className='Index'>
-        {/* <Login /> */}
+        <Greeting page={page} user={user} />
+        {/* <NavBar /> */}
         <br></br>
+        {/* <div>
+          <center>
+            <img src={logoLg} />
+          </center>
+        </div> */}
+        {/* <Container className='pledge' fluid='sm'>
+          <Row>
+            <Col>
+              <PledgeButton user={user} />
+            </Col>
+            <Col>
+              <Friends users={users} />
+            </Col>
+          </Row>
+        </Container> */}
+
         <BrowserRouter>
           <div>
             <ul>
