@@ -97,43 +97,43 @@ import logoLg from '../../assets/myvote_lg.png';
 //       })
 //   }
 
-  renderSelectedPage() {
-    const { page } = this.state;
-    if (page === 'login') {
-      return <Login changePage={this.changePage} />;
-    } else if (page === 'myProfile') {
-      return <MyProfile changePage={this.changePage} />;
-    } else if (page === 'myElection') {
-      return <MyElection changePage={this.changePage} />;
-    } else if (page === 'myBallot') {
-      return <MyBallot changePage={this.changePage} />;
-    } else if (page === 'mySupport') {
-      return <MySupport changePage={this.changePage} />;
-    } else if (page === 'logout') {
-      return <Logout />;
-    } else if (page === 'signup') {
-      return <Signup changePage={this.changePage} />;
-    }
-  }
+  // renderSelectedPage() {
+  //   const { page } = this.state;
+  //   if (page === 'login') {
+  //     return <Login changePage={this.changePage} />;
+  //   } else if (page === 'myProfile') {
+  //     return <MyProfile changePage={this.changePage} />;
+  //   } else if (page === 'myElection') {
+  //     return <MyElection changePage={this.changePage} />;
+  //   } else if (page === 'myBallot') {
+  //     return <MyBallot changePage={this.changePage} />;
+  //   } else if (page === 'mySupport') {
+  //     return <MySupport changePage={this.changePage} />;
+  //   } else if (page === 'logout') {
+  //     return <Logout />;
+  //   } else if (page === 'signup') {
+  //     return <Signup changePage={this.changePage} />;
+  //   }
+  // }
 
-  render() {
-    const { page, user, users } = this.state;
-    return (
-      <>
-        <div>
-          <Greeting page={page} user={user} />
-          <NavBar changePage={this.changePage} page={page} />
-        </div>
-        <div>
-          <center><img src={logoLg} /></center>
-        </div>
-      <Container className='pledge' fluid='sm'>
-        <Row>
-          <Col><PledgeButton user={user} /></Col>
-          <Col><Friends users={users} /></Col>
-        </Row>
-      </Container>
-      </>
+  // render() {
+  //   const { page, user, users } = this.state;
+  //   return (
+  //     <>
+  //       <div>
+  //         <Greeting page={page} user={user} />
+  //         <NavBar changePage={this.changePage} page={page} />
+  //       </div>
+  //       <div>
+  //         <center><img src={logoLg} /></center>
+  //       </div>
+  //     <Container className='pledge' fluid='sm'>
+  //       <Row>
+  //         <Col><PledgeButton user={user} /></Col>
+  //         <Col><Friends users={users} /></Col>
+  //       </Row>
+  //     </Container>
+  //     </>
       
 //     );
 //   }
