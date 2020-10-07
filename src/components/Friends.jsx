@@ -7,7 +7,8 @@ class Friends extends Component {
     super(props);
 
     this.state ={
-      search: ''
+      search: '',
+      friend: ''
     };
 
     this.handleSearch = this.handleSearch.bind(this);
@@ -15,25 +16,32 @@ class Friends extends Component {
   }
 
   handleSearch(e) {
-
     this.setState({
       search: e.target.value
     });
   }
 
   keyClick(e) {
+    const { search } = this.state;
+    const { users } = this.props;
+
     if (e.which === 13) {
-      axios.get('/api/users')
-        .then(users => {
-          console.log('users!!!!!', users);
-        })
+     users.forEach(user => {
+       if (search === user.email) {
+        this.setState({ friend: user });
+       }
+      });
     }
+
   }
 
   render() {
-    const { search } = this.state;
+    const { search, friend } = this.state;
     return(
       <Container>
+        <Row>
+          <h3>{friend.firstName}</h3>
+        </Row>
         <Row>
           <input 
             type='text' 

@@ -115,8 +115,9 @@ import logoLg from '../../assets/myvote_lg.png';
       return <Signup changePage={this.changePage} />;
     }
   }
+
   render() {
-    const { page, user } = this.state;
+    const { page, user, users } = this.state;
     return (
       <>
         <div>
@@ -129,7 +130,7 @@ import logoLg from '../../assets/myvote_lg.png';
       <Container className='pledge' fluid='sm'>
         <Row>
           <Col><PledgeButton user={user} /></Col>
-          <Col><Friends /></Col>
+          <Col><Friends users={users} /></Col>
         </Row>
       </Container>
       </>
