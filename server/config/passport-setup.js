@@ -20,7 +20,8 @@ passport.use(
       clientID: keys.google.clientID,
       clientSecret: keys.google.clientSecret,
     },
-    (accessToken, refreshToken, profile, done) => {
+    (accessToken, refreshToken, profile, email, done) => {
+      console.log(profile);
       User.findOne({ googleId: profile.id }).then((currentUser) => {
         if (currentUser) {
           console.log('User is: ', currentUser);
@@ -30,8 +31,8 @@ passport.use(
             firstName: profile.name.givenName,
             lastName: profile.name.familyName,
             googleId: profile.id,
-            email: '',
-            address: '',
+            email: emails.email[0].value,
+            address: 'TBD',
           })
             .save()
             .then((newUser) => {

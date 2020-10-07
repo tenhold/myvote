@@ -7,24 +7,24 @@ class Greeting extends React.Component {
   }
 
   render() {
+    console.log('user', this.props.user);
     const { firstName } = this.props.user;
     return (
       <div>
-        <ul id="user-greeting">
-          <li id="logo">
-          <img src={logo} width={200} />
+        <ul id='user-greeting'>
+          <li id='logo'>
+            <img src={logo} width={200} />
             {/* <h2>MyVote</h2> */}
           </li>
-          <li id="greet-message">
+          <li id='greet-message'>
             {/* hardcoded the first name of the first name in the database */}
-            <h2>Welcome, {firstName}! [insert badge]</h2> 
+            <h2>Welcome, {firstName}! [insert badge]</h2>
           </li>
         </ul>
       </div>
     );
   }
 }
-
 
 // const Greeting = (props) => (
 //   <div>
