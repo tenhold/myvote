@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import FormUserDetails from './FormUserDetails.jsx';
+import Confirm from './Confirm.jsx';
+import MyProfile from './MyProfile.jsx';
 
 export class UserForm extends Component {
   constructor(props) {
@@ -16,27 +18,29 @@ export class UserForm extends Component {
       party_affiliation: '',
       badge: '',
     };
+
     this.nextStep = this.nextStep.bind(this);
     this.previousStep = this.previousStep.bind(this);
     this.handleFields = this.handleFields.bind(this);
   }
 
   // Proceed to next step in user form
-  nextStep() {
+  nextStep = () => {
     const { step } = this.state;
     this.setState({
       step: step + 1,
     });
-  }
+  };
   // Go back to previous step in form
-  previousStep() {
+  previousStep = () => {
     const { step } = this.state;
     this.setState({
       step: step - 1,
     });
-  }
+  };
 
   handleFields = (input) => (event) => {
+    console.log(event.target.value);
     this.setState({ [input]: event.target.value });
   };
 
@@ -67,19 +71,42 @@ export class UserForm extends Component {
         return (
           <FormUserDetails
             nextStep={this.nextStep}
+            previousStep={this.previousStep}
             handleFields={this.handleFields}
             values={values}
           />
         );
 
       case 2:
-        return <h1>FormPersonalDetails</h1>;
+        return (
+          <Confirm
+            nextStep={this.nextStep}
+            previousStep={this.previousStep}
+            handleFields={this.handleFields}
+            values={values}
+          />
+        );
 
       case 3:
-        return <h1>Confirm</h1>;
-
+        return (
+          <MyProfile
+            firstName={this.state.firstName}
+            lastName={this.state.lastName}
+            email={this.state.email}
+            address={this.state.address}
+            city={this.state.city}
+            dob={this.state.dob}
+            party_affiliation={this.state.party_affiliation}
+            nextStep={this.nextStep}
+            previousStep={this.previousStep}
+            handleFields={this.handleFields}
+            values={values}
+          />
+        );
       case 4:
-        return <h1>Success</h1>;
+        return <Success />;
+      default:
+        console.log('Hello world');
     }
   }
 }

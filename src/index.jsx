@@ -12,6 +12,7 @@ import MyElection from './components/MyElection.jsx';
 import MyProfile from './components/MyProfile/MyProfile.jsx';
 import MySupport from './components/MySupport.jsx';
 import Login from './components/Login.jsx';
+import UserForm from './components/MyProfile/UserForm.jsx';
 import PledgeButton from './components/style-components/Button.jsx';
 import NavBar from './components/style-components/NavBar.jsx';
 import Greeting from './components/style-components/Greeting.jsx';
@@ -30,7 +31,8 @@ class Index extends React.Component {
 
     this.state = {
       users: [],
-      user: '', // will load the current logged in user unique id ie. _id
+      user: '', // will load the current logged in user unique id ie. _id,
+      isLoggedIn: true,
     };
   }
 
@@ -87,7 +89,7 @@ class Index extends React.Component {
           </div>
           <Route path='/login' component={Login}></Route>
           <Route path='/homepage' component={Homepage}></Route>
-          <Route path='/myprofile' component={MyProfile}></Route>
+          <Route path='/myprofile' component={UserForm}></Route>
           <Route path='/myballot' component={MyBallot}></Route>
           <Route path='/myelection' component={MyElection}></Route>
           <Route path='/mysupport' component={MySupport}></Route>
