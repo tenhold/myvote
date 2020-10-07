@@ -12,6 +12,7 @@ class MyElection extends Component {
     this.state = {
       ballotList: []
     }
+    console.log(props)
   }
 
   componentDidMount() {
