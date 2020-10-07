@@ -9,7 +9,7 @@ import Homepage from './components/Homepage.jsx';
 import Logout from './components/Logout.jsx';
 import MyBallot from './components/MyBallot.jsx';
 import MyElection from './components/MyElection.jsx';
-import MyProfile from './components/MyProfile.jsx';
+import MyProfile from './components/MyProfile/MyProfile.jsx';
 import MySupport from './components/MySupport.jsx';
 import Login from './components/Login.jsx';
 import PledgeButton from './components/style-components/Button.jsx';
@@ -56,25 +56,9 @@ class Index extends React.Component {
 
     return (
       <div className='Index'>
-        <Greeting page={page} user={user} />
+        {/* <Greeting page={page} user={user} /> */}
         {/* <NavBar /> */}
         <br></br>
-        {/* <div>
-          <center>
-            <img src={logoLg} />
-          </center>
-        </div> */}
-        {/* <Container className='pledge' fluid='sm'>
-          <Row>
-            <Col>
-              <PledgeButton user={user} />
-            </Col>
-            <Col>
-              <Friends users={users} />
-            </Col>
-          </Row>
-        </Container> */}
-
         <BrowserRouter>
           <div>
             <ul>
