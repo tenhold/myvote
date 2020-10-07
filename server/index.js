@@ -9,6 +9,7 @@ const connectDB = require('../db/index');
 const { SERVER_PORT } = process.env;
 const cookieSession = require('cookie-session');
 const keys = require('./config/keys.js');
+const cors = require('cors');
 
 //////////////////            ROUTES TO DATABASE            /////////////////
 /////////////////////////////////////////////////////////////////////////////
@@ -22,11 +23,11 @@ const veepRoute = require('../db/routes/Veep.routes');
 const potusRoute = require('../db/routes/Potus.routes');
 const ballotRoute = require('../db/routes/Ballot.routes');
 
-const DIR = path.join(__dirname, '../build');
-const html_file = path.join(DIR, 'index.html');
+// const DIR = path.join(__dirname, '../build');
+// const html_file = path.join(DIR, 'index.html');
 const app = express();
-
-app.use(express.static(DIR));
+app.use(cors());
+// app.use(express.static(DIR));
 app.use(bodyParser.json());
 
 // app.set('view engine', 'html');
@@ -58,9 +59,9 @@ app.use(veepRoute);
 app.use(potusRoute);
 app.use(ballotRoute);
 
-app.get('/', (req, res) => {
-  res.sendFile(html_file);
-});
+// app.get('/', (req, res) => {
+//   res.sendFile(html_file);
+// });
 
 connectDB().then(() => {
   app.listen(SERVER_PORT, () => {
