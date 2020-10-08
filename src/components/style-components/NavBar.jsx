@@ -8,14 +8,7 @@ import MySupport from '../MySupport.jsx';
 import MyElection from '../MyElection.jsx';
 import MyBallot from '../MyBallot.jsx';
 
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-  Switch,
-} from 'react-router-dom';
+import { Link, Router } from 'react-router-dom';
 
 class NavBar extends Component {
   constructor(props) {
@@ -29,16 +22,28 @@ class NavBar extends Component {
     return (
       <>
         <AppBar title='MyVote'>
+          <Link to='/homepage'>
             <span id='logo'>
               <img src={logo} width={200} />
             </span>
-            <Tabs value={0}>
+          </Link>  
+          <Tabs value={0}>
+            <Link to='/mysupport'>
               <Tab label='MySupport' />
+            </Link>
+            <Link to='/myelection' >
               <Tab label='MyElection'/>
+            </Link>
+            <Link to='/myballot'>
               <Tab label='MyBallot' />
+            </Link>
+            <Link to='/myprofile'>
               <Tab label='MyProfile' />
+            </Link>
+            <Link>
               <GoogleLogoutButton />
-            </Tabs>
+            </Link>
+          </Tabs>
         </AppBar>
       </>
     );
