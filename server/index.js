@@ -23,12 +23,12 @@ const veepRoute = require('../db/routes/Veep.routes');
 const potusRoute = require('../db/routes/Potus.routes');
 const ballotRoute = require('../db/routes/Ballot.routes');
 
-const DIR = path.join(__dirname, '../build');
-const html_file = path.join(DIR, 'index.html');
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+const DIR = path.join(__dirname, '../build');
+const html_file = path.join(DIR, 'index.html');
 app.use(express.static(DIR));
 app.set('view engine', 'html');
 
@@ -49,11 +49,11 @@ app.use(
 );
 
 // Initialize passport
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
-app.use('/auth', authRoutes);
-app.use('/homepage', homeRoutes);
+// app.use('/auth', authRoutes);
+// app.use('/homepage', homeRoutes);
 ///////////////////////////////////////////////////////////////////////
 
 ///////////////         routes for database            ///////////////
