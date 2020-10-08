@@ -54,9 +54,9 @@ router.patch('/:id', async (req, res) => {
 
   try {
     await Users.findByIdAndUpdate(id, req.body);
-    const getUdatedUser = await Users.findOne({ _id: id });
+    const getUpdatedUser = await Users.findOne({ _id: id });
 
-    getUdatedUser ? res.status(200).send(getUdatedUser) : res.sendStatus(404);
+    getUpdatedUser ? res.status(200).send(getUpdatedUser) : res.sendStatus(404);
 
   } catch (err) {
     console.error('error in patch! ', err);
