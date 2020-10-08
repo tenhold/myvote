@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppBar, Tabs, Tab } from '@material-ui/core';
 import logo from '../../../assets/myvote_sm.png';
+import GoogleLogoutButton from '../goog-auth-components/GoogleLogoutButton.jsx';
 
 const NavBar = () => {
   return (
@@ -13,7 +14,7 @@ const NavBar = () => {
         <Tab label='MyElection' />
         <Tab label='MyBallot' />
         <Tab label='MyProfile' />
-        <Tab label='Logout' />
+        <GoogleLogoutButton />
       </Tabs>
     </AppBar>
   );

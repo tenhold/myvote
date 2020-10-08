@@ -5,19 +5,9 @@ import 'regenerator-runtime/runtime';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import Friends from './components/Friends.jsx';
 import Homepage from './components/Homepage.jsx';
-import Logout from './components/Logout.jsx';
-import MyBallot from './components/MyBallot.jsx';
-import MyElection from './components/MyElection.jsx';
-import MyProfile from './components/MyProfile/MyProfile.jsx';
-import MySupport from './components/MySupport.jsx';
 import Login from './components/Login.jsx';
-import UserForm from './components/MyProfile/UserForm.jsx';
-import PledgeButton from './components/style-components/Button.jsx';
-import NavBar from './components/style-components/NavBar.jsx';
-import Greeting from './components/style-components/Greeting.jsx';
-import logoLg from '../assets/myvote_lg.png';
+
 import {
   BrowserRouter,
   Route,
@@ -34,11 +24,18 @@ class Index extends React.Component {
     this.state = {
       users: [],
       user: '', // will load the current logged in user unique id ie. _id,
-      isLoggedIn: true,
+      isLoggedIn: null,
     };
   }
 
   componentDidMount() {
+    // const script = document.createElement('script');
+    // script.src = 'http://apis.google.com/js/platform.js';
+    // script.onload = () => {
+    //   this.initializeGoogelSignIn();
+    // };
+    // document.body.appendChild(script);
+    ////////
     axios.get('/api/users').then((users) => {
       const { data } = users;
       this.setState({
@@ -60,13 +57,13 @@ class Index extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path='/'>
+          {/* <Route exact path='/'>
             <Login />
           </Route>
           <Route
             path='/homepage'
             render={() => this.isUserLoggedIn(Homepage)}
-          />
+          /> */}
         </Switch>
       </BrowserRouter>
     );
@@ -77,7 +74,7 @@ export default Index;
 
 ReactDOM.render(
   <React.StrictMode>
-    <Index />
+    <Homepage />
   </React.StrictMode>,
   document.getElementById('root')
 );
