@@ -23,17 +23,8 @@ export class Confirm extends Component {
         party_affiliation
     } = this.props.values;
     const { _id } = this.props.user;
-    axios.patch(`/api/users/${_id}`, {
-      firstName,
-        lastName,
-        email,
-        address,
-        city,
-        state,
-        zipcode,
-        dob,
-        party_affiliation
-    })
+    console.log(_id);
+    axios.patch(`/api/users/:${_id}`)
       .then((data) => {
         console.log('axios patch', data);
       })
