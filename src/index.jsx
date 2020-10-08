@@ -83,7 +83,8 @@ class Index extends React.Component {
           </div>
           <Route path='/login' component={Login}></Route>
           <Route path='/homepage' component={Homepage}></Route>
-          <Route path='/myprofile' component={UserForm}></Route>
+          {/* <Route path='/myprofile' component={UserForm}></Route> */}
+          <Route path='/myprofile' render={() => <UserForm user={user} />}></Route>
           <Route path='/myballot' component={MyBallot}></Route>
           {/* <Route path='/myelection' component={MyElection}></Route> */}
           <Route path='/myelection' render={() => <MyElection user={user} />}></Route>
