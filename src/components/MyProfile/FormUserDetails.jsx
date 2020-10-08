@@ -14,7 +14,7 @@ export class FormUserDetails extends Component {
 
   back = (event) => {
     event.preventDefault();
-    this.props.prevStep();
+    this.props.previousStep();
   };
 
   render() {
@@ -27,7 +27,7 @@ export class FormUserDetails extends Component {
             <TextField
               margin='normal'
               fullWidth
-              placeholder='Enter Your First Name'
+              placeholder='Enter First Name'
               label='First Name'
               onChange={handleFields('firstName')}
               defaultValue={values.firstName}
@@ -36,7 +36,7 @@ export class FormUserDetails extends Component {
             <TextField
               margin='normal'
               fullWidth
-              placeholder='Enter Your Last Name'
+              placeholder='Enter Last Name'
               label='Last Name'
               onChange={handleFields('lastName')}
               defaultValue={values.lastName}
@@ -45,7 +45,7 @@ export class FormUserDetails extends Component {
             <TextField
               margin='normal'
               fullWidth
-              placeholder='Enter Your Email Address'
+              placeholder='Enter Email Address'
               label='Email'
               onChange={handleFields('email')}
               defaultValue={values.email}
@@ -54,7 +54,7 @@ export class FormUserDetails extends Component {
             <TextField
               margin='normal'
               fullWidth
-              placeholder='Enter Your Home Address'
+              placeholder='Enter Home Address'
               label='Address'
               onChange={handleFields('address')}
               defaultValue={values.address}
@@ -63,7 +63,7 @@ export class FormUserDetails extends Component {
             <TextField
               margin='normal'
               fullWidth
-              placeholder='Enter Your City'
+              placeholder='Enter City'
               label='City'
               onChange={handleFields('city')}
               defaultValue={values.city}
@@ -72,24 +72,38 @@ export class FormUserDetails extends Component {
             <TextField
               margin='normal'
               fullWidth
-              placeholder='Enter Your Date of Birth'
+              placeholder='Enter State'
+              label='State'
+              onChange={handleFields('state')}
+              defaultValue={values.state}
+            />
+            <br></br>
+            <TextField
+              margin='normal'
+              fullWidth
+              placeholder='Enter Zipcode'
+              label='Zipcode'
+              onChange={handleFields('zipcode')}
+              defaultValue={values.zipcode}
+            />
+            <br></br>
+            <TextField
+              margin='normal'
+              fullWidth
+              placeholder='Date of Birth'
               label='Date of birth'
               onChange={handleFields('dob')}
               defaultValue={values.dob}
             />
             <br></br>
             <TextField
-              placeholder='Enter Your Party'
+              placeholder='Enter Party Affiliation'
               label='Party Affiliation'
               onChange={handleFields('party_affiliation')}
               defaultValue={values.party_affiliation}
             />
-            <br></br>
             <Button color='primary' variant='contained' onClick={this.continue}>
               Continue
-            </Button>
-            <Button color='primary' variant='contained' onClick={this.back}>
-              Back
             </Button>
           </Dialog>
         </>
