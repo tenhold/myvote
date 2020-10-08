@@ -58,8 +58,8 @@ router.post('/add', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
   const { id } = req.params;
-  console.log(req.body, 'patch!!!!')
-  console.log(id)
+  console.log(req.params);
+  // const { voter_device_id } = req.body;
   try {
     await Users.findByIdAndUpdate(id, req.body);
     const getUdatedUser = await Users.findOne({ _id: id });
