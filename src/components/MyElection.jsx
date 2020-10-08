@@ -14,7 +14,7 @@ class MyElection extends Component {
   }
 
   componentDidMount() {
-    getCandidateList()
+    // getCandidateList()
   }
 
   render() {
