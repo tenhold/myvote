@@ -8,7 +8,6 @@ class Greeting extends React.Component {
 
   render() {
     console.log('user', this.props.user);
-    const { firstName } = this.props.user;
     return (
       <div>
         <ul id='user-greeting'>
@@ -17,8 +16,9 @@ class Greeting extends React.Component {
             {/* <h2>MyVote</h2> */}
           </li>
           <li id='greet-message'>
+            <h2>Welcome, JimBob! [insert badge]</h2>
             {/* hardcoded the first name of the first name in the database */}
-            <h2>Welcome, {firstName}! [insert badge]</h2>
+            {/* <h2>Welcome, {firstName}! [insert badge]</h2> */}
           </li>
         </ul>
       </div>

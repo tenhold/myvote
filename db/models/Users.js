@@ -5,6 +5,7 @@ const usersSchema = new Schema({
     // retreved from the we vote api
     type: String,
     unique: true,
+    default: null
     // required: true
   },
   googleId: String,

@@ -42,18 +42,10 @@ class Index extends React.Component {
         user: data[0],
       });
     });
-
-    axios
-      .get('https://api.wevoteusa.org/apis/v1/deviceIdGenerate')
-      .then((voterInfo) => {
-        const { voter_device_id } = voterInfo.data;
-        console.log('voter info', voter_device_id);
-      });
   }
 
   render() {
     const { page, user, users } = this.state;
-
     return (
       <div className='Index'>
         <Greeting page={page} user={user} />
