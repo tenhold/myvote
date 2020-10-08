@@ -5,7 +5,7 @@ router.get('/', async (req, res) => {
   try {
     const users = await Users.find();
     res.status(200).send(users);
-  } catch (err) {
+  catch (err) {
     console.error('ERROR in user GET');
     res.sendStatus(500);
   }
@@ -45,6 +45,7 @@ router.post('/add', async (req, res) => {
     console.error('ERROR in user POST');
     res.sendStatus(500);
   }
+
 });
 
 ////////////////            myPledge put request              ////////////////

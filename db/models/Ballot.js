@@ -5,7 +5,7 @@ const ballotSchema = new Schema({
   userId: {
     type: String,
     unique: true,
-    required: true,
+    required: true
   },
   president: {
     type: String,
