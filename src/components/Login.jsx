@@ -4,8 +4,11 @@ import { Grid, TextField, Button, InputAdornment } from '@material-ui/core';
 import { AccountCircle, LockRounded } from '@material-ui/icons';
 import logo from '../../assets/myvote_lg.png';
 
+// Landing page
+// Clicking sign in will authenticate them and change state to isLoggedIn: true
+
 const Login = () => (
-  <div className='login-page'>
+  <div className='landing-page-container'>
     <LoginNavbar />
     <div className='login-form'>
       <Grid container style={{ minHeight: '100vh' }} justify='center'>
