@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 const mongoose = require('mongoose');
 const { TRUE } = require('node-sass');
 
-const usersSchema = new mongoose.Schema({
+const usersSchema = new Schema({
   voter_device_id: {
     // retreved from the we vote api
     type: String,
