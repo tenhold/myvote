@@ -1,5 +1,7 @@
 //////////////////  import bootstrap  ///////////////////////
 import { Container, Row, Col } from 'react-bootstrap';
+import "regenerator-runtime/runtime";
+
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -83,7 +85,8 @@ class Index extends React.Component {
           <Route path='/homepage' component={Homepage}></Route>
           <Route path='/myprofile' component={UserForm}></Route>
           <Route path='/myballot' component={MyBallot}></Route>
-          <Route path='/myelection' component={MyElection}></Route>
+          {/* <Route path='/myelection' component={MyElection}></Route> */}
+          <Route path='/myelection' render={() => <MyElection user={user} />}></Route>
           <Route path='/mysupport' component={MySupport}></Route>
           <Route path='/logout' component={Logout}></Route>
           <Route path='/homepage' component={Homepage} />

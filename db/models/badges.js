@@ -32,6 +32,7 @@ const VeepBadge = model('VeepBadge', veepBadgeSchema);
 const potusBadgeSchema = createBadgeSchema(100, 'potusBadge');
 const PotusBadge = model('PotusBadge', potusBadgeSchema);
 
+
 module.exports = {
   VoterBadge,
   MayorBadge,
