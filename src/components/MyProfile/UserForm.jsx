@@ -14,6 +14,8 @@ export class UserForm extends Component {
       email: '',
       address: '',
       city: '',
+      state: '',
+      zipcode: '',
       dob: '',
       party_affiliation: '',
       badge: '',
@@ -52,6 +54,8 @@ export class UserForm extends Component {
       email,
       address,
       city,
+      state,
+      zipcode,
       dob,
       party_affiliation,
       badge,
@@ -62,6 +66,8 @@ export class UserForm extends Component {
       email,
       address,
       city,
+      state,
+      zipcode,
       dob,
       party_affiliation,
     };
@@ -95,6 +101,8 @@ export class UserForm extends Component {
             email={this.state.email}
             address={this.state.address}
             city={this.state.city}
+            state={this.state.state}
+            zipcode={this.state.zipcode}
             dob={this.state.dob}
             party_affiliation={this.state.party_affiliation}
             nextStep={this.nextStep}
