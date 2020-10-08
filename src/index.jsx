@@ -1,5 +1,7 @@
 //////////////////  import bootstrap  ///////////////////////
 import { Container, Row, Col } from 'react-bootstrap';
+import "regenerator-runtime/runtime";
+
 
 import React from 'react';
 import ReactDOM from 'react-dom';
