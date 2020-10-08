@@ -58,12 +58,13 @@ router.post('/add', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
   const { id } = req.params;
-  console.log('body in patch', req.body)
+
   try {
     await Users.findByIdAndUpdate(id, req.body);
     const getUdatedUser = await Users.findOne({ _id: id });
 
     getUdatedUser ? res.status(200).send(getUdatedUser) : res.sendStatus(404);
+
   } catch (err) {
     console.error('error in patch! ', err);
     res.sendStatus(500);
