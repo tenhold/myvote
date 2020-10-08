@@ -59,56 +59,40 @@ class Index extends React.Component {
   render() {
     const { isLoggedIn, user } = this.state;
     return (
-      <BrowserRouter>
-        <Switch>
-          <Route
-            path='/'
-            exact
-            strict
-            render={() =>
-              this.state.isLoggedIn ? (
-                <Homepage
-                  onSignOut={this.onSignOut}
-                  isLoggedIn={this.state.isLoggedIn}
-                />
-              ) : (
-                <Redirect to='/login' />
-              )
-            }
-          ></Route>
-
-          <Route
-            path='/login'
-            render={() =>
-              this.state.isLoggedIn ? (
-                <Redirect to='/homepage' />
-              ) : (
-                <Login
-                  // loginUser={this.loginUser}
-                  isLoggedIn={this.state.isLoggedIn}
-                  onSignIn={this.onSignIn}
-                />
-              )
-            }
-          ></Route>
-          <Route
-            path='/homepage'
-            render={() =>
-              this.state.isLoggedIn ? (
-                <Homepage
-                  onSignOut={this.onSignOut}
-                  isLoggedIn={this.state.isLoggedIn}
-                />
-              ) : (
-                <Redirect to='/' />
-              )
-            }
-          ></Route>
-
-          <Route
-            path='/myprofile'
-            render={() => <MyProfile user={user} />}
-          ></Route>
+      <div className='Index'>
+        {/* <Greeting page={page} user={user} /> */}
+        {/* <NavBar /> */}
+        <br></br>
+        <BrowserRouter>
+          <div>
+            <ul>
+              <li>
+                <Link to='/login'>Login</Link>
+              </li>
+              <li>
+                <Link to='/homepage'>Home</Link>
+              </li>
+              <li>
+                <Link to='/myprofile'>MyProfile</Link>
+              </li>
+              <li>
+                <Link to='/myballot'>MyBallot</Link>
+              </li>
+              <li>
+                <Link to='/myelection'>MyElection</Link>
+              </li>
+              <li>
+                <Link to='/mysupport'>MySupport</Link>
+              </li>
+              <li>
+                <Link to='/logout'>Logout</Link>
+              </li>
+            </ul>
+          </div>
+          <Route path='/login' component={Login}></Route>
+          <Route path='/homepage' component={Homepage}></Route>
+          {/* <Route path='/myprofile' component={UserForm}></Route> */}
+          <Route path='/myprofile' render={() => <UserForm user={user} />}></Route>
           <Route path='/myballot' component={MyBallot}></Route>
           <Route path='/userform' component={UserForm}></Route>
           <Route
