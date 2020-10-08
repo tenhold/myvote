@@ -27,8 +27,7 @@ const Homepage = ({ page, user, users }) => {
       {/* <div> */}
       <center>
         <img src={logoLg} />
-      </center>
-      {/* </div> */}
+      </center> 
       {/* <Container className='pledge' fluid='sm'>
         <Row>
           <Col>

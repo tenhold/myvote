@@ -7,7 +7,6 @@ class Greeting extends React.Component {
   }
 
   render() {
-    console.log('user', this.props.user);
     return (
       <div>
         <ul id='user-greeting'>

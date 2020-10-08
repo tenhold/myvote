@@ -25,13 +25,14 @@ const ballotRoute = require('../db/routes/Ballot.routes');
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 app.use(cors());
 
 const DIR = path.join(__dirname, '../build');
 const html_file = path.join(DIR, 'index.html');
 app.use(express.static(DIR));
+app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 ////////////////        routes for authentication       ///////////////

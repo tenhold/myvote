@@ -5,8 +5,11 @@ import 'regenerator-runtime/runtime';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+
 import Homepage from './components/Homepage.jsx';
 import Login from './components/Login.jsx';
+import MyElection from './components/Homepage.jsx';
+import MyProfile from './components/MyProfile/MyProfile.jsx';
 
 import {
   BrowserRouter,
