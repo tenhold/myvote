@@ -31,7 +31,10 @@ passport.use(
             lastName: profile.name.familyName,
             googleId: profile.id,
             email: emails.email[0].value,
-            address: 'TBD',
+            address: null,
+            city: null,
+            state: null,
+            zipcode: null,
           })
             .save()
             .then((newUser) => {

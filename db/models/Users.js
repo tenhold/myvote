@@ -1,4 +1,5 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
+const { TRUE } = require('node-sass');
 
 const usersSchema = new Schema({
   voter_device_id: {
@@ -30,13 +31,29 @@ const usersSchema = new Schema({
   },
   party: {
     type: String,
-    default: "independent",
+    default: 'independent',
   },
   address: {
     type: String,
     required: true,
   },
-  vote: {
+
+  city: {
+    type: String,
+    required: true,
+  },
+
+  state: {
+    type: String,
+    required: true,
+  },
+
+  zipcode: {
+    type: String,
+    required: true,
+  },
+
+  pledge: {
     type: Number,
     default: 1,
   },
@@ -47,6 +64,6 @@ const usersSchema = new Schema({
   },
 });
 
-const Users = model("Users", usersSchema);
+const Users = model('Users', usersSchema);
 
 module.exports = Users;
