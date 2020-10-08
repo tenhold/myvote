@@ -23,7 +23,7 @@ const Index = () => {
   useEffect(() => {
     const getNewUser = localStorage.getItem('newUser');
     setUser(JSON.parse(getNewUser));
-   
+
   }, []);
 
   const toggleLogin = () => {
@@ -50,8 +50,8 @@ const Index = () => {
             isLoggedIn ? (
               <Homepage user={user} isLoggedIn={isLoggedIn} />
             ) : (
-              <Redirect to='/login' />
-            )
+                <Redirect to='/login' />
+              )
           }
         ></Route>
 
@@ -61,8 +61,8 @@ const Index = () => {
             isLoggedIn ? (
               <Redirect to='/homepage' />
             ) : (
-              <Login isLoggedIn={isLoggedIn} onSignIn={onSignIn} />
-            )
+                <Login isLoggedIn={isLoggedIn} onSignIn={onSignIn} />
+              )
           }
         ></Route>
         <Route

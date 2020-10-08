@@ -6,10 +6,10 @@ router.get('/', async (req, res) => {
     const users = await Users.find();
     res.status(200).send(users);
   catch (err) {
-    console.error('ERROR in user GET');
-    res.sendStatus(500);
-  }
-});
+      console.error('ERROR in user GET');
+      res.sendStatus(500);
+    }
+  });
 
 // only a check to see if the user exists in the database
 router.get('/:email', async (req, res) => {
