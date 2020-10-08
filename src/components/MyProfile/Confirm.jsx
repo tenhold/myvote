@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 // import MuiThemeProvider from '@material-ui/core/styles';
 // import { AppBar, TextField, Button } from '@material-ui/core';
 import { List, ListItem, ListItemText } from '@material-ui/core';
@@ -8,6 +9,28 @@ import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
 export class Confirm extends Component {
+
+  componentDidMount = () => {
+    const {
+        firstName,
+        lastName,
+        email,
+        address,
+        city,
+        state,
+        zipcode,
+        dob,
+        party_affiliation
+    } = this.props.values;
+    const { _id } = this.props.user;
+    console.log(_id);
+    axios.patch(`/api/users/:${_id}`)
+      .then((data) => {
+        console.log('axios patch', data);
+      })
+      .catch(err => console.error('USER FORM ERROR: ', err));
+  };
+
   continue = (event) => {
     event.preventDefault();
     // Send data to API

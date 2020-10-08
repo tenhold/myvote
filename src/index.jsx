@@ -55,17 +55,48 @@ class Index extends React.Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <Switch>
-          {/* <Route exact path='/'>
-            <Login />
-          </Route>
-          <Route
-            path='/homepage'
-            render={() => this.isUserLoggedIn(Homepage)}
-          /> */}
-        </Switch>
-      </BrowserRouter>
+      <div className='Index'>
+        {/* <Greeting page={page} user={user} /> */}
+        {/* <NavBar /> */}
+        <br></br>
+        <BrowserRouter>
+          <div>
+            <ul>
+              <li>
+                <Link to='/login'>Login</Link>
+              </li>
+              <li>
+                <Link to='/homepage'>Home</Link>
+              </li>
+              <li>
+                <Link to='/myprofile'>MyProfile</Link>
+              </li>
+              <li>
+                <Link to='/myballot'>MyBallot</Link>
+              </li>
+              <li>
+                <Link to='/myelection'>MyElection</Link>
+              </li>
+              <li>
+                <Link to='/mysupport'>MySupport</Link>
+              </li>
+              <li>
+                <Link to='/logout'>Logout</Link>
+              </li>
+            </ul>
+          </div>
+          <Route path='/login' component={Login}></Route>
+          <Route path='/homepage' component={Homepage}></Route>
+          {/* <Route path='/myprofile' component={UserForm}></Route> */}
+          <Route path='/myprofile' render={() => <UserForm user={user} />}></Route>
+          <Route path='/myballot' component={MyBallot}></Route>
+          {/* <Route path='/myelection' component={MyElection}></Route> */}
+          <Route path='/myelection' render={() => <MyElection user={user} />}></Route>
+          <Route path='/mysupport' component={MySupport}></Route>
+          <Route path='/logout' component={Logout}></Route>
+          <Route path='/homepage' component={Homepage} />
+        </BrowserRouter>
+      </div>
     );
   }
 }
