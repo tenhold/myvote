@@ -14,7 +14,6 @@ class MyElection extends Component {
       ballotList: []
     }
   
-    this.getCandidateList = this.getCandidateList.bind(this);
   }
 
   componentDidMount() {
@@ -29,33 +28,8 @@ class MyElection extends Component {
             });
             console.log(this.state)
           });
-      });
-    
+      });  
   }
-  getCandidateList(race, voterId, state) {
-    axios.get(`https://api.wevoteusa.org/apis/v1/allBallotItemsRetrieve`, {
-      params: {
-        voter_device_id: voterId,
-        google_civic_election_id: 1000112,
-        state_code: state || 'la'
-      }
-    })
-      .then(data => {
-        // console.log('axios GETTTTTTTTT', data.data.ballot_item_list);
-        const { ballot_item_list } = data.data;
-        const race = ballot_item_list.reduce((ballotRace, curBallotRace) => {
-          if (curBallotRace.ballot_item_display_name === race) {
-            ballotRace = curBallotRace.candidate_list;
-          }
-          return ballotRace;
-        }, {});
-        this.setState({
-          races
-        });
-      })
-      .catch(err => console.err('error in axios get', err))
-  }
-  
   
   
   render() {
@@ -67,7 +41,6 @@ class MyElection extends Component {
           <NavBar />
           <h4 className='center'>MyElection</h4>
            <div>loading...</div>
-          {/* <center>I choose u Pikachu</center> */}
         </div>
       );
     } else {
