@@ -26,6 +26,8 @@ const ballotRoute = require('../db/routes/Ballot.routes');
 const DIR = path.join(__dirname, '../build');
 const html_file = path.join(DIR, 'index.html');
 const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 app.use(cors());
 
