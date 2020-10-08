@@ -1,11 +1,19 @@
 // @import "custom";
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Roboto,
     Arial, sans-serif;
   color: rgba(247, 54, 54, 0.762);
 }
+
+.profile-details {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Roboto,
+    Arial, sans-serif;
+  color: rgba(247, 54, 54, 0.762);
+  text-align: center;
+}
+
 #logo {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Roboto,
     Arial, sans-serif;
@@ -56,9 +64,11 @@ body {
   font-size: 1.1em;
 }
 
-h2 {
-  margin: 0;
-  padding: 0;
+.profile-header {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Roboto,
+    Arial, sans-serif;
+  color: rgba(55, 55, 60, 0.762);
+  text-align: center;
 }
 
 .homepage-content {
@@ -69,6 +79,8 @@ ul .navbar {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
 .pledge {
   text-align: center;
 }
