@@ -27,6 +27,7 @@ class Index extends React.Component {
     // this.logOutUser = this.logOutUser.bind(this);
     this.onSignIn = this.onSignIn.bind(this);
     this.onSignOut = this.onSignOut.bind(this);
+    this.handleLoginUser = this.handleLoginUser.bind(this);
   }
 
   componentDidMount() {
@@ -47,8 +48,8 @@ class Index extends React.Component {
   };
 
   onSignIn = (googleUser) => {
-    this.toggleLogin();
-    console.log(googleUser);
+    this.loginUser();
+    // console.log(googleUser);
   };
 
   onSignOut = (googleUser) => {
@@ -56,43 +57,63 @@ class Index extends React.Component {
     console.log(`Signed out ${googleUser}`);
   };
 
+  handleLoginUser = (data) => {
+    // update parent component
+    
+  };
+
   render() {
-    const { isLoggedIn, user } = this.state;
+    const { isLoggedIn, user, users } = this.state;
     return (
-      <div className='Index'>
-        {/* <Greeting page={page} user={user} /> */}
-        {/* <NavBar /> */}
-        <br></br>
-        <BrowserRouter>
-          <div>
-            <ul>
-              <li>
-                <Link to='/login'>Login</Link>
-              </li>
-              <li>
-                <Link to='/homepage'>Home</Link>
-              </li>
-              <li>
-                <Link to='/myprofile'>MyProfile</Link>
-              </li>
-              <li>
-                <Link to='/myballot'>MyBallot</Link>
-              </li>
-              <li>
-                <Link to='/myelection'>MyElection</Link>
-              </li>
-              <li>
-                <Link to='/mysupport'>MySupport</Link>
-              </li>
-              <li>
-                <Link to='/logout'>Logout</Link>
-              </li>
-            </ul>
-          </div>
-          <Route path='/login' component={Login}></Route>
-          <Route path='/homepage' component={Homepage}></Route>
-          {/* <Route path='/myprofile' component={UserForm}></Route> */}
-          <Route path='/myprofile' render={() => <UserForm user={user} />}></Route>
+      <BrowserRouter>
+        <Switch>
+          <Route
+            path='/'
+            exact
+            strict
+            render={(props) =>
+              this.state.isLoggedIn ? (
+                <Homepage
+                  // loginUser={this.loginUser()}
+                  {...props}
+                  isLoggedIn={isLoggedIn}
+                />
+              ) : (
+                <Redirect to='/login' />
+              )
+            }
+          ></Route>
+
+          <Route
+            path='/login'
+            render={() =>
+              this.state.isLoggedIn ? (
+                <Redirect to='/homepage' />
+              ) : (
+                <Login
+                  loginUser={this.loginUser}
+                  isLoggedIn={this.state.isLoggedIn}
+                  onSignIn={this.onSignIn}
+                />
+              )
+            }
+          ></Route>
+          <Route
+            path='/homepage'
+            render={(props) => (
+              <Homepage
+                {...props} 
+                loginUser={this.loginUser} 
+                isLoggedIn={isLoggedIn} 
+                users={users}  
+              />
+            )}
+          ></Route>
+
+          <Route
+            path='/myprofile'
+            render={() => <MyProfile user={user} />}
+          ></Route>
           <Route path='/myballot' component={MyBallot}></Route>
           <Route path='/userform' component={UserForm}></Route>
           <Route

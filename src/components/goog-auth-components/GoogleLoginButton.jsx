@@ -9,10 +9,14 @@ import newUserCreate from '../../../server/helpers/newUserCreate';
 
 const clientId = google.clientID;
 
-const GoogleLoginButton = ({ isLoggedIn, onSignIn }) => {
+const GoogleLoginButton = ({ isLoggedIn, loginUser, onSignIn, handleLoginUser }) => {
   const onSuccess = (res) => {
     const { email, givenName, familyName, googleId } = res.profileObj;
-    newUserCreate(email, googleId, givenName, familyName).catch((err) =>
+    newUserCreate(email, googleId, givenName, familyName)
+      .then((data) => {
+        handleLoginUser(data);
+      })
+      .catch((err) =>
       console.error('ERROR in Login: ', err)
     );
     onSignIn();
