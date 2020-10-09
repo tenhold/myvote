@@ -21,7 +21,6 @@ class Index extends React.Component {
     this.state = {
       users: [],
       user: '',
-      loggedInUser: '',
       isLoggedIn: false,
     };
     // this.loginUser = this.loginUser.bind(this);
@@ -29,15 +28,13 @@ class Index extends React.Component {
     this.onSignIn = this.onSignIn.bind(this);
     this.onSignOut = this.onSignOut.bind(this);
     this.handleLoginUser = this.handleLoginUser.bind(this);
-    this.handleLogin = this.handleLoginUser.bind(this);
   }
 
   componentDidMount() {
     axios.get('/api/users').then((users) => {
       const { data } = users;
       this.setState({
-        users: data,
-        user: data[0]
+        users: data
       });
     });
   }
@@ -46,12 +43,26 @@ class Index extends React.Component {
     this.setState({
       isLoggedIn: !this.state.isLoggedIn,
     });
-    // console.log('test', this.state.isLoggedIn);
   };
 
   onSignIn = (googleUser) => {
     this.loginUser();
-    // console.log(googleUser);
+  };
+
+  logOutUser = () => {
+    this.setState({
+      isLoggedIn: false,
+    });
+  };
+
+  onSignIn = (googleUser) => {
+    this.loginUser();
+  };
+
+  logOutUser = () => {
+    this.setState({
+      isLoggedIn: false,
+    });
   };
 
   onSignOut = (googleUser) => {
@@ -59,23 +70,11 @@ class Index extends React.Component {
     console.log(`Signed out ${googleUser}`);
   };
 
-
-  // able to console log that data from google.
   handleLoginUser = (data) => {
-    // update parent component
-    this.setState({ loggedInUser: data });
-
-    // console.log('handle log in ', data)
-    // const { email } = data;
-    // axios.get(`/api/users/${email}`)
-    //   .then(data => {
-    //     console.log(data)
-    //     this.setState({ user: data.data });
-    //   })
+    this.setState({ user: data.data });
   };
 
   render() {
-    console.log('index state', this.state)
     const { isLoggedIn, user, users, loggedInUser } = this.state;
     return (
       <BrowserRouter>
@@ -90,7 +89,7 @@ class Index extends React.Component {
                   // loginUser={this.loginUser()}
                   {...props}
                   isLoggedIn={isLoggedIn}
-                  handleLogin={handleLoginUser}
+                  handleLoginUser={this.handleLoginUser}
                 />
               ) : (
                 <Redirect to='/login' />
