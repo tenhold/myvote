@@ -3,39 +3,37 @@ import { AppBar, Tabs, Tab } from '@material-ui/core';
 import logo from '../../../assets/myvote_sm.png';
 import GoogleLogoutButton from '../goog-auth-components/GoogleLogoutButton.jsx';
 
-import { Link } from 'react-router-dom';
+import { NavLink, Router } from 'react-router-dom';
 
 class NavBar extends Component {
   constructor(props) {
     super(props);
-
   }
 
   render() {
     return (
       <>
         <AppBar title='MyVote'>
-          <Link to='/homepage'>
+          <NavLink to='/homepage'>
             <span id='logo'>
               <img src={logo} width={200} />
             </span>
-          </Link>  
+          </NavLink>
           <Tabs value={0}>
-            <Link to='/mysupport'>
+            <NavLink to='/mysupport'>
               <Tab label='MySupport' />
-            </Link>
-            <Link to='/myelection' >
-              <Tab label='MyElection'/>
-            </Link>
-            <Link to='/myballot'>
+            </NavLink>
+            <NavLink to='/myelection'>
+              <Tab label='MyElection' />
+            </NavLink>
+            <NavLink to='/myballot'>
               <Tab label='MyBallot' />
-            </Link>
-            <Link to='/myprofile'>
+            </NavLink>
+            <NavLink to='/myprofile'>
               <Tab label='MyProfile' />
-            </Link>
-            <Link>
-              <GoogleLogoutButton />
-            </Link>
+            </NavLink>
+
+            <GoogleLogoutButton />
           </Tabs>
         </AppBar>
       </>

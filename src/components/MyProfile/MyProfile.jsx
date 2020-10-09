@@ -1,13 +1,8 @@
 import React from 'react';
 import NavBar from '../style-components/NavBar.jsx';
 import { List, ListItem, ListItemText } from '@material-ui/core';
-import { Grid, InputAdornment } from '@material-ui/core';
-import { AccountCircle, LockRounded } from '@material-ui/icons';
-import { withStyles } from '@material-ui/styles';
-// import {
-//   ThemeProvider as MuiThemeProvider,
-//   createMuiTheme,
-// } from '@material-ui/core/styles';
+import { Grid, InputAdornment, Button } from '@material-ui/core';
+import { BrowserRouter, Route, Redirect, Link } from 'react-router-dom';
 
 const MyProfile = ({
   firstName,
@@ -29,9 +24,20 @@ const MyProfile = ({
   return (
     <div className='container'>
       <NavBar />
-      <p></p>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <div className='header'>
-        <h1 style={mystyle}>MyProfile</h1>
+        <Grid>
+          <h1 style={mystyle}>MyProfile</h1>
+          <Button variant='contained' color='secondary' href='/userform'>
+            EDIT PROFILE
+          </Button>
+        </Grid>
       </div>
       <Grid
         container

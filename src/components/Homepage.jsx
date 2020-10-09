@@ -1,8 +1,4 @@
-// import React from 'react';
-
-//////////////////  import bootstrap  ///////////////////////
-import { Container, Row, Col } from 'react-bootstrap';
-
+import React, { Component } from 'react';
 // import ReactDOM from "react-dom";
 import moment from 'moment';
 import axios from 'axios';
@@ -11,27 +7,23 @@ import Greeting from './style-components/Greeting.jsx';
 import PledgeButton from './style-components/Button.jsx';
 import Friends from './Friends.jsx';
 import logoLg from '../../assets/myvote_lg.png';
+import Index from '../index.jsx';
 
 const Homepage = ({ page, user, users }) => {
   return (
     <div className='container'>
-      {/* <Greeting user={user} users={users} /> */}
       <NavBar />
       <br></br>
-      {/* <div> */}
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <center>
         <img src={logoLg} />
-      </center> 
-      {/* <Container className='pledge' fluid='sm'>
-        <Row>
-          <Col>
-            <PledgeButton user={user} />
-          </Col>
-          <Col>
-            <Friends users={users} />
-          </Col>
-        </Row>
-      </Container> */}
+      </center>
+      <p></p>
+      <p></p>
+      <h1>Welcome </h1>
     </div>
   );
 };
