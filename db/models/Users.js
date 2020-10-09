@@ -7,7 +7,7 @@ const usersSchema = new Schema({
     // retreved from the we vote api
     type: String,
     unique: true,
-    required: true
+    // required: true
   },
   voter_id: {
     type: String,

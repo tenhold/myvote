@@ -5,6 +5,8 @@ import React from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { refreshTokenId } from '../../../server/helpers/refreshToken.js';
 
+import newUserCreate from '../../../server/helpers/newUserCreate';
+
 const clientId = google.clientID;
 
 const GoogleLoginButton = ({ isLoggedIn, trueLogin }) => {
@@ -12,10 +14,13 @@ const GoogleLoginButton = ({ isLoggedIn, trueLogin }) => {
     console.log('[Successfully logged in!] currentUser:', res.profileObj);
     const { email, givenName, familyName, googleId, } = res.profileObj;
 
-
     alert(`Welcome ${res.profileObj.name}!!!`);
     refreshTokenId(res);
     trueLogin();
+
+    newUserCreate(email, googleId, givenName, familyName)
+      .then((data) => console.log('USER CREATED!!!!: ', data))
+      .catch((err) => console.error('ERROR in Login: ', err));
     console.log('logged in?', isLoggedIn);
   };
 
