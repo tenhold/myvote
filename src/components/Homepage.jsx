@@ -7,10 +7,21 @@ class Homepage extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      user: ''
+    }
+  }
 
+  componentDidUpdate() {
+    const { email } = this.props.user;
+    axios.get(`/api/users/${email}`)
+      .then(data => {
+        this.setState({ user: data.data });
+      });
   }
 
   render() {
+    const { firstName } = this.state.user;
     return (
       <div className='container'>
         <NavBar />
@@ -24,7 +35,7 @@ class Homepage extends Component {
         </center>
         <p></p>
         <p></p>
-        <h1>Welcome {this.props.users[0].firstName}</h1>
+        <h1>Welcome {firstName} </h1>
       </div>
     );  
   }

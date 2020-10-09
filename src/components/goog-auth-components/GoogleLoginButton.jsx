@@ -13,15 +13,13 @@ const GoogleLoginButton = ({ isLoggedIn, loginUser, onSignIn, handleLoginUser })
   const onSuccess = (res) => {
     const { email, givenName, familyName, googleId } = res.profileObj;
     newUserCreate(email, googleId, givenName, familyName)
-      .then((data) => {
-        handleLoginUser(data);
-      })
       .catch((err) =>
       console.error('ERROR in Login: ', err)
     );
     onSignIn();
     refreshTokenId(res);
     console.info('[Successfully logged in!] currentUser:', res.profileObj);
+    handleLoginUser(res.profileObj);
   };
 
   const onFailure = (res) => {
