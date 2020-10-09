@@ -11,34 +11,47 @@ router.get('/', async (req, res) => {
   }
 });
 
+// only a check to see if the user exists in the database
+router.get('/:email', async (req, res) => {
+  const { email } = req.params;
+  const user = await Users.findOne({ email });
+  res.status(200).send(user)
+});
+
 router.post('/add', async (req, res) => {
-  console.log(req.body);
+  console.log('post request', req.body);
   const {
+    voter_device_id,
+    voter_id,
+    voter_we_vote_id,
     email,
-    password,
-    salt,
+    googleId,
+    givenName,
+    familyName,
     firstName,
     lastName,
     DOB,
     party,
     address,
-    city,
-    state,
-    zipcode,
+    // city,
+    // state,
+    // zipcode,
   } = req.body;
   try {
     const user = await Users.create({
+      voter_device_id,
+      voter_id,
+      voter_we_vote_id,
       email,
-      password,
-      salt,
-      firstName,
-      lastName,
+      googleId,
+      firstName: givenName || firstName,
+      lastName: familyName || lastName,
       DOB,
       party,
       address,
-      city,
-      state,
-      zipcode,
+      // city,
+      // state,
+      // zipcode,
     });
     res.status(201).send(user);
   } catch (err) {

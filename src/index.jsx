@@ -9,12 +9,10 @@ import axios from 'axios';
 import Friends from './components/Friends.jsx';
 import Homepage from './components/Homepage.jsx';
 import Login from './components/Login.jsx';
+import MyBallot from './components/MyBallot.jsx';
+import MyElection from './components/MyElection.jsx';
 import UserForm from './components/MyProfile/UserForm.jsx';
-import PledgeButton from './components/style-components/Button.jsx';
-import NavBar from './components/style-components/NavBar.jsx';
-import Greeting from './components/style-components/Greeting.jsx';
-import logoLg from '../assets/myvote_lg.png';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import MySupport from './components/MySupport.jsx';
 
 import {
   BrowserRouter,
@@ -58,7 +56,7 @@ class Index extends React.Component {
     this.setState({
       isLoggedIn: true,
     });
-
+    
     console.log('This user is now logged in!', this.state.isLoggedIn);
   };
 
@@ -81,51 +79,55 @@ class Index extends React.Component {
     // </div>
     const { isLoggedIn } = this.state;
     return (
-      <div className='Index'>
-        <CssBaseline />
-        {/* <Greeting page={page} user={user} /> */}
-        {/* <NavBar /> */}
-        <br></br>
-        <BrowserRouter>
-          <div>
-            <ul>
-              <li>
-                <Link to='/login'>Login</Link>
-              </li>
-              <li>
-                <Link to='/homepage'>Home</Link>
-              </li>
-              <li>
-                <Link to='/myprofile'>MyProfile</Link>
-              </li>
-              <li>
-                <Link to='/myballot'>MyBallot</Link>
-              </li>
-              <li>
-                <Link to='/myelection'>MyElection</Link>
-              </li>
-              <li>
-                <Link to='/mysupport'>MySupport</Link>
-              </li>
-              <li>
-                <Link to='/logout'>Logout</Link>
-              </li>
-            </ul>
-          </div>
-          <Route path='/login' component={Login}></Route>
-          <Route path='/homepage' component={Homepage}></Route>
-          <Route path='/myprofile' component={UserForm}></Route>
-          <Route path='/myballot' component={MyBallot}></Route>
-          {/* <Route path='/myelection' component={MyElection}></Route> */}
+      <BrowserRouter>
+        <Switch>
+          {/* <Route exact path='/'>
+            {isLoggedIn ? (
+              <Redirect to='/homepage' component={Homepage} />
+            ) : (
+              <Login
+                handleLogin={this.loginUser.bind(this)}
+                isLoggedIn={isLoggedIn}
+              /> */}
+          {/* )} */}
+          {/* <Login
+              handleLogin={this.loginUser.bind(this)}
+              isLoggedIn={isLoggedIn}
+            />
+          </Route>
           <Route
-            path='/myelection'
-            render={() => <MyElection user={user} />}
-          ></Route>
+            path='/homepage'
+            render={(component) => this.isUserLoggedIn(Homepage)}
+          /> */}
+          {/* </Route> */}
+          <Route
+            exact
+            path='/'
+            render={() => {
+              return isLoggedIn ? (
+                <Redirect to='/homepage' />
+              ) : (
+                <Redirect to='/login' />
+              );
+            }}
+          />
+          <Route exact path='/homepage' component={Homepage} />
+          <Route
+            exact
+            path='/login'
+            render={() => (
+              <Login
+                isLoggedIn={isLoggedIn}
+                handleLogin={this.loginUser.bind(this)}
+              />
+            )}
+          />
+          <Route path='/myprofile' render={() => <UserForm user={user} />}></Route>
+          <Route path='/myballot' component={MyBallot}></Route>
+          <Route path='/myelection' render={() => <MyElection user={user} />}></Route>
           <Route path='/mysupport' component={MySupport}></Route>
-          <Route path='/logout' component={Logout}></Route>
-          <Route path='/homepage' component={Homepage} />
-        </BrowserRouter>
-      </div>
+        </Switch>
+      </BrowserRouter>
     );
     // )
   }

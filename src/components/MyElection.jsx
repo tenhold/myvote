@@ -12,7 +12,6 @@ const MyElection = ({ ballotList }) => {
       <NavBar />
       <h4 className='center MyElection'>MyElection</h4>
       <YourBallot />
-      git{' '}
     </div>
   );
 };

@@ -69,7 +69,7 @@ app.use(veepRoute);
 app.use(potusRoute);
 app.use(ballotRoute);
 
-app.get('/', (req, res) => {
+app.get('/*', (req, res) => {
   res.render(html_file);
 });
 
