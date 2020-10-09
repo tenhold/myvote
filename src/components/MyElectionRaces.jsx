@@ -12,18 +12,18 @@ class Races extends Component {
   }
 
   componentDidMount() {
-    createVoterId()
-      .then(data => {
-        const { voter_device_id } = data.data;
-        getCandidateList(voter_device_id, '1217 Magazine St nola la')
-          .then(data => {
-            const { ballot_item_list } = data.data;
-            this.setState({
-              ballotList: ballot_item_list
-            });
-            console.log(this.state)
-          });
-      });  
+    // createVoterId()
+    //   .then(data => {
+    //     const { voter_device_id } = data.data;
+    //     getCandidateList(voter_device_id, '1217 Magazine St nola la')
+    //       .then(data => {
+    //         const { ballot_item_list } = data.data;
+    //         this.setState({
+    //           ballotList: ballot_item_list
+    //         });
+    //         console.log(this.state)
+    //       });
+    //   });  
   }
   
   
