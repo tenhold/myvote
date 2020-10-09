@@ -13,13 +13,14 @@ router.get('/', async (req, res) => {
 
 router.get('/:email', async (req, res) => {
   const { email } = req.params;
-  try {
-    const user = await Users.findOne({ email });
-    user ? res.status(200).send(user) : res.sendStatus(404);
-  } catch (err) {
-    console.error('ERROR in user GET');
-    res.sendStatus(500);
-  }
+  // try {
+  const user = await Users.findOne({ email });
+  // user ? res.status(200).send(user) : res.status(404).end();
+  res.status(200).send(user)
+  // } catch (err) {
+  //   // console.error('ERROR in user GET');
+  //   res.sendStatus(500);
+  // }
 });
 
 router.post('/add', async (req, res) => {
@@ -37,9 +38,9 @@ router.post('/add', async (req, res) => {
     DOB,
     party,
     address,
-    city,
-    state,
-    zipcode,
+    // city,
+    // state,
+    // zipcode,
   } = req.body;
   try {
     const user = await Users.create({
@@ -53,9 +54,9 @@ router.post('/add', async (req, res) => {
       DOB,
       party,
       address,
-      city,
-      state,
-      zipcode,
+      // city,
+      // state,
+      // zipcode,
     });
     res.status(201).send(user);
   } catch (err) {

@@ -13,7 +13,7 @@ const clientId = google.clientID;
 
 const GoogleLoginButton = ({ isLoggedIn, trueLogin }) => {
   const onSuccess = (res) => {
-    console.log('[Successfully logged in!] currentUser:', res.profileObj);
+    console.info('[Successfully logged in!] currentUser:', res.profileObj);
     const { email, givenName, familyName, googleId, } = res.profileObj;
 
     newUserCreate(email, googleId, givenName, familyName)
@@ -23,11 +23,11 @@ const GoogleLoginButton = ({ isLoggedIn, trueLogin }) => {
     refreshTokenId(res);
     trueLogin();
     
-    console.log('logged in?', isLoggedIn);
+    console.info('logged in?', isLoggedIn);
   };
 
   const onFailure = (res) => {
-    console.log('[Failed to log into MyVote]', res);
+    console.info('[Failed to log into MyVote]', res);
   };
 
   return (
