@@ -5,12 +5,12 @@ const createBadgeSchema = (number, imageURL) => {
     _id: {
       required: true,
       type: Number,
-      default: number
+      default: number,
     },
     url: {
       type: String,
-      default: imageURL // might need to be a link to S3 where the image is actually stored
-    }
+      default: imageURL, // might need to be a link to S3 where the image is actually stored
+    },
   });
 };
 
@@ -27,10 +27,11 @@ const gubBadgeSchema = createBadgeSchema(25, 'gubBadge');
 const GubBadge = model('GobBadge', gubBadgeSchema);
 
 const veepBadgeSchema = createBadgeSchema(50, 'veepBadge');
-const VeepBadge = model('VeepBadge', veepBadgeSchema)
+const VeepBadge = model('VeepBadge', veepBadgeSchema);
 
 const potusBadgeSchema = createBadgeSchema(100, 'potusBadge');
 const PotusBadge = model('PotusBadge', potusBadgeSchema);
+
 
 module.exports = {
   VoterBadge,
@@ -38,6 +39,5 @@ module.exports = {
   SosBadge,
   GubBadge,
   VeepBadge,
-  PotusBadge
-}
-
+  PotusBadge,
+};

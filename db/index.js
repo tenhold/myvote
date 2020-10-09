@@ -1,7 +1,8 @@
 // const MongoClient = require('mongodb').MongoClient;
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-require("dotenv").config();
+
+require('dotenv').config();
 
 const { MONGODB_USERNAME, MONGODB_PASSWORD } = process.env;
 
@@ -14,9 +15,9 @@ const connectDB = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.info("db connected!");
+    console.info('db connected!');
   } catch (err) {
-    console.error("db connection error ", err);
+    console.error('db connection error ', err);
   }
 };
 

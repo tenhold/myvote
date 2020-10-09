@@ -6,3 +6,16 @@
 
 #.vscode
 .vscode
+
+# authentication
+
+/../../config/keys.js
+
+# app.min.js
+/build/app.min.js
+/./server/config/keys.js
+
+
+# app.min.js
+/build/app.min.js
+

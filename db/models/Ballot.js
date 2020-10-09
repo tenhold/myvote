@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const ballotSchema = new Schema({
   // what info do we need to store.
@@ -45,6 +45,6 @@ const ballotSchema = new Schema({
   }
 });
 
-const Ballot = model('Ballot', ballotSchema);
+const Ballot = model("Ballot", ballotSchema);
 
 module.exports = Ballot;
