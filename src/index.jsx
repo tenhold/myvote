@@ -56,7 +56,7 @@ class Index extends React.Component {
     this.setState({
       isLoggedIn: true,
     });
-
+    console.log(this.props)
     console.log('This user is now logged in!', this.state.isLoggedIn);
   };
 
@@ -79,40 +79,50 @@ class Index extends React.Component {
     // </div>
     const { isLoggedIn } = this.state;
     return (
-      <div className='Index'>
-        <CssBaseline />
-        {/* <Greeting page={page} user={user} /> */}
-        {/* <NavBar /> */}
-        <br></br>
-        <BrowserRouter>
-          <div>
-            <ul>
-              <li>
-                <Link to='/login'>Login</Link>
-              </li>
-              <li>
-                <Link to='/homepage'>Home</Link>
-              </li>
-              <li>
-                <Link to='/myprofile'>MyProfile</Link>
-              </li>
-              <li>
-                <Link to='/myballot'>MyBallot</Link>
-              </li>
-              <li>
-                <Link to='/myelection'>MyElection</Link>
-              </li>
-              <li>
-                <Link to='/mysupport'>MySupport</Link>
-              </li>
-              <li>
-                <Link to='/logout'>Logout</Link>
-              </li>
-            </ul>
-          </div>
-          <Route path='/login' component={Login}></Route>
-          <Route path='/homepage' component={Homepage}></Route>
-          <Route path='/myprofile' component={UserForm}></Route>
+      <BrowserRouter>
+        <Switch>
+          {/* <Route exact path='/'>
+            {isLoggedIn ? (
+              <Redirect to='/homepage' component={Homepage} />
+            ) : (
+              <Login
+                handleLogin={this.loginUser.bind(this)}
+                isLoggedIn={isLoggedIn}
+              /> */}
+          {/* )} */}
+          {/* <Login
+              handleLogin={this.loginUser.bind(this)}
+              isLoggedIn={isLoggedIn}
+            />
+          </Route>
+          <Route
+            path='/homepage'
+            render={(component) => this.isUserLoggedIn(Homepage)}
+          /> */}
+          {/* </Route> */}
+          <Route
+            exact
+            path='/'
+            render={() => {
+              return isLoggedIn ? (
+                <Redirect to='/homepage' />
+              ) : (
+                <Redirect to='/login' />
+              );
+            }}
+          />
+          <Route exact path='/homepage' component={Homepage} />
+          <Route
+            exact
+            path='/login'
+            render={() => (
+              <Login
+                isLoggedIn={isLoggedIn}
+                handleLogin={this.loginUser.bind(this)}
+              />
+            )}
+          />
+          <Route path='/myprofile' render={() => <UserForm user={user} />}></Route>
           <Route path='/myballot' component={MyBallot}></Route>
           {/* <Route path='/myelection' component={MyElection}></Route> */}
           <Route
