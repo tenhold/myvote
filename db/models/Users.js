@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
-const mongoose = require('mongoose');
-const { TRUE } = require('node-sass');
+// const mongoose = require('mongoose');
+// const { TRUE } = require('node-sass');
 
 const usersSchema = new Schema({
   voter_device_id: {
@@ -41,19 +41,19 @@ const usersSchema = new Schema({
   },
   address: {
     type: String,
-    required: true,
+    // required: true,
   },
   city: {
     type: String,
-    required: true,
+    // required: true,
   },
   state: {
     type: String,
-    required: true,
+    // required: true,
   },
   zipcode: {
     type: String,
-    required: true,
+    // required: true,
   },
   pledge: {
     type: Number,
