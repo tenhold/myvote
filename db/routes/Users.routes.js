@@ -11,14 +11,27 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:email', async (req, res) => {
+  const { email } = req.params;
+  try {
+    const user = await Users.findOne({ email });
+    user ? res.status(200).send(user) : res.sendStatus(404);
+  } catch (err) {
+    console.error('ERROR in user GET');
+    res.sendStatus(500);
+  }
+});
+
 router.post('/add', async (req, res) => {
-  console.log(req.body);
+  console.log('post request', req.body);
   const {
     voter_device_id,
     voter_id,
     voter_we_vote_id,
     email,
     googleId,
+    givenName,
+    familyName,
     firstName,
     lastName,
     DOB,
@@ -35,8 +48,8 @@ router.post('/add', async (req, res) => {
       voter_we_vote_id,
       email,
       googleId,
-      firstName,
-      lastName,
+      firstName: givenName || firstName,
+      lastName: familyName || lastName,
       DOB,
       party,
       address,

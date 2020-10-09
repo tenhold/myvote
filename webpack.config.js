@@ -15,9 +15,6 @@ module.exports = {
     filename: "app.min.js",
     publicPath: "/",
   },
-  externals: {
-    express: 'express',
-  },
   plugins: [
     htmlPlugin
   ],
