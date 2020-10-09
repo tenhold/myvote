@@ -43,18 +43,18 @@ const usersSchema = new Schema({
     type: String,
     // required: true,
   },
-  city: {
-    type: String,
-    // required: true,
-  },
-  state: {
-    type: String,
-    // required: true,
-  },
-  zipcode: {
-    type: String,
-    // required: true,
-  },
+  // city: {
+  //   type: String,
+  //   // required: true,
+  // },
+  // state: {
+  //   type: String,
+  //   // required: true,
+  // },
+  // zipcode: {
+  //   type: String,
+  //   // required: true,
+  // },
   pledge: {
     type: Number,
     default: 1,

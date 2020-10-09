@@ -56,7 +56,7 @@ class Index extends React.Component {
     this.setState({
       isLoggedIn: true,
     });
-    console.log(this.props)
+    
     console.log('This user is now logged in!', this.state.isLoggedIn);
   };
 
