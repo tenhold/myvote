@@ -20,13 +20,15 @@ class Index extends React.Component {
 
     this.state = {
       users: [],
-      user: '',
+      loggedInUser: '',
+      user: '', // will load the current logged in user unique id ie. _id,
       isLoggedIn: false,
     };
     this.toggleLogin = this.toggleLogin.bind(this);
     this.onSignIn = this.onSignIn.bind(this);
     this.onSignOut = this.onSignOut.bind(this);
     this.handleLoginUser = this.handleLoginUser.bind(this);
+    this.handleLogin = this.handleLoginUser.bind(this);
   }
 
   componentDidMount() {
@@ -42,6 +44,7 @@ class Index extends React.Component {
     this.setState({
       isLoggedIn: !this.state.isLoggedIn,
     });
+    // console.log('test', this.state.isLoggedIn);
   };
 
   onSignIn = (googleUser) => {
@@ -57,13 +60,23 @@ class Index extends React.Component {
     this.setState({ user: data.data });
   };
 
+
+  // able to console log that data from google.
   handleLoginUser = (data) => {
     // update parent component
-    
+    this.setState({ loggedInUser: data });
+
+    // console.log('handle log in ', data)
+    // const { email } = data;
+    // axios.get(`/api/users/${email}`)
+    //   .then(data => {
+    //     console.log(data)
+    //     this.setState({ user: data.data });
+    //   })
   };
 
   render() {
-    const { isLoggedIn, user, users } = this.state;
+    const { isLoggedIn, user, users, loggedInUser } = this.state;
     return (
       <BrowserRouter>
         <Switch>
@@ -77,6 +90,7 @@ class Index extends React.Component {
                   // loginUser={this.loginUser()}
                   {...props}
                   isLoggedIn={isLoggedIn}
+                  handleLogin={handleLoginUser}
                 />
               ) : (
                 <Redirect to='/login' />
@@ -94,6 +108,7 @@ class Index extends React.Component {
                   loginUser={this.loginUser}
                   isLoggedIn={this.state.isLoggedIn}
                   onSignIn={this.onSignIn}
+                  handleLoginUser={this.handleLoginUser}
                 />
               )
             }
@@ -105,7 +120,7 @@ class Index extends React.Component {
                 {...props} 
                 loginUser={this.loginUser} 
                 isLoggedIn={isLoggedIn} 
-                users={users}  
+                user={loggedInUser}  
               />
             )}
           ></Route>

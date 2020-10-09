@@ -24,7 +24,7 @@ class Homepage extends Component {
         </center>
         <p></p>
         <p></p>
-        {/* <h1>Welcome {firstName} </h1> */}
+        <h1>Welcome {firstName} </h1>
       </div>
     );  
   }
