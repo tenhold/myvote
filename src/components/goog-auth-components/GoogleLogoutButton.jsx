@@ -5,9 +5,15 @@ import { GoogleLogout } from 'react-google-login';
 
 const clientId = google.clientID;
 
-const GoogleLogoutButton = () => {
+const GoogleLogoutButton = ({ onSignOut }) => {
   const onSuccess = () => {
-    alert('Succesfully logged out of MyVote ✌️ 🇺🇸');
+    onSignOut();
+    alert('signed outtttt');
+    console.info('You are logged out. Happy Voting!');
+  };
+
+  const onFailure = () => {
+    console.error('Problem signing out.');
   };
 
   return (
@@ -15,7 +21,10 @@ const GoogleLogoutButton = () => {
       <GoogleLogout
         clientId={clientId}
         buttonText='Logout'
-        onLogoutSuccess={onSuccess}
+        onSuccess={onSuccess}
+        onFailure={onFailure}
+        onClick={() => onSignOut()}
+        isSignedIn={false}
       ></GoogleLogout>
     </div>
   );
