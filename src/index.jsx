@@ -1,12 +1,28 @@
+//////////////////  import bootstrap  ///////////////////////
+import { Container, Row, Col } from 'react-bootstrap';
 import 'regenerator-runtime/runtime';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+
+import Friends from './components/Friends.jsx';
 import Homepage from './components/Homepage.jsx';
 import Login from './components/Login.jsx';
+import UserForm from './components/MyProfile/UserForm.jsx';
+import PledgeButton from './components/style-components/Button.jsx';
+import NavBar from './components/style-components/NavBar.jsx';
+import Greeting from './components/style-components/Greeting.jsx';
+import logoLg from '../assets/myvote_lg.png';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Link,
+  Redirect,
+  withRouter,
+} from 'react-router-dom';
 
 class Index extends React.Component {
   constructor(props) {
@@ -20,7 +36,7 @@ class Index extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/api/users').then((users) => {
+    axios.get('/api/users').then(users => {
       const { data } = users;
       this.setState({
         users: data,
@@ -65,51 +81,51 @@ class Index extends React.Component {
     // </div>
     const { isLoggedIn } = this.state;
     return (
-      <BrowserRouter>
-        <Switch>
-          {/* <Route exact path='/'>
-            {isLoggedIn ? (
-              <Redirect to='/homepage' component={Homepage} />
-            ) : (
-              <Login
-                handleLogin={this.loginUser.bind(this)}
-                isLoggedIn={isLoggedIn}
-              /> */}
-          {/* )} */}
-          {/* <Login
-              handleLogin={this.loginUser.bind(this)}
-              isLoggedIn={isLoggedIn}
-            />
-          </Route>
+      <div className='Index'>
+        <CssBaseline />
+        {/* <Greeting page={page} user={user} /> */}
+        {/* <NavBar /> */}
+        <br></br>
+        <BrowserRouter>
+          <div>
+            <ul>
+              <li>
+                <Link to='/login'>Login</Link>
+              </li>
+              <li>
+                <Link to='/homepage'>Home</Link>
+              </li>
+              <li>
+                <Link to='/myprofile'>MyProfile</Link>
+              </li>
+              <li>
+                <Link to='/myballot'>MyBallot</Link>
+              </li>
+              <li>
+                <Link to='/myelection'>MyElection</Link>
+              </li>
+              <li>
+                <Link to='/mysupport'>MySupport</Link>
+              </li>
+              <li>
+                <Link to='/logout'>Logout</Link>
+              </li>
+            </ul>
+          </div>
+          <Route path='/login' component={Login}></Route>
+          <Route path='/homepage' component={Homepage}></Route>
+          <Route path='/myprofile' component={UserForm}></Route>
+          <Route path='/myballot' component={MyBallot}></Route>
+          {/* <Route path='/myelection' component={MyElection}></Route> */}
           <Route
-            path='/homepage'
-            render={(component) => this.isUserLoggedIn(Homepage)}
-          /> */}
-          {/* </Route> */}
-          <Route
-            exact
-            path='/'
-            render={() => {
-              return isLoggedIn ? (
-                <Redirect to='/homepage' />
-              ) : (
-                <Redirect to='/login' />
-              );
-            }}
-          />
-          <Route exact path='/homepage' component={Homepage} />
-          <Route
-            exact
-            path='/login'
-            render={() => (
-              <Login
-                isLoggedIn={isLoggedIn}
-                handleLogin={this.loginUser.bind(this)}
-              />
-            )}
-          />
-        </Switch>
-      </BrowserRouter>
+            path='/myelection'
+            render={() => <MyElection user={user} />}
+          ></Route>
+          <Route path='/mysupport' component={MySupport}></Route>
+          <Route path='/logout' component={Logout}></Route>
+          <Route path='/homepage' component={Homepage} />
+        </BrowserRouter>
+      </div>
     );
     // )
   }
