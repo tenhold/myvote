@@ -1,5 +1,12 @@
 import { google } from '../../../server/config/keys.js';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Redirect,
+  Switch,
+  BrowserHistory,
+  location,
+} from 'react-router-dom';
 import React from 'react';
 import axios from 'axios';
 
@@ -11,47 +18,39 @@ import newUserCreate from '../../../server/helpers/newUserCreate';
 
 const clientId = google.clientID;
 
-const GoogleLoginButton = ({ isLoggedIn, loginUser }) => {
+const GoogleLoginButton = ({ isLoggedIn, loginUser, onSignIn }) => {
   const onSuccess = (res) => {
-    console.info('[Successfully logged in!] currentUser:', res.profileObj);
     const { email, givenName, familyName, googleId } = res.profileObj;
-
     newUserCreate(email, googleId, givenName, familyName).catch((err) =>
       console.error('ERROR in Login: ', err)
     );
-
-    // alert(`Welcome ${res.profileObj.name}!!!`);
-    console.log('[Successfully logged in!] currentUser:', res.profileObj);
+    onSignIn();
     refreshTokenId(res);
-    console.log('logged in?', isLoggedIn);
+    console.info('[Successfully logged in!] currentUser:', res.profileObj);
   };
 
   const onFailure = (res) => {
     console.info('[Failed to log into MyVote]', res);
   };
 
-  // const trueLogin = () => {
-  //   handleLogin();
-  //   console.log('hello from true login', isLoggedIn);
-  // };
+  const trueLogin = () => {
+    loginUser();
+    console.log('hello from true login', isLoggedIn);
+  };
 
   return (
     <div>
-      {/* <BrowserRouter>
-        <Link to='/homepage'> */}
       <GoogleLogin
         clientId={clientId}
         buttonText='Login with Google'
         onSuccess={onSuccess}
-        // loginUser={loginUser}
         onFailure={onFailure}
+        onClick={() => onSignIn()}
         cookiePolicy={'single_host_origin'}
-        style={{ marginTop: '100px' }}
-        isLoggedIn={true}
+        style={{ marginTop: '500px' }}
+        isSignedIn={true}
       />
       {console.log('can i plz be logged in now', isLoggedIn)}
-      {/* </Link>
-      </BrowserRouter> */}
     </div>
   );
 };

@@ -13,7 +13,6 @@ import Logout from './components/Logout.jsx';
 import UserForm from './components/MyProfile/UserForm.jsx';
 
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
-import GoogleLoginButton from './components/goog-auth-components/GoogleLoginButton.jsx';
 
 class Index extends React.Component {
   constructor(props) {
@@ -56,7 +55,14 @@ class Index extends React.Component {
     this.setState({
       isLoggedIn: false,
     });
+    console.log('test', this.state.isLoggedIn);
   };
+
+  onSignIn = (googleUser) => {
+    this.loginUser();
+    console.log(googleUser);
+  };
+
   logOutUser = () => {
     this.setState({
       isLoggedIn: false,
@@ -78,7 +84,10 @@ class Index extends React.Component {
             strict
             render={() =>
               this.state.isLoggedIn ? (
-                <Homepage loginUser={this.loginUser} isLoggedIn={isLoggedIn} />
+                <Homepage
+                  // loginUser={this.loginUser()}
+                  isLoggedIn={isLoggedIn}
+                />
               ) : (
                 <Redirect to='/login' />
               )

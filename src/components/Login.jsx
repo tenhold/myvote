@@ -4,7 +4,7 @@ import { Grid } from '@material-ui/core';
 import GoogleLoginButton from '../components/goog-auth-components/GoogleLoginButton.jsx';
 import logo from '../../assets/myvote_lg.png';
 
-const Login = ({ loginUser, isLoggedIn }) => {
+const Login = ({ loginUser, isLoggedIn, onSignIn }) => {
   return (
     <div className='landing-page-container'>
       <LoginNavbar />
@@ -32,9 +32,7 @@ const Login = ({ loginUser, isLoggedIn }) => {
                 <img src={logo} width={600} alt='logo' />
                 <br></br>
                 <GoogleLoginButton
-                  onClick={() => {
-                    loginUser();
-                  }}
+                  onSignIn={onSignIn}
                   isLoggedIn={isLoggedIn}
                 />
               </Grid>
