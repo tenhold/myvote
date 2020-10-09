@@ -2,12 +2,18 @@ import { google } from '../../../server/config/keys.js';
 
 import React from 'react';
 import { GoogleLogin } from 'react-google-login';
+import { refreshTokenId } from '../../../server/helpers/refreshToken.js';
 
 const clientId = google.clientID;
 
-const GoogleLoginButton = () => {
+const GoogleLoginButton = ({ isLoggedIn, trueLogin }) => {
   const onSuccess = (res) => {
     console.log('[Successfully logged in!] currentUser:', res.profileObj);
+
+    alert(`Welcome ${res.profileObj.name}!!!`);
+    refreshTokenId(res);
+    trueLogin();
+    console.log('logged in?', isLoggedIn);
   };
 
   const onFailure = (res) => {
@@ -21,8 +27,9 @@ const GoogleLoginButton = () => {
         buttonText='Login with Google'
         onSuccess={onSuccess}
         onFailure={onFailure}
+        onClick={() => trueLogin()}
         cookiePolicy={'single_host_origin'}
-        style={{ marginTop: '200px' }}
+        style={{ marginTop: '100px' }}
         isLoggedIn={true}
       />
     </div>
