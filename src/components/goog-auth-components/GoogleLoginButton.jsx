@@ -1,6 +1,7 @@
 import { google } from '../../../server/config/keys.js';
 
 import React from 'react';
+
 import { GoogleLogin } from 'react-google-login';
 import { refreshTokenId } from '../../../server/helpers/refreshToken.js';
 
@@ -9,6 +10,8 @@ const clientId = google.clientID;
 const GoogleLoginButton = ({ isLoggedIn, trueLogin }) => {
   const onSuccess = (res) => {
     console.log('[Successfully logged in!] currentUser:', res.profileObj);
+    const { email, givenName, familyName, googleId, } = res.profileObj;
+
 
     alert(`Welcome ${res.profileObj.name}!!!`);
     refreshTokenId(res);

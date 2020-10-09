@@ -46,7 +46,7 @@ class Index extends React.Component {
     this.setState({
       isLoggedIn: true,
     });
-
+    console.log(this.props)
     console.log('This user is now logged in!', this.state.isLoggedIn);
   };
 
@@ -112,8 +112,6 @@ class Index extends React.Component {
               />
             )}
           />
-          <Route path='/login' component={Login}></Route>
-          {/* <Route path='/homepage' component={Homepage}></Route> */}
           <Route path='/myprofile' render={() => <UserForm user={user} />}></Route>
           <Route path='/myballot' component={MyBallot}></Route>
           <Route path='/myelection' render={() => <MyElection user={user} />}></Route>

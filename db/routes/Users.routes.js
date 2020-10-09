@@ -14,9 +14,11 @@ router.get('/', async (req, res) => {
 router.post('/add', async (req, res) => {
   console.log(req.body);
   const {
+    voter_device_id,
+    voter_id,
+    voter_we_vote_id,
     email,
-    password,
-    salt,
+    googleId,
     firstName,
     lastName,
     DOB,
@@ -28,9 +30,11 @@ router.post('/add', async (req, res) => {
   } = req.body;
   try {
     const user = await Users.create({
+      voter_device_id,
+      voter_id,
+      voter_we_vote_id,
       email,
-      password,
-      salt,
+      googleId,
       firstName,
       lastName,
       DOB,
