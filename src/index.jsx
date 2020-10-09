@@ -9,12 +9,10 @@ import axios from 'axios';
 import Friends from './components/Friends.jsx';
 import Homepage from './components/Homepage.jsx';
 import Login from './components/Login.jsx';
+import MyBallot from './components/MyBallot.jsx';
+import MyElection from './components/MyElection.jsx';
 import UserForm from './components/MyProfile/UserForm.jsx';
-import PledgeButton from './components/style-components/Button.jsx';
-import NavBar from './components/style-components/NavBar.jsx';
-import Greeting from './components/style-components/Greeting.jsx';
-import logoLg from '../assets/myvote_lg.png';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import MySupport from './components/MySupport.jsx';
 
 import {
   BrowserRouter,
