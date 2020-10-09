@@ -5,6 +5,10 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Homepage from './components/Homepage.jsx';
 import Login from './components/Login.jsx';
+import MyBallot from './components/MyBallot.jsx';
+import MyElection from './components/MyElection.jsx';
+import UserForm from './components/MyProfile/UserForm.jsx';
+import MySupport from './components/MySupport.jsx';
 
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
@@ -108,6 +112,12 @@ class Index extends React.Component {
               />
             )}
           />
+          <Route path='/login' component={Login}></Route>
+          {/* <Route path='/homepage' component={Homepage}></Route> */}
+          <Route path='/myprofile' render={() => <UserForm user={user} />}></Route>
+          <Route path='/myballot' component={MyBallot}></Route>
+          <Route path='/myelection' render={() => <MyElection user={user} />}></Route>
+          <Route path='/mysupport' component={MySupport}></Route>
         </Switch>
       </BrowserRouter>
     );
