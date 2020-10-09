@@ -23,8 +23,8 @@ class Index extends React.Component {
       user: '', // will load the current logged in user unique id ie. _id,
       isLoggedIn: false,
     };
-    this.loginUser = this.loginUser.bind(this);
-    this.logOutUser = this.logOutUser.bind(this);
+    // this.loginUser = this.loginUser.bind(this);
+    // this.logOutUser = this.logOutUser.bind(this);
     this.onSignIn = this.onSignIn.bind(this);
     this.onSignOut = this.onSignOut.bind(this);
   }
@@ -39,7 +39,7 @@ class Index extends React.Component {
     });
   }
 
-  loginUser = () => {
+  toggleLogin = () => {
     this.setState({
       isLoggedIn: !this.state.isLoggedIn,
     });
@@ -47,30 +47,13 @@ class Index extends React.Component {
   };
 
   onSignIn = (googleUser) => {
-    this.loginUser();
+    this.toggleLogin();
     console.log(googleUser);
-  };
-
-  logOutUser = () => {
-    this.setState({
-      isLoggedIn: false,
-    });
-    console.log('test', this.state.isLoggedIn);
-  };
-
-  onSignIn = (googleUser) => {
-    this.loginUser();
-    console.log(googleUser);
-  };
-
-  logOutUser = () => {
-    this.setState({
-      isLoggedIn: false,
-    });
   };
 
   onSignOut = (googleUser) => {
-    this.logOutUser();
+    this.toggleLogin();
+    console.log(`Signed out ${googleUser}`);
   };
 
   render() {
@@ -85,8 +68,8 @@ class Index extends React.Component {
             render={() =>
               this.state.isLoggedIn ? (
                 <Homepage
-                  // loginUser={this.loginUser()}
-                  isLoggedIn={isLoggedIn}
+                  onSignOut={this.onSignOut}
+                  isLoggedIn={this.state.isLoggedIn}
                 />
               ) : (
                 <Redirect to='/login' />
@@ -101,7 +84,7 @@ class Index extends React.Component {
                 <Redirect to='/homepage' />
               ) : (
                 <Login
-                  loginUser={this.loginUser}
+                  // loginUser={this.loginUser}
                   isLoggedIn={this.state.isLoggedIn}
                   onSignIn={this.onSignIn}
                 />
@@ -110,9 +93,16 @@ class Index extends React.Component {
           ></Route>
           <Route
             path='/homepage'
-            render={() => (
-              <Homepage loginUser={this.loginUser} isLoggedIn={isLoggedIn} />
-            )}
+            render={() =>
+              this.state.isLoggedIn ? (
+                <Homepage
+                  onSignOut={this.onSignOut}
+                  isLoggedIn={this.state.isLoggedIn}
+                />
+              ) : (
+                <Redirect to='/' />
+              )
+            }
           ></Route>
 
           <Route
@@ -136,8 +126,7 @@ class Index extends React.Component {
 export default Index;
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Index />
-  </React.StrictMode>,
+  <Index />,
+
   document.getElementById('root')
 );

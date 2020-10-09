@@ -1,14 +1,5 @@
 import { google } from '../../../server/config/keys.js';
-import {
-  BrowserRouter,
-  Route,
-  Redirect,
-  Switch,
-  BrowserHistory,
-  location,
-} from 'react-router-dom';
 import React from 'react';
-import axios from 'axios';
 
 import { GoogleLogin } from 'react-google-login';
 import { refreshTokenId } from '../../../server/helpers/refreshToken.js';
@@ -18,7 +9,7 @@ import newUserCreate from '../../../server/helpers/newUserCreate';
 
 const clientId = google.clientID;
 
-const GoogleLoginButton = ({ isLoggedIn, loginUser, onSignIn }) => {
+const GoogleLoginButton = ({ isLoggedIn, onSignIn }) => {
   const onSuccess = (res) => {
     const { email, givenName, familyName, googleId } = res.profileObj;
     newUserCreate(email, googleId, givenName, familyName).catch((err) =>
@@ -31,11 +22,6 @@ const GoogleLoginButton = ({ isLoggedIn, loginUser, onSignIn }) => {
 
   const onFailure = (res) => {
     console.info('[Failed to log into MyVote]', res);
-  };
-
-  const trueLogin = () => {
-    loginUser();
-    console.log('hello from true login', isLoggedIn);
   };
 
   return (
