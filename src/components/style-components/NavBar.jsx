@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { AppBar, Tabs, Tab } from '@material-ui/core';
 import logo from '../../../assets/myvote_sm.png';
 import GoogleLogoutButton from '../goog-auth-components/GoogleLogoutButton.jsx';
