@@ -7,8 +7,8 @@ const getVoterAddress = require('./weVoteAddress');
 const newUserCreate = async (email, googleId, givenName, familyName) => {
   // look in the database to see if the email already exists
   const findUser = await axios.get(`/api/users/${email}`);
+
   // if the user is not found then call the wevote api and get voter ids
-  console.log('findUser', findUser.data);
   if (!findUser.data.email) {
     const voterInfo = await createVoterId();
     const { voter_device_id, voter_id, voter_we_vote_id } = voterInfo.data;
@@ -26,8 +26,10 @@ const newUserCreate = async (email, googleId, givenName, familyName) => {
       familyName,
       address
     });
+    console.info('user created');
+  } else {
+    console.info('user exists');
   }
-  console.info('user exists');
 };
 
 module.exports = newUserCreate;

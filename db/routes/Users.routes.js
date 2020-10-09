@@ -11,16 +11,11 @@ router.get('/', async (req, res) => {
   }
 });
 
+// only a check to see if the user exists in the database
 router.get('/:email', async (req, res) => {
   const { email } = req.params;
-  // try {
   const user = await Users.findOne({ email });
-  // user ? res.status(200).send(user) : res.status(404).end();
   res.status(200).send(user)
-  // } catch (err) {
-  //   // console.error('ERROR in user GET');
-  //   res.sendStatus(500);
-  // }
 });
 
 router.post('/add', async (req, res) => {
