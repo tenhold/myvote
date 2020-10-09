@@ -11,7 +11,7 @@ import newUserCreate from '../../../server/helpers/newUserCreate';
 
 const clientId = google.clientID;
 
-const GoogleLoginButton = ({ isLoggedIn, handleLogin }) => {
+const GoogleLoginButton = ({ isLoggedIn, loginUser }) => {
   const onSuccess = (res) => {
     console.info('[Successfully logged in!] currentUser:', res.profileObj);
     const { email, givenName, familyName, googleId } = res.profileObj;
@@ -21,9 +21,9 @@ const GoogleLoginButton = ({ isLoggedIn, handleLogin }) => {
     );
 
     // alert(`Welcome ${res.profileObj.name}!!!`);
+    console.log('[Successfully logged in!] currentUser:', res.profileObj);
     refreshTokenId(res);
-    // trueLogin();
-    console.log('logged in?');
+    console.log('logged in?', isLoggedIn);
   };
 
   const onFailure = (res) => {
@@ -43,12 +43,13 @@ const GoogleLoginButton = ({ isLoggedIn, handleLogin }) => {
         clientId={clientId}
         buttonText='Login with Google'
         onSuccess={onSuccess}
+        // loginUser={loginUser}
         onFailure={onFailure}
-        handleLogin={handleLogin}
         cookiePolicy={'single_host_origin'}
         style={{ marginTop: '100px' }}
         isLoggedIn={true}
       />
+      {console.log('can i plz be logged in now', isLoggedIn)}
       {/* </Link>
       </BrowserRouter> */}
     </div>

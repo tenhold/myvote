@@ -4,12 +4,7 @@ import { Grid } from '@material-ui/core';
 import GoogleLoginButton from '../components/goog-auth-components/GoogleLoginButton.jsx';
 import logo from '../../assets/myvote_lg.png';
 
-const Login = ({ handleLogin, isLoggedIn }) => {
-  // const trueLogin = () => {
-  //   handleLogin();
-  //   console.log('hello from true login', isLoggedIn);
-  // };
-
+const Login = ({ loginUser, isLoggedIn }) => {
   return (
     <div className='landing-page-container'>
       <LoginNavbar />
@@ -37,7 +32,9 @@ const Login = ({ handleLogin, isLoggedIn }) => {
                 <img src={logo} width={600} alt='logo' />
                 <br></br>
                 <GoogleLoginButton
-                  handleLogin={handleLogin}
+                  onClick={() => {
+                    loginUser();
+                  }}
                   isLoggedIn={isLoggedIn}
                 />
               </Grid>
