@@ -9,7 +9,6 @@ class NavBar extends Component {
   constructor(props) {
     super(props);
 
-
   }
 
   render() {
