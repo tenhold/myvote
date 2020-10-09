@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const router = require('express').Router({ mergeParams: true });
 const Users = require('../models/Users');
 
 router.get('/', async (req, res) => {
@@ -51,14 +51,13 @@ router.post('/add', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
   const { id } = req.params;
-  // const { voter_device_id } = req.body;
-  try {
-    const updateUser = await Users.findByIdAndUpdate(id, {
-      $inc: { vote: 1 },
-      // voter_device_id: voter_device_id
-    });
 
-    updateUser ? res.status(200).send(updateUser) : res.sendStatus(404);
+  try {
+    await Users.findByIdAndUpdate(id, req.body);
+    const getUdatedUser = await Users.findOne({ _id: id });
+
+    getUdatedUser ? res.status(200).send(getUdatedUser) : res.sendStatus(404);
+
   } catch (err) {
     console.error('error in patch! ', err);
     res.sendStatus(500);

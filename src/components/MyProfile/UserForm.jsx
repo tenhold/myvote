@@ -21,6 +21,8 @@ export class UserForm extends Component {
       badge: '',
     };
 
+    
+
     this.nextStep = this.nextStep.bind(this);
     this.previousStep = this.previousStep.bind(this);
     this.handleFields = this.handleFields.bind(this);
@@ -42,12 +44,12 @@ export class UserForm extends Component {
   };
 
   handleFields = (input) => (event) => {
-    console.log(event.target.value);
     this.setState({ [input]: event.target.value });
   };
 
   render() {
     const { step } = this.state;
+    const { user } = this.props;
     const {
       firstName,
       lastName,
@@ -90,6 +92,7 @@ export class UserForm extends Component {
             previousStep={this.previousStep}
             handleFields={this.handleFields}
             values={values}
+            user={user}
           />
         );
 
