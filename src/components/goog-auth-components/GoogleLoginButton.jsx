@@ -9,17 +9,17 @@ import newUserCreate from '../../../server/helpers/newUserCreate';
 
 const clientId = google.clientID;
 
+
+
 const GoogleLoginButton = ({ isLoggedIn, loginUser, onSignIn, handleLoginUser }) => {
-  const onSuccess = (res) => {
+  const onSuccess = async (res) => {
     const { email, givenName, familyName, googleId } = res.profileObj;
-    newUserCreate(email, googleId, givenName, familyName)
-      .catch((err) =>
-      console.error('ERROR in Login: ', err)
-    );
+    const createUser = await newUserCreate(email, googleId, givenName, familyName);
+    // pass the current user to the index state.
+    handleLoginUser(createUser);
     onSignIn();
     refreshTokenId(res);
     console.info('[Successfully logged in!] currentUser:', res.profileObj);
-    handleLoginUser(res.profileObj);
   };
 
   const onFailure = (res) => {
