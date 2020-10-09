@@ -20,8 +20,8 @@ class Index extends React.Component {
 
     this.state = {
       users: [],
+      user: '',
       loggedInUser: '',
-      user: '', // will load the current logged in user unique id ie. _id,
       isLoggedIn: false,
     };
     // this.loginUser = this.loginUser.bind(this);
@@ -36,7 +36,8 @@ class Index extends React.Component {
     axios.get('/api/users').then((users) => {
       const { data } = users;
       this.setState({
-        users: data
+        users: data,
+        user: data[0]
       });
     });
   }
@@ -74,6 +75,7 @@ class Index extends React.Component {
   };
 
   render() {
+    console.log('index state', this.state)
     const { isLoggedIn, user, users, loggedInUser } = this.state;
     return (
       <BrowserRouter>
@@ -118,7 +120,7 @@ class Index extends React.Component {
                 {...props} 
                 loginUser={this.loginUser} 
                 isLoggedIn={isLoggedIn} 
-                user={loggedInUser}  
+                user={user}  
               />
             )}
           ></Route>
