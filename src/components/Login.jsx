@@ -5,10 +5,10 @@ import GoogleLoginButton from '../components/goog-auth-components/GoogleLoginBut
 import logo from '../../assets/myvote_lg.png';
 
 const Login = ({ handleLogin, isLoggedIn }) => {
-  const trueLogin = () => {
-    handleLogin();
-    console.log('hello from true login', isLoggedIn);
-  };
+  // const trueLogin = () => {
+  //   handleLogin();
+  //   console.log('hello from true login', isLoggedIn);
+  // };
 
   return (
     <div className='landing-page-container'>
@@ -37,7 +37,7 @@ const Login = ({ handleLogin, isLoggedIn }) => {
                 <img src={logo} width={600} alt='logo' />
                 <br></br>
                 <GoogleLoginButton
-                  trueLogin={trueLogin}
+                  handleLogin={handleLogin}
                   isLoggedIn={isLoggedIn}
                 />
               </Grid>
