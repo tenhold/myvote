@@ -1,7 +1,6 @@
 const router = require('express').Router();
-const { findOneAndUpdate } = require('../models/Ballot');
+const { findOneAndUpdate, find } = require('../models/Ballot');
 const Ballot = require('../models/Ballot');
-
 
 
 router.post('/:voter_id', async (req, res) => {
@@ -9,29 +8,70 @@ router.post('/:voter_id', async (req, res) => {
   console.log('user id', voter_id);
   console.log('post in ballot', req.body);
   const {
+    officeId,
+    officeWeVoteId,
+    office,
     name,
     party,
     image,
-    officeId,
-    office,
-    officeWeVoteId,
     ballotItem
   } = req.body
 
-  const ballot = await Ballot
-    .create({
-      voter_id,
-      office,
-      name,
-      party,
-      image,
-      officeId,
-      officeWeVoteId,
-      ballotItem
+  const findBallot = await Ballot.findOne({ office });
 
-    });
-  res.status(201).send(ballot);
+  console.log('find ballot office', findBallot)
+
+  // check to see if ballot exists
+  // if not create ballot
+  // if so check to see if the candidate is the same
+  // if not then patch that item
+  if (!findBallot) {
+    const ballot = await Ballot
+      .create({
+        voter_id,
+        officeId,
+        officeWeVoteId,
+        office,
+        name,
+        party,
+        image,
+        ballotItem
+      });
+    res.status(201).send(ballot);
+  } else {
+    res.status(404).send('already added office')
+  }
+
 });
+
+// router.post('/:voter_id', async (req, res) => {
+//   const { voter_id } = req.params;
+//   console.log('user id', voter_id);
+//   console.log('post in ballot', req.body);
+//   const {
+//     name,
+//     party,
+//     image,
+//     officeId,
+//     office,
+//     officeWeVoteId,
+//     ballotItem
+//   } = req.body
+
+//   const ballot = await Ballot
+//     .create({
+//       voter_id,
+//       office,
+//       name,
+//       party,
+//       image,
+//       officeId,
+//       officeWeVoteId,
+//       ballotItem
+
+//     });
+//   res.status(201).send(ballot);
+// });
 
 // router.post('/add', async (req, res) => {
 //   const {
