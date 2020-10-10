@@ -7,7 +7,6 @@ import {
   Button,
   Typography,
   Avatar,
-  Link,
   Grid,
 } from '@material-ui/core';
 
@@ -59,9 +58,9 @@ const Candidate = ({ candidate, updateMyBallot }) => {
                 src={candidate_photo_url_medium}
               />
 
-              <Link href={ballotpedia_candidate_url}>
+              <a href={ballotpedia_candidate_url} target='_blank'>
                 {ballot_item_display_name}
-              </Link>
+              </a>
 
               <Typography className={classes.pos} color='textSecondary'>
                 {contest_office_name}
