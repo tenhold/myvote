@@ -1,13 +1,16 @@
 import React from 'react';
 import logo from '../../../assets/myvote_sm.png';
 import GoogleLogoutButton from '../goog-auth-components/GoogleLogoutButton.jsx';
-import { BrowserRouter, Tabs, Tab } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { AppBar, Toolbar, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+  },
+  '& > *': {
+    margin: theme.spacing(3),
   },
   logo: {
     width: 200,
@@ -23,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 const NavBar = ({ onSignOut }) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+
   return (
     <BrowserRouter>
       <nav className={classes.root}>
@@ -34,13 +37,25 @@ const NavBar = ({ onSignOut }) => {
                 <img className={classes.logo} src={logo} />
               </a>
             </Typography>
-            <Button color='inherit' href='http://localhost:8080/mysupport'>
+            <Button
+              fullWidth={true}
+              color='inherit'
+              href='http://localhost:8080/mysupport'
+            >
               MySupport
             </Button>
-            <Button color='inherit' href='http://localhost:8080/myelection'>
+            <Button
+              fullWidth={true}
+              color='inherit'
+              href='http://localhost:8080/myelection'
+            >
               MyElection
             </Button>
-            <Button color='inherit' href='http://localhost:8080/myprofile'>
+            <Button
+              fullWidth={true}
+              color='inherit'
+              href='http://localhost:8080/myprofile'
+            >
               MyProfile
             </Button>
           </Toolbar>

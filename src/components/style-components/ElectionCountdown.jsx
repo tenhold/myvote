@@ -20,7 +20,7 @@ const ElectionCountdown = () => {
     <div className='election-countdown'>
       <div style={{ textAlign: 'center' }}>
         <div className='title'>
-          <h3>{daysUntilElection()}</h3>
+          <h2>{daysUntilElection()}</h2>
           <h1>Tuesday, November 3, 2020</h1>
         </div>
       </div>
