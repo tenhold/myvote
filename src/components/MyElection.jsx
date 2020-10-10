@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import axios from 'axios';
 
 import NavBar from '../components/style-components/NavBar.jsx';
@@ -25,7 +25,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const MyElection = ({ ballotList }) => {
+const MyElection = ({ ballotList, user }) => {
+  const { voter_id } = user;
+  
   const [myBallot, setMyBallot] = useState([]);
   const [myCandidates, setMyCandidates] = useState([]);
 
@@ -34,7 +36,7 @@ const MyElection = ({ ballotList }) => {
   const updateMyBallot = candidate => {
     setMyCandidates([candidate, ...myCandidates]);
     ////////// save candidates to db //////////////
-    saveCandidates(candidate);
+    saveCandidates(candidate, voter_id);
   };
 
   const removeCandidate = (id, e) => {

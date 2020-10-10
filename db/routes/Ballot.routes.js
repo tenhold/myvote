@@ -1,23 +1,21 @@
 const router = require('express').Router();
+const { findOneAndUpdate } = require('../models/Ballot');
 const Ballot = require('../models/Ballot');
 
 
 router.post('/add', async (req, res) => {
   const { voter_id } = req.body;
-  console.log(voter_id);
-  try {
-    const ballot = await Ballot
-      .create({ voter_id });
-    res.status(201).send(ballot);
-  }
-  catch (err) {
-    console.error('POST error ballot: ', err);
-    res.sendStatus(500);
-  }
+  const ballot = await Ballot
+    .create({ voter_id });
+  res.status(201).send(ballot);
 });
 
-router.patch('/:user_id', async (req, res) => {
-
+router.patch('/:voterId', async (req, res) => {
+  const { voterId } = req.params;
+  console.log(voterId)
+  const { party } = req.body;
+  const getUser = await Ballot.findOne({ voter_id: voterId })
+  console.log('patch party!', getUser);
 });
 
 // router.post('/add', async (req, res) => {
