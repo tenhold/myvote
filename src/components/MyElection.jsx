@@ -24,10 +24,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
 const MyElection = ({ ballotList, user }) => {
   const { voter_id } = user;
-  
+
   const [myBallot, setMyBallot] = useState([]);
   const [myCandidates, setMyCandidates] = useState([]);
 
@@ -51,7 +50,6 @@ const MyElection = ({ ballotList, user }) => {
     <div>
       <CssBaseline />
       <NavBar />
-      <Greeting />
       <div className={classes.root}>
         <Grid container spacing={3}>
           <Grid item xs={6}>
