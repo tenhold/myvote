@@ -31,7 +31,8 @@ const saveCandidates = async (candidate, voterId) => {
       image,
       officeId,
       officeWeVoteId,
-      ballotItem
+      ballotItem,
+      level
     }
   })
   console.log(postBallot)

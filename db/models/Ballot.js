@@ -13,7 +13,8 @@ const ballotSchema = new Schema({
     officeId: Number,
     office: String,
     officeWeVoteId: String,
-    ballotItem: String
+    ballotItem: String,
+    level: String,
   },
   house: {
     name: String,
@@ -22,7 +23,8 @@ const ballotSchema = new Schema({
     officeId: Number,
     office: String,
     officeWeVoteId: String,
-    ballotItem: String
+    ballotItem: String,
+    level: String,
   },
   senate: {
     name: String,
@@ -31,7 +33,8 @@ const ballotSchema = new Schema({
     officeId: Number,
     office: String,
     officeWeVoteId: String,
-    ballotItem: String
+    ballotItem: String,
+    level: String,
   },
   district: {
     name: String,
@@ -40,7 +43,8 @@ const ballotSchema = new Schema({
     officeId: Number,
     office: String,
     officeWeVoteId: String,
-    ballotItem: String
+    ballotItem: String,
+    level: String,
   },
   school: {
     name: String,
@@ -49,7 +53,8 @@ const ballotSchema = new Schema({
     officeId: Number,
     office: String,
     officeWeVoteId: String,
-    ballotItem: String
+    ballotItem: String,
+    level: String,
   },
   traffic: {
     name: String,
@@ -58,7 +63,8 @@ const ballotSchema = new Schema({
     officeId: Number,
     office: String,
     officeWeVoteId: String,
-    ballotItem: String
+    ballotItem: String,
+    level: String,
   },
   juvenile: {
     name: String,
@@ -67,7 +73,8 @@ const ballotSchema = new Schema({
     officeId: Number,
     office: String,
     officeWeVoteId: String,
-    ballotItem: String
+    ballotItem: String,
+    level: String,
   },
   criminal: {
     name: String,
@@ -76,7 +83,8 @@ const ballotSchema = new Schema({
     officeId: Number,
     office: String,
     officeWeVoteId: String,
-    ballotItem: String
+    ballotItem: String,
+    level: String,
   },
   civil: {
     name: String,
@@ -85,7 +93,8 @@ const ballotSchema = new Schema({
     officeId: Number,
     office: String,
     officeWeVoteId: String,
-    ballotItem: String
+    ballotItem: String,
+    level: String,
   }
 });
 
