@@ -2,16 +2,13 @@ import React, { Component, useState, useEffect } from 'react';
 import axios from 'axios';
 
 import NavBar from '../components/style-components/NavBar.jsx';
-import Greeting from '../components/style-components/Greeting.jsx';
 import MyBallot from './MyBallot.jsx';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Grid, CssBaseline } from '@material-ui/core';
+import { Paper, Grid } from '@material-ui/core';
 
 import YourBallot from './YourBallot.jsx';
 import saveCandidates from '../../server/helpers/saveCandidates';
-
-import { ballot_item_list } from './response.json';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,11 +21,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
-const MyElection = ({ ballotList, user }) => {
+const MyElection = ({ user }) => {
   const { voter_id } = user;
-  
-  const [myBallot, setMyBallot] = useState([]);
+
   const [myCandidates, setMyCandidates] = useState([]);
 
   const classes = useStyles();
@@ -48,10 +43,8 @@ const MyElection = ({ ballotList, user }) => {
   };
 
   return (
-    <div>
-      <CssBaseline />
+    <div className='container'>
       <NavBar />
-      <Greeting />
       <div className={classes.root}>
         <Grid container spacing={3}>
           <Grid item xs={6}>
@@ -74,6 +67,7 @@ const MyElection = ({ ballotList, user }) => {
             <Paper className={classes.paper}>
               <YourBallot
                 updateMyBallot={candidate => updateMyBallot(candidate)}
+                user={user}
               />
             </Paper>
           </Grid>
