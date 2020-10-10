@@ -4,8 +4,8 @@ import Greeting from '../components/style-components/Greeting.jsx';
 import MyBallot from './MyBallot.jsx';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import { Paper, Grid, CssBaseline } from '@material-ui/core';
+
 import YourBallot from './YourBallot.jsx';
 
 import { ballot_item_list } from './response.json';
@@ -40,6 +40,7 @@ const MyElection = () => {
 
   return (
     <div>
+      <CssBaseline />
       <NavBar />
       <Greeting />
       <div className={classes.root}>
