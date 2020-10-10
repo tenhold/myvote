@@ -29,9 +29,7 @@ const parseBallot = () => {
   return ballotData;
 };
 
-
 const userBallot = () => {
-
   getCandidateList(voter_device_id, '1217 Magazine St nola la').then(data => {
     const { ballot_item_list } = data.data;
   });
@@ -54,6 +52,10 @@ const YourBallot = ({ updateMyBallot }) => {
 
   const classes = useStyles();
   const { OFFICE } = ballotList[0];
+
+  const handleChange = panel => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
   return (
     <div className={classes.root}>
       <h2>Your Local Ballot</h2>
