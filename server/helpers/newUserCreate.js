@@ -1,7 +1,7 @@
 const axios = require('axios');
 const createVoterId = require('./createVoterId');
 const getVoterAddress = require('./weVoteAddress');
-const candidateList = require('./candidateList');
+const getCandidateList = require('./candidateList');
 
 // function to create a new user
 

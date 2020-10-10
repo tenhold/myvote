@@ -14,8 +14,25 @@ const saveCandidates = async (candidate, voterId) => {
   } = candidate;
 
 
-  const postBallot = await axios.patch(`/api/ballots/${voterId}`, { party: 'democrat' })
-  // console.log(postBallot)
+  const officesRegExp = /(president)|(house)|(senate)|(district)|(school)|(juvenile)|(criminal)|(civil)|(traffic)/i;
+  const getOffice = ((str, regex) => {
+    return str.match(regex)[0].toLowerCase();
+  });
+  const parsedName = getOffice(ballot_item_display_name, officesRegExp);
+
+
+
+  const postBallot = await axios.patch(`/api/ballots/${voterId}`, {
+    [parsedName]: {
+      name,
+      party,
+      image,
+      officeId,
+      officeWeVoteId,
+      ballotItem
+    }
+  })
+  console.log(postBallot)
 };
 
 module.exports = saveCandidates;

@@ -33,7 +33,7 @@ const ballotSchema = new Schema({
     officeWeVoteId: String,
     ballotItem: String
   },
-  districtAttorney: {
+  district: {
     name: String,
     party: String,
     image: String,
@@ -42,7 +42,7 @@ const ballotSchema = new Schema({
     officeWeVoteId: String,
     ballotItem: String
   },
-  schoolBoard: {
+  school: {
     name: String,
     party: String,
     image: String,
@@ -51,7 +51,7 @@ const ballotSchema = new Schema({
     officeWeVoteId: String,
     ballotItem: String
   },
-  trafficCourt: {
+  traffic: {
     name: String,
     party: String,
     image: String,
@@ -60,7 +60,7 @@ const ballotSchema = new Schema({
     officeWeVoteId: String,
     ballotItem: String
   },
-  juvenileCourt: {
+  juvenile: {
     name: String,
     party: String,
     image: String,
@@ -69,7 +69,7 @@ const ballotSchema = new Schema({
     officeWeVoteId: String,
     ballotItem: String
   },
-  criminalCourt: {
+  criminal: {
     name: String,
     party: String,
     image: String,
@@ -78,7 +78,7 @@ const ballotSchema = new Schema({
     officeWeVoteId: String,
     ballotItem: String
   },
-  civilCourt: {
+  civil: {
     name: String,
     party: String,
     image: String,
