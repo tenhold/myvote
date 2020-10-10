@@ -47,14 +47,23 @@ const useStyles = makeStyles(theme => ({
 
 const YourBallot = ({ updateMyBallot }) => {
   const [ballotList, setBallotList] = useState([parseBallot()]);
+  const [expanded, setExpanded] = useState(false);
+
   const classes = useStyles();
   const { OFFICE } = ballotList[0];
+
+  const handleChange = panel => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
 
   return (
     <div className={classes.root}>
       <h2>Your Local Ballot</h2>
       {OFFICE.map(office => (
-        <Accordion>
+        <Accordion
+          expanded={expanded === office.id}
+          onChange={handleChange(office.id)}
+        >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls='panel1a-content'
