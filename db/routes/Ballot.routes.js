@@ -3,17 +3,21 @@ const Ballot = require('../models/Ballot');
 
 
 router.post('/add', async (req, res) => {
-  const { user_id } = req.body;
-  console.log(user_id);
+  const { voter_id } = req.body;
+  console.log(voter_id);
   try {
     const ballot = await Ballot
-      .create({ user_id });
+      .create({ voter_id });
     res.status(201).send(ballot);
   }
   catch (err) {
     console.error('POST error ballot: ', err);
     res.sendStatus(500);
   }
+});
+
+router.patch('/:user_id', async (req, res) => {
+
 });
 
 // router.post('/add', async (req, res) => {

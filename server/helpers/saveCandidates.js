@@ -2,7 +2,7 @@ const axios = require('axios');
 const { ballot_item_list } = require('../../src/components/response.json');
 
 
-const saveCandidates = (candidate) => {
+const saveCandidates = (candidate, voter_id) => {
   const {
     party,
     ballot_item_display_name: name,
@@ -12,8 +12,9 @@ const saveCandidates = (candidate) => {
     contest_office_we_vote_id: officeWeVoteId,
     kind_of_ballot_item: ballotItem,
   } = candidate;
-
-  axios.post()
+  const getVoterId = await axios.get(`/api/users/${voter_id}`);
+  console.log(getVoterId);
+  axios.patch(`/api/ballots/${}`)
 };
 
 module.exports = saveCandidates;

@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const ballotSchema = new Schema({
   // what info do we need to store.
-  user_id: Number,
+  voter_id: Number,
   // unique: true,
   // required: true,
 

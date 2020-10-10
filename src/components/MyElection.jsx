@@ -34,7 +34,7 @@ const MyElection = ({ ballotList }) => {
   const updateMyBallot = candidate => {
     setMyCandidates([candidate, ...myCandidates]);
     ////////// save candidates to db //////////////
-    // saveCandidates(candidate);
+    saveCandidates(candidate);
   };
 
   const removeCandidate = (id, e) => {
