@@ -112,14 +112,12 @@ class Index extends React.Component {
             path='/myprofile'
             render={() => <MyProfile user={user} />}
           ></Route>
-          <Route path='/myballot' component={MyBallot}></Route>
           <Route path='/userform' component={UserForm}></Route>
           <Route
             path='/myelection'
             render={() => <MyElection user={user} />}
           ></Route>
           <Route path='/mysupport' component={MySupport}></Route>
-          <Route path='/logout' component={Logout}></Route>
         </Switch>
       </BrowserRouter>
     );
@@ -129,7 +127,7 @@ class Index extends React.Component {
 export default Index;
 
 ReactDOM.render(
-  <Homepage />,
+  <Index />,
 
   document.getElementById('root')
 );
