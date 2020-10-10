@@ -50,17 +50,15 @@ const YourBallot = ({ updateMyBallot, user }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const classes = useStyles();
-  // const { OFFICE } = ballotList[0];
-
   const handleChange = panel => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
-
+  const { voter_device_id } = user;
   useEffect(() => {
-    console.log('USE EFFECT');
-    const voteId =
+    // console.log(voter_device_id);
+    const testId =
       '7UXNgDlFXCkyPki7XWpiTsaenrVsM3xXmmqwPPRCcZmaZnGa5veaf4FnHyWzGmfTzwHbkZ4NQsJlKwSVTJA8uTCV';
-    getCandidateList(voteId, '1217 Magazine St nola la').then(data => {
+    getCandidateList(voter_device_id, '1217 Magazine St nola la').then(data => {
       const { ballot_item_list } = data.data;
 
       let ballotData = {};
@@ -75,12 +73,12 @@ const YourBallot = ({ updateMyBallot, user }) => {
       setIsLoading(false);
     });
   }, []);
-  console.log('BALLOT LIST', ballotList[0]);
+
   return (
     <div className={classes.root}>
       <h2>Your Local Ballot</h2>
       {isLoading && <h3>Loading Your Ballot...</h3>}
-      {!ballotList && <h3>No Data Yet</h3>}
+      {!ballotList.length && <h3>No Officials are Running in this Election</h3>}
 
       {!isLoading &&
         ballotList[0].OFFICE.map(office => (
