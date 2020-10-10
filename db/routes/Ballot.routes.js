@@ -14,8 +14,10 @@ router.post('/add', async (req, res) => {
 
 router.patch('/:voterId', async (req, res) => {
   const { voterId } = req.params;
+  console.log('patch in ballot', req.body);
   const { party } = req.body;
-  const getUser = await Ballot.findOneAndUpdate({ voter_id: voterId })
+  const getUser = await Ballot.findOneAndUpdate({ voter_id: voterId }, req.body);
+
 });
 
 // router.post('/add', async (req, res) => {
