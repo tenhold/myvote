@@ -1,8 +1,52 @@
 const router = require('express').Router();
-const { handlePost } = require('../../server/helpers/saveCandidates');
 const { findOneAndUpdate, find } = require('../models/Ballot');
 const Ballot = require('../models/Ballot');
 
+const handlePost = (async (req, res) => {
+  const { voter_id } = req.params;
+  const {
+    candidateId,
+    officeId,
+    officeWeVoteId,
+    office,
+    name,
+    party,
+    image,
+    ballotItem
+  } = req.body
+
+  const findCandidate = await Ballot
+    .findOneAndUpdate({ voter_id, officeId }, {
+      voter_id,
+      candidateId,
+      officeId,
+      officeWeVoteId,
+      office,
+      name,
+      party,
+      image,
+      ballotItem
+    });
+  console.log('find candidate????', findCandidate)
+
+  if (!findCandidate) {
+    const ballot = await Ballot
+      .create({
+        voter_id,
+        candidateId,
+        officeId,
+        officeWeVoteId,
+        office,
+        name,
+        party,
+        image,
+        ballotItem
+      });
+    res.status(201).send(ballot);
+  } else {
+    res.status(404).send('added or updated office')
+  }
+});
 
 router.post('/:voter_id', (req, res) => {
   handlePost(req, res);

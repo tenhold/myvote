@@ -50,11 +50,29 @@ const YourBallot = ({ updateMyBallot, user }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const classes = useStyles();
-  const { OFFICE } = ballotList[0];
-
-  const handleChange = panel => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
+  const handleChange = panel => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
   };
+  const { voter_device_id } = user;
+  useEffect(() => {
+    // console.log(voter_device_id);
+    const testId =
+      '7UXNgDlFXCkyPki7XWpiTsaenrVsM3xXmmqwPPRCcZmaZnGa5veaf4FnHyWzGmfTzwHbkZ4NQsJlKwSVTJA8uTCV';
+    getCandidateList(testId, '1217 Magazine St nola la').then(data => {
+      const { ballot_item_list } = data.data;
+
+      let ballotData = {};
+      ballot_item_list.map(ballot => {
+        if (ballotData[ballot.kind_of_ballot_item]) {
+          ballotData[ballot.kind_of_ballot_item].push(ballot);
+        } else {
+          ballotData[ballot.kind_of_ballot_item] = [ballot];
+        }
+      });
+      setBallotList([ballotData]);
+      setIsLoading(false);
+    });
+  }, []);
 
   return (
     <div className={classes.root}>

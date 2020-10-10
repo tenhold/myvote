@@ -22,7 +22,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MyElection = ({ user }) => {
-  const { voter_id } = user;
+  // const { voter_id } = user;
+  const voter_id = '266077';
+
+  console.log('user in my election!!!', user)
 
   const [myCandidates, setMyCandidates] = useState([]);
 
