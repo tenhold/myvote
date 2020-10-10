@@ -11,6 +11,10 @@ const { Schema, model } = require("mongoose");
 
 const ballotSchema = new Schema({
   voter_id: String,
+  candidateId: {
+    type: Number,
+    unique: true
+  },
   officeId: Number,           // contest_office_id
   officeWeVoteId: String,     // contest_office_we_vote_id
   office: String,             // contest_office_name
@@ -18,7 +22,6 @@ const ballotSchema = new Schema({
   party: String,
   image: String,              // candidate_photo_url_medium
   ballotItem: String,         // kind_of_ballot_item
-  // ???? level: String
 });
 
 const Ballot = model("Ballot", ballotSchema);

@@ -1,9 +1,13 @@
 const axios = require('axios');
 const { ballot_item_list } = require('../../src/components/response.json');
 
+
+//////////////////////////////////    used for myElection api call    ////////////////////////////////////////
+
 const saveCandidates = async (candidate, voterId) => {
   const {
     contest_office_id: officeId,
+    id: candidateId,
     contest_office_name: office,
     contest_office_we_vote_id: officeWeVoteId,
     ballot_item_display_name: name,
@@ -16,6 +20,7 @@ const saveCandidates = async (candidate, voterId) => {
 
   const postBallot = await axios.post(`/api/ballots/${voterId}`, {
     voter_id,
+    candidateId,
     officeId,
     officeWeVoteId,
     office,
@@ -27,6 +32,52 @@ const saveCandidates = async (candidate, voterId) => {
   console.log(postBallot)
 };
 
+//////////////////////////////////    used for routes in the db    ////////////////////////////////////////
+
+const handlePost = (async (req, res) => {
+  const { voter_id } = req.params;
+  const {
+    candidateId,
+    officeId,
+    officeWeVoteId,
+    office,
+    name,
+    party,
+    image,
+    ballotItem
+  } = req.body
+
+  const findCandidate = await Ballot
+    .findOneAndUpdate({ voter_id, officeId }, {
+      voter_id,
+      candidateId,
+      officeId,
+      officeWeVoteId,
+      office,
+      name,
+      party,
+      image,
+      ballotItem
+    });
+
+  if (!findCandidate) {
+    const ballot = await Ballot
+      .create({
+        voter_id,
+        candidateId,
+        officeId,
+        officeWeVoteId,
+        office,
+        name,
+        party,
+        image,
+        ballotItem
+      });
+    res.status(201).send(ballot);
+  } else {
+    res.status(404).send('added or updated office')
+  }
+});
 
 
 // const saveCandidates = async (candidate, voterId) => {
@@ -65,4 +116,4 @@ const saveCandidates = async (candidate, voterId) => {
 //   console.log(postBallot)
 // };
 
-module.exports = saveCandidates;
+module.exports = { saveCandidates, handlePost };

@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Grid } from '@material-ui/core';
 
 import YourBallot from './YourBallot.jsx';
-import saveCandidates from '../../server/helpers/saveCandidates';
+import { saveCandidates } from '../../server/helpers/saveCandidates';
 
 const useStyles = makeStyles(theme => ({
   root: {
