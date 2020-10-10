@@ -16,7 +16,7 @@ const newUserCreate = async (email, googleId, givenName, familyName) => {
     const voterAddress = await getVoterAddress();
     const { voter_location: address } = voterAddress.data;
 
-    await axios.post('/api/users/add', {
+    const newUser = await axios.post('/api/users/add', {
       voter_device_id,
       voter_id,
       voter_we_vote_id,
@@ -27,8 +27,10 @@ const newUserCreate = async (email, googleId, givenName, familyName) => {
       address
     });
     console.info('user created');
+    return newUser;
   } else {
     console.info('user exists');
+    return findUser;
   }
 };
 

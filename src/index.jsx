@@ -20,21 +20,21 @@ class Index extends React.Component {
 
     this.state = {
       users: [],
-      user: '', // will load the current logged in user unique id ie. _id,
+      user: '',
       isLoggedIn: false,
     };
-    // this.loginUser = this.loginUser.bind(this);
-    // this.logOutUser = this.logOutUser.bind(this);
+    
+    this.toggleLogin = this.toggleLogin.bind(this);
     this.onSignIn = this.onSignIn.bind(this);
     this.onSignOut = this.onSignOut.bind(this);
+    this.handleLoginUser = this.handleLoginUser.bind(this);
   }
 
   componentDidMount() {
     axios.get('/api/users').then((users) => {
       const { data } = users;
       this.setState({
-        users: data,
-        user: data[0],
+        users: data
       });
     });
   }
@@ -43,12 +43,10 @@ class Index extends React.Component {
     this.setState({
       isLoggedIn: !this.state.isLoggedIn,
     });
-    console.log('test', this.state.isLoggedIn);
   };
 
   onSignIn = (googleUser) => {
     this.toggleLogin();
-    console.log(googleUser);
   };
 
   onSignOut = (googleUser) => {
@@ -56,8 +54,12 @@ class Index extends React.Component {
     console.log(`Signed out ${googleUser}`);
   };
 
+  handleLoginUser = (data) => {
+    this.setState({ user: data.data });
+  };
+
   render() {
-    const { isLoggedIn, user } = this.state;
+    const { isLoggedIn, user, users, loggedInUser } = this.state;
     return (
       <BrowserRouter>
         <Switch>
@@ -65,11 +67,12 @@ class Index extends React.Component {
             path='/'
             exact
             strict
-            render={() =>
+            render={(props) =>
               this.state.isLoggedIn ? (
                 <Homepage
-                  onSignOut={this.onSignOut}
-                  isLoggedIn={this.state.isLoggedIn}
+                  {...props}
+                  isLoggedIn={isLoggedIn}
+                  handleLoginUser={this.handleLoginUser}
                 />
               ) : (
                 <Redirect to='/login' />
@@ -84,25 +87,24 @@ class Index extends React.Component {
                 <Redirect to='/homepage' />
               ) : (
                 <Login
-                  // loginUser={this.loginUser}
+                  loginUser={this.loginUser}
                   isLoggedIn={this.state.isLoggedIn}
                   onSignIn={this.onSignIn}
+                  handleLoginUser={this.handleLoginUser}
                 />
               )
             }
           ></Route>
           <Route
             path='/homepage'
-            render={() =>
-              this.state.isLoggedIn ? (
-                <Homepage
-                  onSignOut={this.onSignOut}
-                  isLoggedIn={this.state.isLoggedIn}
-                />
-              ) : (
-                <Redirect to='/' />
-              )
-            }
+            render={(props) => (
+              <Homepage
+                {...props} 
+                loginUser={this.loginUser} 
+                isLoggedIn={isLoggedIn} 
+                user={user}  
+              />
+            )}
           ></Route>
 
           <Route
