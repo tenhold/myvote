@@ -1,26 +1,28 @@
-import React from 'react';
-import CountdownTimer from 'react-component-countdown-timer';
-import 'react-component-countdown-timer/lib/styles.css';
+import React, { useState } from 'react';
+import moment from 'moment';
 
 const ElectionCountdown = () => {
+  const daysUntilElection = () => {
+    const today = new Date();
+    let presElection = new Date(today.getFullYear(), 10, 3);
+    if (today.getMonth() === 10 && today.getDate() > 3) {
+      presElection.setFullYear(presElection.getFullYear() + 1);
+    }
+    let one_day = 1000 * 60 * 60 * 24;
+
+    let daysAway = Math.ceil(
+      (presElection.getTime() - today.getTime()) / one_day
+    );
+    return `${daysAway} days left until the United States Presidential Election!`;
+  };
+
   return (
     <div className='election-countdown'>
       <div style={{ textAlign: 'center' }}>
         <div className='title'>
-          <h1>The General Election is in:</h1>
+          <h3>{daysUntilElection()}</h3>
+          <h1>Tuesday, November 3, 2020</h1>
         </div>
-
-        <CountdownTimer
-          count={264}
-          showTitle
-          border
-          noPoints
-          color='#27bf65'
-          size={30}
-          labelSize={40}
-          direction='right'
-          onEnd={() => {}}
-        />
       </div>
     </div>
   );
