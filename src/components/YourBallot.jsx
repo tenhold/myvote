@@ -1,23 +1,18 @@
 import React, { useState } from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+import {
+  Grid,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+} from '@material-ui/core';
 
 import Candidate from './Candidate.jsx';
 import { ballot_item_list } from './response.json';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
-}));
 
 const parseBallot = () => {
   let ballotData = {};
@@ -32,13 +27,32 @@ const parseBallot = () => {
   return ballotData;
 };
 
-const YourBallot = () => {
+const userBallot = () => {
+  const { voter_device_id } = data.data;
+  getCandidateList(voter_device_id, '1217 Magazine St nola la').then(data => {
+    const { ballot_item_list } = data.data;
+  });
+  return ballot_item_list;
+};
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: '100%',
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+  },
+}));
+
+const YourBallot = ({ updateMyBallot }) => {
   const [ballotList, setBallotList] = useState([parseBallot()]);
   const classes = useStyles();
   const { OFFICE } = ballotList[0];
 
   return (
     <div className={classes.root}>
+      <h2>Your Local Ballot</h2>
       {OFFICE.map(office => (
         <Accordion>
           <AccordionSummary
@@ -51,11 +65,15 @@ const YourBallot = () => {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            {office.candidate_list.map((candidate, ind) => (
-              <Typography>
-                <Candidate candidate={candidate} ind={ind} />
-              </Typography>
-            ))}
+            <Typography>
+              {office.candidate_list.map((candidate, index) => (
+                <Candidate
+                  candidate={candidate}
+                  ind={index}
+                  updateMyBallot={() => updateMyBallot(candidate)}
+                />
+              ))}
+            </Typography>
           </AccordionDetails>
         </Accordion>
       ))}
