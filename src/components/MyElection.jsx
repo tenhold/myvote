@@ -1,4 +1,6 @@
 import React, { Component, useState } from 'react';
+import axios from 'axios';
+
 import NavBar from '../components/style-components/NavBar.jsx';
 import Greeting from '../components/style-components/Greeting.jsx';
 import MyBallot from './MyBallot.jsx';
@@ -7,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Grid, CssBaseline } from '@material-ui/core';
 
 import YourBallot from './YourBallot.jsx';
+import saveCandidates from '../../server/helpers/saveCandidates';
 
 import { ballot_item_list } from './response.json';
 
@@ -21,13 +24,17 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const MyElection = () => {
+
+const MyElection = ({ ballotList }) => {
+  const [myBallot, setMyBallot] = useState([]);
   const [myCandidates, setMyCandidates] = useState([]);
 
   const classes = useStyles();
 
   const updateMyBallot = candidate => {
     setMyCandidates([candidate, ...myCandidates]);
+    ////////// save candidates to db //////////////
+    // saveCandidates(candidate);
   };
 
   const removeCandidate = (id, e) => {

@@ -26,6 +26,8 @@ const newUserCreate = async (email, googleId, givenName, familyName) => {
       familyName,
       address
     });
+    const createBallot = await axios.post('/api/ballots/add', { user_id: voter_id });
+    console.info(createBallot);
     console.info('user created');
     return newUser;
   } else {
