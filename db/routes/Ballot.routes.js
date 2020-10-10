@@ -3,22 +3,57 @@ const { findOneAndUpdate } = require('../models/Ballot');
 const Ballot = require('../models/Ballot');
 
 
-router.post('/add', async (req, res) => {
+
+router.post('/:voter_id', async (req, res) => {
+  const { voter_id } = req.params;
+  console.log('user id', voter_id);
+  console.log('post in ballot', req.body);
   const {
-    voter_id
-  } = req.body;
+    name,
+    party,
+    image,
+    officeId,
+    office,
+    officeWeVoteId,
+    ballotItem
+  } = req.body
+
   const ballot = await Ballot
-    .create({ voter_id });
+    .create({
+      voter_id,
+      candidate: {
+        office: office,
+        info: {
+          name,
+          party,
+          image,
+          officeId,
+          officeWeVoteId,
+          ballotItem
+        }
+      }
+    });
   res.status(201).send(ballot);
 });
 
-router.patch('/:voterId', async (req, res) => {
-  const { voterId } = req.params;
-  console.log('patch in ballot', req.body);
-  const { party } = req.body;
-  const getUser = await Ballot.findOneAndUpdate({ voter_id: voterId }, req.body);
+// router.post('/add', async (req, res) => {
+//   const {
+//     voter_id
+//   } = req.body;
+//   console.log('post!!!!', voter_id)
+//   const ballot = await Ballot
+//     .create({ voter_id });
+//   res.status(201).send(ballot);
+// });
 
-});
+// router.patch('/:voter_id', async (req, res) => {
+//   const { voter_id } = req.params;
+//   console.log(req.params);
+//   console.log('patch in ballot', req.body);
+//   const { party } = req.body;
+//   const getUser = await Ballot.findOneAndUpdate({ voter_id }, req.body);
+//   res.status(201).send(getUser);
+// });
 
 // router.post('/add', async (req, res) => {
 //   const {

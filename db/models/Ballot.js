@@ -1,7 +1,39 @@
 const { Schema, model } = require("mongoose");
 
+/** pull in all cadidte info create ballot
+ * candidate: {
+ *    <office> : {
+ *       name: string,
+ *       party: string
+ *    }
+ * }
+ */
+
 const ballotSchema = new Schema({
-  // what info do we need to store.
+  voter_id: String,
+  candidate: {
+    office: String,
+    info: {
+      name: String,               // ballot_item_display_name
+      party: String,
+      image: String,              // candidate_photo_url_medium
+      officeId: Number,           // contest_office_id
+      office: String,             // contest_office_name
+      officeWeVoteId: String,     // contest_office_we_vote_id
+      ballotItem: String,         // kind_of_ballot_item
+      // ???? level: String
+
+    }
+  }
+});
+
+const Ballot = model("Ballot", ballotSchema);
+
+module.exports = Ballot;
+
+
+/*
+// what info do we need to store.
   voter_id: Number,
   // unique: true,
   // required: true,
@@ -96,8 +128,4 @@ const ballotSchema = new Schema({
     ballotItem: String,
     level: String,
   }
-});
-
-const Ballot = model("Ballot", ballotSchema);
-
-module.exports = Ballot;
+*/

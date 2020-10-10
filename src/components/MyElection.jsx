@@ -30,6 +30,7 @@ const MyElection = ({ user }) => {
 
   const updateMyBallot = candidate => {
     setMyCandidates([candidate, ...myCandidates]);
+    console.log('updatemyballot', voter_id);
     ////////// save candidates to db //////////////
     saveCandidates(candidate, voter_id);
   };

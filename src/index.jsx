@@ -51,15 +51,47 @@ const Index = () => {
     setUser(user.givenName);
   };
 
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route
-          path='/'
-          exact
-          strict
-          render={() =>
-            isLoggedIn ? (
+  render() {
+    const { isLoggedIn, user, users, loggedInUser } = this.state;
+    console.log('user in index', user)
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route
+            path='/'
+            exact
+            strict
+            render={(props) =>
+              this.state.isLoggedIn ? (
+                <Homepage
+                  {...props}
+                  isLoggedIn={isLoggedIn}
+                  handleLoginUser={this.handleLoginUser}
+                />
+              ) : (
+                <Redirect to='/login' />
+              )
+            }
+          ></Route>
+
+          <Route
+            path='/login'
+            render={() =>
+              this.state.isLoggedIn ? (
+                <Redirect to='/homepage' />
+              ) : (
+                <Login
+                  loginUser={this.loginUser}
+                  isLoggedIn={this.state.isLoggedIn}
+                  onSignIn={this.onSignIn}
+                  handleLoginUser={this.handleLoginUser}
+                />
+              )
+            }
+          ></Route>
+          <Route
+            path='/homepage'
+            render={(props) => (
               <Homepage
                 user={user}
                 isLoggedIn={isLoggedIn}

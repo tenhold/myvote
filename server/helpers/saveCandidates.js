@@ -25,15 +25,15 @@ const saveCandidates = async (candidate, voterId) => {
 
 
   const postBallot = await axios.patch(`/api/ballots/${voterId}`, {
-    [parsedOffice]: {
-      name,
-      party,
-      image,
-      officeId,
-      officeWeVoteId,
-      ballotItem,
-      level
-    }
+    // office: {
+    //   name,
+    //   party,
+    //   image,
+    //   office,
+    //   officeId,
+    //   officeWeVoteId,
+    //   ballotItem,
+    // }
   })
   console.log(postBallot)
 };
