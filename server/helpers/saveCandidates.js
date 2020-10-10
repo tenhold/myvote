@@ -13,8 +13,9 @@ const saveCandidates = async (candidate, voterId) => {
     kind_of_ballot_item: ballotItem,
   } = candidate;
 
+
   const postBallot = await axios.patch(`/api/ballots/${voterId}`, { party: 'democrat' })
-  console.log(postBallot)
+  // console.log(postBallot)
 };
 
 module.exports = saveCandidates;
