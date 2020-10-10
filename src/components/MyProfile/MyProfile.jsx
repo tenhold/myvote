@@ -24,13 +24,7 @@ const MyProfile = ({
   return (
     <div className='container'>
       <NavBar />
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+
       <div className='header'>
         <Grid>
           <h1 style={mystyle}>MyProfile</h1>

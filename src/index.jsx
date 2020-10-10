@@ -23,7 +23,8 @@ class Index extends React.Component {
       user: '',
       isLoggedIn: false,
     };
-    
+    // this.loginUser = this.loginUser.bind(this);
+    // this.logOutUser = this.logOutUser.bind(this);
     this.toggleLogin = this.toggleLogin.bind(this);
     this.onSignIn = this.onSignIn.bind(this);
     this.onSignOut = this.onSignOut.bind(this);
@@ -34,7 +35,7 @@ class Index extends React.Component {
     axios.get('/api/users').then((users) => {
       const { data } = users;
       this.setState({
-        users: data
+        users: data,
       });
     });
   }
@@ -99,10 +100,10 @@ class Index extends React.Component {
             path='/homepage'
             render={(props) => (
               <Homepage
-                {...props} 
-                loginUser={this.loginUser} 
-                isLoggedIn={isLoggedIn} 
-                user={user}  
+                {...props}
+                loginUser={this.loginUser}
+                isLoggedIn={isLoggedIn}
+                user={user}
               />
             )}
           ></Route>
@@ -111,14 +112,12 @@ class Index extends React.Component {
             path='/myprofile'
             render={() => <MyProfile user={user} />}
           ></Route>
-          <Route path='/myballot' component={MyBallot}></Route>
           <Route path='/userform' component={UserForm}></Route>
           <Route
             path='/myelection'
             render={() => <MyElection user={user} />}
           ></Route>
           <Route path='/mysupport' component={MySupport}></Route>
-          <Route path='/logout' component={Logout}></Route>
         </Switch>
       </BrowserRouter>
     );
