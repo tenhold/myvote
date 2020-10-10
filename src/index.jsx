@@ -23,8 +23,7 @@ class Index extends React.Component {
       user: '',
       isLoggedIn: false,
     };
-    // this.loginUser = this.loginUser.bind(this);
-    // this.logOutUser = this.logOutUser.bind(this);
+    this.toggleLogin = this.toggleLogin.bind(this);
     this.onSignIn = this.onSignIn.bind(this);
     this.onSignOut = this.onSignOut.bind(this);
     this.handleLoginUser = this.handleLoginUser.bind(this);
@@ -46,23 +45,7 @@ class Index extends React.Component {
   };
 
   onSignIn = (googleUser) => {
-    this.loginUser();
-  };
-
-  logOutUser = () => {
-    this.setState({
-      isLoggedIn: false,
-    });
-  };
-
-  onSignIn = (googleUser) => {
-    this.loginUser();
-  };
-
-  logOutUser = () => {
-    this.setState({
-      isLoggedIn: false,
-    });
+    this.toggleLogin();
   };
 
   onSignOut = (googleUser) => {
@@ -86,7 +69,7 @@ class Index extends React.Component {
             render={(props) =>
               this.state.isLoggedIn ? (
                 <Homepage
-                  // loginUser={this.loginUser()}
+
                   {...props}
                   isLoggedIn={isLoggedIn}
                   handleLoginUser={this.handleLoginUser}
@@ -104,7 +87,6 @@ class Index extends React.Component {
                 <Redirect to='/homepage' />
               ) : (
                 <Login
-                  loginUser={this.loginUser}
                   isLoggedIn={this.state.isLoggedIn}
                   onSignIn={this.onSignIn}
                   handleLoginUser={this.handleLoginUser}
@@ -117,7 +99,6 @@ class Index extends React.Component {
             render={(props) => (
               <Homepage
                 {...props} 
-                loginUser={this.loginUser} 
                 isLoggedIn={isLoggedIn} 
                 user={user}  
               />
