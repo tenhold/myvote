@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
-import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
+import getCandidateList from '../../server/helpers/candidateList';
+
+import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import {
@@ -27,12 +29,13 @@ const parseBallot = () => {
   return ballotData;
 };
 
+
 const userBallot = () => {
-  const { voter_device_id } = data.data;
+
   getCandidateList(voter_device_id, '1217 Magazine St nola la').then(data => {
     const { ballot_item_list } = data.data;
   });
-  return ballot_item_list;
+  // return ballot_item_list;
 };
 
 const useStyles = makeStyles(theme => ({
@@ -51,11 +54,6 @@ const YourBallot = ({ updateMyBallot }) => {
 
   const classes = useStyles();
   const { OFFICE } = ballotList[0];
-
-  const handleChange = panel => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
-
   return (
     <div className={classes.root}>
       <h2>Your Local Ballot</h2>

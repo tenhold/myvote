@@ -1,6 +1,7 @@
 const axios = require('axios');
 const createVoterId = require('./createVoterId');
 const getVoterAddress = require('./weVoteAddress');
+const getCandidateList = require('./candidateList');
 
 // function to create a new user
 
@@ -26,6 +27,8 @@ const newUserCreate = async (email, googleId, givenName, familyName) => {
       familyName,
       address
     });
+    const createBallot = await axios.post('/api/ballots/add', { voter_id });
+    console.info(createBallot);
     console.info('user created');
     return newUser;
   } else {

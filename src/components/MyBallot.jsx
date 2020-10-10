@@ -32,6 +32,7 @@ const MyBallot = ({ candidate, removeCandidate }) => {
   const [myCandidates, setCandidates] = useState();
 
   const classes = useStyles();
+  console.log('myCadidates', myCandidates);
 
   const {
     ballot_item_display_name,

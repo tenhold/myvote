@@ -32,10 +32,7 @@ router.post('/add', async (req, res) => {
     lastName,
     DOB,
     party,
-    address,
-    // city,
-    // state,
-    // zipcode,
+    address
   } = req.body;
   try {
     const user = await Users.create({
@@ -48,10 +45,7 @@ router.post('/add', async (req, res) => {
       lastName: familyName || lastName,
       DOB,
       party,
-      address,
-      // city,
-      // state,
-      // zipcode,
+      address
     });
     res.status(201).send(user);
   } catch (err) {

@@ -1,43 +1,61 @@
 const router = require('express').Router();
+const { findOneAndUpdate } = require('../models/Ballot');
 const Ballot = require('../models/Ballot');
 
 
-router.post('/api/ballot', async (req, res) => {
+router.post('/add', async (req, res) => {
   const {
-    userId,
-    president,
-    house,
-    senate,
-    districtAttorney,
-    schoolBoard,
-    trafficCourt,
-    juvenileCourt,
-    criminalCourt,
-    civilCourt
+    voter_id
   } = req.body;
-  try {
-    const ballot = await Ballot
-      .create({
-        userId,
-        president,
-        house,
-        senate,
-        districtAttorney,
-        schoolBoard,
-        trafficCourt,
-        juvenileCourt,
-        criminalCourt,
-        civilCourt
-      });
-    res.status(201).send(ballot);
-  }
-  catch (err) {
-    console.error('POST error ballot: ', err);
-    res.sendStatus(500);
-  }
+  const ballot = await Ballot
+    .create({ voter_id });
+  res.status(201).send(ballot);
 });
 
-router.get('/api/ballot', async (req, res) => {
+router.patch('/:voterId', async (req, res) => {
+  const { voterId } = req.params;
+  console.log('patch in ballot', req.body);
+  const { party } = req.body;
+  const getUser = await Ballot.findOneAndUpdate({ voter_id: voterId }, req.body);
+
+});
+
+// router.post('/add', async (req, res) => {
+//   const {
+//     userId,
+//     president,
+//     house,
+//     senate,
+//     districtAttorney,
+//     schoolBoard,
+//     trafficCourt,
+//     juvenileCourt,
+//     criminalCourt,
+//     civilCourt
+//   } = req.body;
+//   try {
+//     const ballot = await Ballot
+//       .create({
+//         userId,
+//         president,
+//         house,
+//         senate,
+//         districtAttorney,
+//         schoolBoard,
+//         trafficCourt,
+//         juvenileCourt,
+//         criminalCourt,
+//         civilCourt
+//       });
+//     res.status(201).send(ballot);
+//   }
+//   catch (err) {
+//     console.error('POST error ballot: ', err);
+//     res.sendStatus(500);
+//   }
+// });
+
+router.get('/', async (req, res) => {
   try {
     const ballot = await Ballot.find();
     res.status(200).send(ballot);

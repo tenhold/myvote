@@ -2,46 +2,99 @@ const { Schema, model } = require("mongoose");
 
 const ballotSchema = new Schema({
   // what info do we need to store.
-  userId: {
-    type: String,
-    unique: true,
-    required: true,
-  },
+  voter_id: Number,
+  // unique: true,
+  // required: true,
+
   president: {
-    type: String,
-    default: null
+    name: String,
+    party: String,
+    image: String,
+    officeId: Number,
+    office: String,
+    officeWeVoteId: String,
+    ballotItem: String,
+    level: String,
   },
   house: {
-    type: String,
-    default: null
+    name: String,
+    party: String,
+    image: String,
+    officeId: Number,
+    office: String,
+    officeWeVoteId: String,
+    ballotItem: String,
+    level: String,
   },
   senate: {
-    type: String,
-    default: null
+    name: String,
+    party: String,
+    image: String,
+    officeId: Number,
+    office: String,
+    officeWeVoteId: String,
+    ballotItem: String,
+    level: String,
   },
-  districtAttorney: {
-    type: String,
-    default: null
+  district: {
+    name: String,
+    party: String,
+    image: String,
+    officeId: Number,
+    office: String,
+    officeWeVoteId: String,
+    ballotItem: String,
+    level: String,
   },
-  schoolBoard: {
-    type: String,
-    default: null
+  school: {
+    name: String,
+    party: String,
+    image: String,
+    officeId: Number,
+    office: String,
+    officeWeVoteId: String,
+    ballotItem: String,
+    level: String,
   },
-  trafficCourt: {
-    type: String,
-    default: null
+  traffic: {
+    name: String,
+    party: String,
+    image: String,
+    officeId: Number,
+    office: String,
+    officeWeVoteId: String,
+    ballotItem: String,
+    level: String,
   },
-  juvenileCourt: {
-    type: String,
-    default: null
+  juvenile: {
+    name: String,
+    party: String,
+    image: String,
+    officeId: Number,
+    office: String,
+    officeWeVoteId: String,
+    ballotItem: String,
+    level: String,
   },
-  criminalCourt: {
-    type: String,
-    default: null
+  criminal: {
+    name: String,
+    party: String,
+    image: String,
+    officeId: Number,
+    office: String,
+    officeWeVoteId: String,
+    ballotItem: String,
+    level: String,
   },
-  civilCourt: {
-    type: String,
-    default: null
+  civil: {
+    name: String,
+    party: String,
+    image: String,
+    officeId: Number,
+    office: String,
+    officeWeVoteId: String,
+    ballotItem: String,
+    level: String,
   }
 });
 

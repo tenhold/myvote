@@ -67,7 +67,7 @@ app.use(sosRoute);
 app.use(gubRoute);
 app.use(veepRoute);
 app.use(potusRoute);
-app.use(ballotRoute);
+app.use('/api/ballots', ballotRoute);
 
 app.get('/*', (req, res) => {
   res.render(html_file);
