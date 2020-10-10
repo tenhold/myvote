@@ -18,6 +18,20 @@ const getCandidateList = async (voterDeviceId, address) => {
 };
 
 
+// const getCandidateList = async (voterDeviceId, address) => {
+//   try {
+//     return await axios.get('https://api.wevoteusa.org/apis/v1/voterAddressSave/', {
+//       params: {
+//         voter_device_id: voterDeviceId,
+//         text_for_map_search: address
+//       }
+//     });
+//   } catch (err) {
+//     console.error('getCandidateList ERROR: ', err);
+//   }
+// };
+
+
 /////////////////////         example of use          /////////////////////
 
 // createVoterId()

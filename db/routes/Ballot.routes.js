@@ -4,7 +4,9 @@ const Ballot = require('../models/Ballot');
 
 
 router.post('/add', async (req, res) => {
-  const { voter_id } = req.body;
+  const {
+    voter_id
+  } = req.body;
   const ballot = await Ballot
     .create({ voter_id });
   res.status(201).send(ballot);
