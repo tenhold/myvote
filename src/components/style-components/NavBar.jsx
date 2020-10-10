@@ -5,7 +5,7 @@ import GoogleLogoutButton from '../goog-auth-components/GoogleLogoutButton.jsx';
 
 import { NavLink, Router } from 'react-router-dom';
 
-const NavBar = ({ onSignOut }) => {
+const NavBar = ({ onSignOut, user }) => {
   return (
     <>
       <AppBar title='MyVote'>

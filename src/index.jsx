@@ -23,6 +23,7 @@ class Index extends React.Component {
       user: '',
       isLoggedIn: false,
     };
+    
     this.toggleLogin = this.toggleLogin.bind(this);
     this.onSignIn = this.onSignIn.bind(this);
     this.onSignOut = this.onSignOut.bind(this);
@@ -57,10 +58,6 @@ class Index extends React.Component {
     this.setState({ user: data.data });
   };
 
-  handleLoginUser = (data) => {
-    this.setState({ user: data.data });
-  };
-
   render() {
     const { isLoggedIn, user, users, loggedInUser } = this.state;
     return (
@@ -73,7 +70,6 @@ class Index extends React.Component {
             render={(props) =>
               this.state.isLoggedIn ? (
                 <Homepage
-                  // loginUser={this.loginUser()}
                   {...props}
                   isLoggedIn={isLoggedIn}
                   handleLoginUser={this.handleLoginUser}
