@@ -21,17 +21,14 @@ router.post('/:voter_id', async (req, res) => {
   const ballot = await Ballot
     .create({
       voter_id,
-      candidate: {
-        office: office,
-        info: {
-          name,
-          party,
-          image,
-          officeId,
-          officeWeVoteId,
-          ballotItem
-        }
-      }
+      office,
+      name,
+      party,
+      image,
+      officeId,
+      officeWeVoteId,
+      ballotItem
+
     });
   res.status(201).send(ballot);
 });

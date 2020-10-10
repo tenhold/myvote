@@ -11,20 +11,15 @@ const { Schema, model } = require("mongoose");
 
 const ballotSchema = new Schema({
   voter_id: String,
-  candidate: {
-    office: String,
-    info: {
-      name: String,               // ballot_item_display_name
-      party: String,
-      image: String,              // candidate_photo_url_medium
-      officeId: Number,           // contest_office_id
-      office: String,             // contest_office_name
-      officeWeVoteId: String,     // contest_office_we_vote_id
-      ballotItem: String,         // kind_of_ballot_item
-      // ???? level: String
-
-    }
-  }
+  office: String,
+  name: String,               // ballot_item_display_name
+  party: String,
+  image: String,              // candidate_photo_url_medium
+  officeId: Number,           // contest_office_id
+  office: String,             // contest_office_name
+  officeWeVoteId: String,     // contest_office_we_vote_id
+  ballotItem: String,         // kind_of_ballot_item
+  // ???? level: String
 });
 
 const Ballot = model("Ballot", ballotSchema);
