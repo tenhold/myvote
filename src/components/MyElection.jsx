@@ -21,14 +21,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const MyElection = ({ ballotList }) => {
-  const [myBallot, setMyBallot] = useState([]);
+const MyElection = () => {
   const [myCandidates, setMyCandidates] = useState([]);
 
   const classes = useStyles();
 
   const updateMyBallot = candidate => {
     setMyCandidates([candidate, ...myCandidates]);
+  };
+
+  const removeCandidate = (id, e) => {
+    e.preventDefault();
+    const candidateRemove = myCandidates.filter(
+      candidate => candidate.id !== id
+    );
+    setMyCandidates(candidateRemove);
   };
 
   return (
@@ -39,7 +46,18 @@ const MyElection = ({ ballotList }) => {
         <Grid container spacing={3}>
           <Grid item xs={6}>
             <Paper className={classes.paper}>
-              <MyBallot onChange={myCandidates} myCandidates={myCandidates} />
+              <h2>Your Saved Ballot</h2>
+              {!myCandidates.length ? (
+                <div>Add to your Ballot</div>
+              ) : (
+                myCandidates.map((candidate, ind) => (
+                  <MyBallot
+                    key={ind}
+                    candidate={candidate}
+                    removeCandidate={(id, e) => removeCandidate(id, e)}
+                  />
+                ))
+              )}
             </Paper>
           </Grid>
           <Grid item xs={6}>

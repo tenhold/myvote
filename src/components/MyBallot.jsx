@@ -28,14 +28,10 @@ const useStyles = makeStyles({
   },
 });
 
-const MyBallot = ({ myCandidates }) => {
-  const [edit, useEdit] = useState({
-    id: null,
-    value: '',
-  });
+const MyBallot = ({ candidate, removeCandidate }) => {
+  const [myCandidates, setCandidates] = useState();
 
   const classes = useStyles();
-  console.log(myCandidates);
 
   const {
     ballot_item_display_name,
@@ -43,15 +39,15 @@ const MyBallot = ({ myCandidates }) => {
     party,
     candidate_photo_url_medium,
     contest_office_name,
-  } = myCandidates;
+    id,
+  } = candidate;
 
   return (
     <div>
-      <h2>Your Saved Ballot</h2>
       <Card className={classes.root} variant='outlined'>
         <Grid container spacing={1}>
           <Grid item xs={12} spacing={1}>
-            <CardContent>
+            <CardContent id={id}>
               <Typography
                 className={classes.title}
                 color='textSecondary'
@@ -78,10 +74,11 @@ const MyBallot = ({ myCandidates }) => {
               <Button
                 className={classes.marginAutoItem}
                 size='small'
-                color='primary'
+                color='secondary'
                 variant='outlined'
+                onClick={e => removeCandidate(id, e)}
               >
-                Add to your ballot
+                Remove from your ballot
               </Button>
             </CardActions>
           </Grid>
