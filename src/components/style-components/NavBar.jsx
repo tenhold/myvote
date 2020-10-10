@@ -1,37 +1,53 @@
-import React, { Component } from 'react';
-import { AppBar, Tabs, Tab } from '@material-ui/core';
+import React from 'react';
 import logo from '../../../assets/myvote_sm.png';
 import GoogleLogoutButton from '../goog-auth-components/GoogleLogoutButton.jsx';
+import { Link, BrowserRouter } from 'react-router-dom';
+import { AppBar, Grid, Toolbar, Tabs, Tab } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
-import { NavLink, Router } from 'react-router-dom';
-
-const NavBar = ({ onSignOut, user }) => {
+const useStyles = makeStyles({
+  root: {
+    flexGrow: 1,
+  },
+  logo: {
+    width: 135,
+    height: 43.54,
+  },
+});
+const NavBar = ({ onSignOut }) => {
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
   return (
-    <>
-      <AppBar title='MyVote'>
-        <NavLink to='/homepage'>
-          <span id='logo'>
-            <img src={logo} width={200} />
-          </span>
-        </NavLink>
-        <Tabs value={0}>
-          <NavLink to='/mysupport'>
-            <Tab label='MySupport' />
-          </NavLink>
-          <NavLink to='/myelection'>
-            <Tab label='MyElection' />
-          </NavLink>
-          <NavLink to='/myballot'>
-            <Tab label='MyBallot' />
-          </NavLink>
-          <NavLink to='/myprofile'>
-            <Tab label='MyProfile' />
-          </NavLink>
-
-          <GoogleLogoutButton onSignOut={onSignOut} />
-        </Tabs>
-      </AppBar>
-    </>
+    <BrowserRouter>
+      <nav className={classes.root}>
+        <AppBar position='static' color='primary'>
+          <Toolbar style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <Grid justify={'center'} alignItems={'center'} container>
+              <Grid style={{ justifySelf: 'flex-start' }} item>
+                <img className={classes.logo} src={logo} href='/homepage' />
+              </Grid>
+              <Grid item>
+                <Grid container justify={'center'}>
+                  <Tabs
+                    onChange={(event, value) => setValue(value)}
+                    value={value}
+                    aria-label='MyVote'
+                  >
+                    <Tab label={'MyProfile'} component={Link} to='/myprofile' />
+                    <Tab label={'MySupport'} component={Link} to='/mysupport' />
+                    <Tab
+                      label={'MyElection'}
+                      component={Link}
+                      to='/myelection'
+                    />
+                  </Tabs>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Toolbar>
+        </AppBar>
+      </nav>
+    </BrowserRouter>
   );
 };
 
