@@ -13,6 +13,7 @@ import { saveCandidates } from '../../server/helpers/saveCandidates';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    padding: '15px',
   },
   paper: {
     padding: theme.spacing(2),
@@ -141,6 +142,7 @@ const MyElection = ({ user }) => {
           </Grid>
           <Grid item xs={6}>
             <Paper className={classes.paper}>
+              <div></div>
               <YourBallot
                 updateMyBallot={(candidate) => updateMyBallot(candidate)}
                 user={user}

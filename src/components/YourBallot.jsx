@@ -20,6 +20,7 @@ import Candidate from './Candidate.jsx';
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
+    padding: '15px',
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
