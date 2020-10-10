@@ -16,6 +16,14 @@ import {
 import Candidate from './Candidate.jsx';
 import { ballot_item_list } from './response.json';
 
+const userBallot = () => {
+  getCandidateList(voter_device_id, '1217 Magazine St nola la').then(data => {
+    const { ballot_item_list } = data.data;
+  });
+  console.log(ballot_item_list); // return ballot_item_list;
+};
+// userBallot();
+
 const parseBallot = () => {
   let ballotData = {};
 
@@ -27,13 +35,6 @@ const parseBallot = () => {
     }
   });
   return ballotData;
-};
-
-const userBallot = () => {
-  getCandidateList(voter_device_id, '1217 Magazine St nola la').then(data => {
-    const { ballot_item_list } = data.data;
-  });
-  // return ballot_item_list;
 };
 
 const useStyles = makeStyles(theme => ({

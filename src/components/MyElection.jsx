@@ -11,8 +11,6 @@ import { Paper, Grid, CssBaseline } from '@material-ui/core';
 import YourBallot from './YourBallot.jsx';
 import saveCandidates from '../../server/helpers/saveCandidates';
 
-import { ballot_item_list } from './response.json';
-
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -47,8 +45,7 @@ const MyElection = ({ ballotList, user }) => {
   };
 
   return (
-    <div>
-      <CssBaseline />
+    <div className='container'>
       <NavBar />
       <div className={classes.root}>
         <Grid container spacing={3}>
