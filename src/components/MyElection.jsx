@@ -34,7 +34,7 @@ const MyElection = ({ user }) => {
   const classes = useStyles();
   
   useEffect(() => {
-    getDb(user);
+    getDb(user)
   }, [user]);
 
   const getDb = ({ voter_id }) => {
@@ -59,25 +59,25 @@ const MyElection = ({ user }) => {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const patchReq = (id) => {
-  const text_for_map_search = '1060 W Addison St, Chicago, IL 60613';
-  console.log(id)
-  axios.patch(`/api/users/${id}`, { address: text_for_map_search })
-    .then(data => {
-      console.log('data!!!!!', data);
-      const {voter_device_id} = data.data;
-      if (text_for_map_search) {
-        axios.get(`https://api.wevoteusa.org/apis/v1/voterAddressSave/`, {
-          params: { voter_device_id, text_for_map_search }
-        })
-        .then(data => console.log('data from we vote addess', data));
-      }
-    })
-    .catch(err => {
-      console.log('error!!!!!!!!!!!!!!')
-    })
-  };
-patchReq('5f81e80894f2e9f52053952f')
+  // const patchReq = (id) => {
+  //   const text_for_map_search = '1060 W Addison St, Chicago, IL 60613';
+  //   console.log(id)
+  //   axios.patch(`/api/users/${id}`, { address: text_for_map_search })
+  //     .then(data => {
+  //       console.log('data!!!!!', data);
+  //       const {voter_device_id} = data.data;
+  //       if (text_for_map_search) {
+  //         axios.get(`https://api.wevoteusa.org/apis/v1/voterAddressSave/`, {
+  //           params: { voter_device_id, text_for_map_search }
+  //         })
+  //         .then(data => console.log('data from we vote addess', data));
+  //       }
+  //     })
+  //     .catch(err => {
+  //       console.log('error!!!!!!!!!!!!!!')
+  //     })
+  //   };
+  // patchReq('5f81e80894f2e9f52053952f')
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

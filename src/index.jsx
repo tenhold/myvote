@@ -27,7 +27,6 @@ const Index = () => {
   useEffect((user) => {
     const getNewUser = localStorage.getItem('newUser'); // Grab the new user from the local storage
     setUser(JSON.parse(getNewUser)); // Set the state of 'user' to the user that is logged in
-    console.log(getNewUser)
   }, []);
 
   const toggleLogin = () => {

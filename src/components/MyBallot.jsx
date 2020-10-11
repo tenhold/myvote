@@ -31,7 +31,6 @@ const useStyles = makeStyles({
 
 const MyBallot = ({ candidate, removeCandidate }) => {
   const [myCandidates, setCandidates] = useState();
-  console.log('myballot ', candidate)
 
   const classes = useStyles();
 

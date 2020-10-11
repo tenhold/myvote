@@ -1,7 +1,17 @@
 const axios = require('axios');
 
+
 const getVoterAddress = async () => {
   return await axios.get('https://api.wevoteusa.org/apis/v1/voterLocationRetrieveFromIP');
-}
+};
 
-module.exports = getVoterAddress;
+const updateVoterAddress = async (voter_device_id, text_for_map_search) => {
+  return await axios.get('https://api.wevoteusa.org/apis/v1/', {
+    params: {
+      voter_device_id,
+      text_for_map_search
+    }
+  });
+};
+
+module.exports = { updateVoterAddress, getVoterAddress };
