@@ -1,1 +1,1 @@
-GET HTTP://localhost:8080/api/users
+GET HTTP://localhost:8080/api/users/:googleId

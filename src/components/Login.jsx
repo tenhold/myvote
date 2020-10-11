@@ -4,7 +4,7 @@ import { Grid } from '@material-ui/core';
 import GoogleLoginButton from '../components/goog-auth-components/GoogleLoginButton.jsx';
 import logo from '../../assets/myvote_lg.png';
 
-const Login = ({ loginUser, isLoggedIn, onSignIn, handleLoginUser }) => {
+const Login = ({ isLoggedIn, onSignIn, handleLoginUser }) => {
   return (
     <div className='landing-page-container'>
       <LoginNavbar />

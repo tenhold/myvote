@@ -18,10 +18,7 @@ export class UserForm extends Component {
       zipcode: '',
       dob: '',
       party_affiliation: '',
-      badge: '',
     };
-
-    
 
     this.nextStep = this.nextStep.bind(this);
     this.previousStep = this.previousStep.bind(this);
@@ -60,7 +57,6 @@ export class UserForm extends Component {
       zipcode,
       dob,
       party_affiliation,
-      badge,
     } = this.state;
     const values = {
       firstName,

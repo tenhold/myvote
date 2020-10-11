@@ -1,8 +1,7 @@
 import React from 'react';
 import NavBar from '../style-components/NavBar.jsx';
 import { List, ListItem, ListItemText } from '@material-ui/core';
-import { Grid, InputAdornment, Button } from '@material-ui/core';
-import { BrowserRouter, Route, Redirect, Link } from 'react-router-dom';
+import { Grid, Button } from '@material-ui/core';
 
 const MyProfile = ({
   firstName,
@@ -28,7 +27,11 @@ const MyProfile = ({
       <div className='header'>
         <Grid>
           <h1 style={mystyle}>MyProfile</h1>
-          <Button variant='contained' color='secondary' href='/userform'>
+          <Button
+            variant='contained'
+            color='secondary'
+            href='http://localhost:8080/userform'
+          >
             EDIT PROFILE
           </Button>
         </Grid>

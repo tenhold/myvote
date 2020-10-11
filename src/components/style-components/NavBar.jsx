@@ -13,8 +13,8 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3),
   },
   logo: {
-    width: 200,
-    height: 80,
+    width: 195,
+    height: 95,
   },
   title: {
     display: 'none',
