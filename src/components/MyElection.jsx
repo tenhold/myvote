@@ -20,12 +20,12 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.secondary,
   },
 }));
-const voter_id = '266077';
+// const voter_id = '266077';
 
 const MyElection = ({ user }) => {
 
   // CHANGE THIS BACK WHEN PROPS ARE BEING PASSED AROUND!!!!!!! 
-  // const { voter_id } = user;
+  const { voter_id } = user;
 
   // console.log('user in my election!!!', user)
 
