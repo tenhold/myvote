@@ -4,6 +4,10 @@ import GoogleLogoutButton from '../goog-auth-components/GoogleLogoutButton.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { AppBar, Toolbar, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AirportShuttleIcon from '@material-ui/icons/AirportShuttle';
+import AccessibilityNewRoundedIcon from '@material-ui/icons/AccessibilityNewRounded';
+import FlagRoundedIcon from '@material-ui/icons/FlagRounded';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,6 +24,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
+    },
+    supportBtn: {
+      '&svg': {
+        fontSize: 50,
+      },
     },
   },
 }));
@@ -38,23 +47,34 @@ const NavBar = ({ onSignOut }) => {
               </a>
             </Typography>
             <Button
+              style={{ fontSize: '23px' }}
               fullWidth={true}
               color='inherit'
               href='http://localhost:8080/mysupport'
+              size='large'
+              startIcon={
+                <AccessibilityNewRoundedIcon className={classes.supportBtn} />
+              }
             >
               MySupport
             </Button>
             <Button
+              style={{ fontSize: '23px' }}
               fullWidth={true}
               color='inherit'
               href='http://localhost:8080/myelection'
+              size='large'
+              startIcon={<FlagRoundedIcon />}
             >
               MyElection
             </Button>
             <Button
+              style={{ fontSize: '23px' }}
               fullWidth={true}
               color='inherit'
               href='http://localhost:8080/myprofile'
+              size='large'
+              startIcon={<AccountCircleIcon />}
             >
               MyProfile
             </Button>
