@@ -2,40 +2,34 @@ const axios = require('axios');
 const { ballot_item_list } = require('../../src/components/response.json');
 
 
-const saveCandidates = async (candidate, voterId) => {
+//////////////////////////////////    used for myElection api call    ////////////////////////////////////////
+
+const saveCandidates = async (candidate, voter_id) => {
   const {
+    contest_office_id,
+    id,
+    contest_office_name,
+    contest_office_we_vote_id,
+    ballot_item_display_name,
     party,
-    ballot_item_display_name: name,
-    candidate_photo_url_medium: image,
-    contest_office_id: officeId,
-    contest_office_name: office,
-    contest_office_we_vote_id: officeWeVoteId,
-    kind_of_ballot_item: ballotItem,
+    candidate_photo_url_medium,
+    kind_of_ballot_item,
   } = candidate;
 
-  console.log('save candidate', candidate)
+  console.log('save candidate', candidate);
 
-  const officesRegExp = /(president)|(house)|(senate)|(district)|(school)|(juvenile)|(criminal)|(civil)|(traffic)/i;
-  const getOffice = ((str, regex) => {
-    return str.match(regex)[0].toLowerCase();
+  const postBallot = await axios.post(`/api/ballots/${voter_id}`, {
+    voter_id,
+    contest_office_id,
+    id,
+    contest_office_we_vote_id,
+    contest_office_name,
+    ballot_item_display_name,
+    party,
+    candidate_photo_url_medium,
+    kind_of_ballot_item
   });
-  const parsedOffice = getOffice(office, officesRegExp);
-  console.log('parsed office name', parsedOffice)
-
-
-
-  const postBallot = await axios.patch(`/api/ballots/${voterId}`, {
-    [parsedOffice]: {
-      name,
-      party,
-      image,
-      officeId,
-      officeWeVoteId,
-      ballotItem,
-      level
-    }
-  })
-  console.log(postBallot)
 };
 
-module.exports = saveCandidates;
+
+module.exports = { saveCandidates };

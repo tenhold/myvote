@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Grid } from '@material-ui/core';
 
 import YourBallot from './YourBallot.jsx';
-import saveCandidates from '../../server/helpers/saveCandidates';
+import { saveCandidates } from '../../server/helpers/saveCandidates';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,28 +20,53 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.secondary,
   },
 }));
+// const voter_id = '266077';
 
 const MyElection = ({ user }) => {
+
+  // CHANGE THIS BACK WHEN PROPS ARE BEING PASSED AROUND!!!!!!! 
   const { voter_id } = user;
 
+  // console.log('user in my election!!!', user)
+
   const [myCandidates, setMyCandidates] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [trickState, setTrickState] = useState('');
 
   const classes = useStyles();
 
+  useEffect(() => {
+    getDb();
+  }, []);
+
+  const getDb = () => {
+    axios.get(`/api/ballots/${voter_id}`)
+    .then(data => {
+      const mapCandidate = data.data.map(candidate => candidate);
+      setMyCandidates(mapCandidate.reverse());
+      setIsLoading(false);
+    });
+  };
+  
   const updateMyBallot = candidate => {
-    setMyCandidates([candidate, ...myCandidates]);
+    
     ////////// save candidates to db //////////////
     saveCandidates(candidate, voter_id);
+    setMyCandidates([candidate, ...myCandidates]);
   };
 
   const removeCandidate = (id, e) => {
+    console.log('remove cand', id)
+    axios.delete(`/api/ballots/${id}`)
     e.preventDefault();
-    const candidateRemove = myCandidates.filter(
-      candidate => candidate.id !== id
+    const candidateRemove = myCandidates.filter(  
+      candidate => candidate.contest_office_id !== id
+
+      // remove from the database
     );
     setMyCandidates(candidateRemove);
   };
-
+  console.log('state in myElection', myCandidates)
   return (
     <div className='container'>
       <NavBar />
@@ -50,10 +75,11 @@ const MyElection = ({ user }) => {
           <Grid item xs={6}>
             <Paper className={classes.paper}>
               <h2>Your Saved Ballot</h2>
+              {isLoading && <div>Loading Candidates</div>}
               {!myCandidates.length ? (
                 <div>Add to your Ballot</div>
               ) : (
-                myCandidates.map((candidate, ind) => (
+                !isLoading && myCandidates.map((candidate, ind) => (
                   <MyBallot
                     key={ind}
                     candidate={candidate}

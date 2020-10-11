@@ -1,59 +1,56 @@
 const router = require('express').Router();
-const { findOneAndUpdate } = require('../models/Ballot');
+const { findOneAndUpdate, find } = require('../models/Ballot');
 const Ballot = require('../models/Ballot');
 
-
-router.post('/add', async (req, res) => {
+const handlePost = (async (req, res) => {
+  const { voter_id } = req.params;
   const {
-    voter_id
-  } = req.body;
-  const ballot = await Ballot
-    .create({ voter_id });
-  res.status(201).send(ballot);
+    id,
+    contest_office_id,
+    contest_office_we_vote_id,
+    contest_office_name,
+    ballot_item_display_name,
+    party,
+    candidate_photo_url_medium,
+    kind_of_ballot_item,
+    ballotpedia_candidate_url
+  } = req.body
+
+  const findCandidate = await Ballot
+    .findOneAndUpdate({ voter_id, contest_office_id }, {
+      voter_id,
+      id,
+      contest_office_id,
+      contest_office_we_vote_id,
+      contest_office_name,
+      ballot_item_display_name,
+      party,
+      candidate_photo_url_medium,
+      kind_of_ballot_item,
+      ballotpedia_candidate_url
+    });
+  console.log('find candidate????', findCandidate)
+
+  if (!findCandidate) {
+    const ballot = await Ballot
+      .create({
+        voter_id,
+        id,
+        contest_office_id,
+        contest_office_we_vote_id,
+        contest_office_name,
+        ballot_item_display_name,
+        party,
+        candidate_photo_url_medium,
+        kind_of_ballot_item,
+        ballotpedia_candidate_url
+      });
+    res.status(201).send(ballot);
+  } else {
+    res.status(404).send('added or updated office')
+  }
 });
 
-router.patch('/:voterId', async (req, res) => {
-  const { voterId } = req.params;
-  console.log('patch in ballot', req.body);
-  const { party } = req.body;
-  const getUser = await Ballot.findOneAndUpdate({ voter_id: voterId }, req.body);
-
-});
-
-// router.post('/add', async (req, res) => {
-//   const {
-//     userId,
-//     president,
-//     house,
-//     senate,
-//     districtAttorney,
-//     schoolBoard,
-//     trafficCourt,
-//     juvenileCourt,
-//     criminalCourt,
-//     civilCourt
-//   } = req.body;
-//   try {
-//     const ballot = await Ballot
-//       .create({
-//         userId,
-//         president,
-//         house,
-//         senate,
-//         districtAttorney,
-//         schoolBoard,
-//         trafficCourt,
-//         juvenileCourt,
-//         criminalCourt,
-//         civilCourt
-//       });
-//     res.status(201).send(ballot);
-//   }
-//   catch (err) {
-//     console.error('POST error ballot: ', err);
-//     res.sendStatus(500);
-//   }
-// });
 
 router.get('/', async (req, res) => {
   try {
@@ -64,6 +61,50 @@ router.get('/', async (req, res) => {
     console.error('GET error ballot: ', err);
     res.status(500).send('GET error ballot: ', err);
   }
+});
+
+
+// router.get('/:voter_id', async (req, res) => {
+//   const { voter_id } = req.params;
+//   try {
+//     await Ballot.find({ voter_id });
+//     res.sendStatus(200);
+//   } catch (err) {
+//     res.status(500).send('ERROR IN GET VOTER_ID: ', err);
+//   }
+
+// });
+
+router.get('/:voter_id', (req, res) => {
+  const { voter_id } = req.params;
+  Ballot.find({ voter_id })
+    .then(data => {
+      console.log('datain get', data);
+
+      res.send(data)
+    });
+});
+
+router.post('/:voter_id', (req, res) => {
+  handlePost(req, res);
+});
+
+router.patch('/:voter_id', (req, res) => {
+  handlePost(req, res);
+});
+
+
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deleteIt = await Ballot.findOneAndDelete({ contest_office_id: id });
+    console.log(deleteIt);
+    res.status(200).send('DELETED!');
+  } catch (err) {
+    res.status(500);
+  }
+
+
 });
 
 

@@ -12,6 +12,7 @@ import {
   Link,
   Grid,
 } from '@material-ui/core';
+import { Image } from 'react-bootstrap';
 
 const useStyles = makeStyles({
   root: {
@@ -30,9 +31,9 @@ const useStyles = makeStyles({
 
 const MyBallot = ({ candidate, removeCandidate }) => {
   const [myCandidates, setCandidates] = useState();
+  console.log('myballot ', candidate)
 
   const classes = useStyles();
-  console.log('myCadidates', myCandidates);
 
   const {
     ballot_item_display_name,
@@ -40,7 +41,7 @@ const MyBallot = ({ candidate, removeCandidate }) => {
     party,
     candidate_photo_url_medium,
     contest_office_name,
-    id,
+    contest_office_id,
   } = candidate;
 
   return (
@@ -48,7 +49,7 @@ const MyBallot = ({ candidate, removeCandidate }) => {
       <Card className={classes.root} variant='outlined'>
         <Grid container spacing={1}>
           <Grid item xs={12} spacing={1}>
-            <CardContent id={id}>
+            <CardContent id={contest_office_id}>
               <Typography
                 className={classes.title}
                 color='textSecondary'
@@ -63,11 +64,11 @@ const MyBallot = ({ candidate, removeCandidate }) => {
               />
 
               <Link href={ballotpedia_candidate_url}>
-                {ballot_item_display_name}
+                {contest_office_name}
               </Link>
 
               <Typography className={classes.pos} color='textSecondary'>
-                {contest_office_name}
+                {ballot_item_display_name}
               </Typography>
               <Typography variant='body2' component='p'></Typography>
             </CardContent>
@@ -77,7 +78,7 @@ const MyBallot = ({ candidate, removeCandidate }) => {
                 size='small'
                 color='secondary'
                 variant='outlined'
-                onClick={e => removeCandidate(id, e)}
+                onClick={e => removeCandidate(contest_office_id, e)}
               >
                 Remove from your ballot
               </Button>

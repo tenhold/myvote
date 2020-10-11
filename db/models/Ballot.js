@@ -1,101 +1,25 @@
 const { Schema, model } = require("mongoose");
 
-const ballotSchema = new Schema({
-  // what info do we need to store.
-  voter_id: Number,
-  // unique: true,
-  // required: true,
+/** pull in all cadidte info create ballot
+ * candidate: {
+ *    <office> : {
+ *       name: string,
+ *       party: string
+ *    }
+ * }
+ */
 
-  president: {
-    name: String,
-    party: String,
-    image: String,
-    officeId: Number,
-    office: String,
-    officeWeVoteId: String,
-    ballotItem: String,
-    level: String,
-  },
-  house: {
-    name: String,
-    party: String,
-    image: String,
-    officeId: Number,
-    office: String,
-    officeWeVoteId: String,
-    ballotItem: String,
-    level: String,
-  },
-  senate: {
-    name: String,
-    party: String,
-    image: String,
-    officeId: Number,
-    office: String,
-    officeWeVoteId: String,
-    ballotItem: String,
-    level: String,
-  },
-  district: {
-    name: String,
-    party: String,
-    image: String,
-    officeId: Number,
-    office: String,
-    officeWeVoteId: String,
-    ballotItem: String,
-    level: String,
-  },
-  school: {
-    name: String,
-    party: String,
-    image: String,
-    officeId: Number,
-    office: String,
-    officeWeVoteId: String,
-    ballotItem: String,
-    level: String,
-  },
-  traffic: {
-    name: String,
-    party: String,
-    image: String,
-    officeId: Number,
-    office: String,
-    officeWeVoteId: String,
-    ballotItem: String,
-    level: String,
-  },
-  juvenile: {
-    name: String,
-    party: String,
-    image: String,
-    officeId: Number,
-    office: String,
-    officeWeVoteId: String,
-    ballotItem: String,
-    level: String,
-  },
-  criminal: {
-    name: String,
-    party: String,
-    image: String,
-    officeId: Number,
-    office: String,
-    officeWeVoteId: String,
-    ballotItem: String,
-    level: String,
-  },
-  civil: {
-    name: String,
-    party: String,
-    image: String,
-    officeId: Number,
-    office: String,
-    officeWeVoteId: String,
-    ballotItem: String,
-    level: String,
-  }
+const ballotSchema = new Schema({
+  voter_id: String,
+  id: Number,
+  contest_office_id: Number,           // contest_office_id
+  contest_office_we_vote_id: String,     // contest_office_we_vote_id
+  contest_office_name: String,             // contest_office_name
+  ballot_item_display_name: String,               // ballot_item_display_name
+  party: String,
+  candidate_photo_url_medium: String,              // candidate_photo_url_medium
+  kind_of_ballot_item: String,         // kind_of_ballot_item
+  ballotpedia_candidate_url: String
 });
 
 const Ballot = model("Ballot", ballotSchema);
