@@ -51,12 +51,35 @@ const handlePost = (async (req, res) => {
   }
 });
 
+
+router.get('/', async (req, res) => {
+  try {
+    const ballot = await Ballot.find();
+    res.status(200).send(ballot);
+  }
+  catch (err) {
+    console.error('GET error ballot: ', err);
+    res.status(500).send('GET error ballot: ', err);
+  }
+});
+
+
+// router.get('/:voter_id', async (req, res) => {
+//   const { voter_id } = req.params;
+//   try {
+//     await Ballot.find({ voter_id });
+//     res.sendStatus(200);
+//   } catch (err) {
+//     res.status(500).send('ERROR IN GET VOTER_ID: ', err);
+//   }
+
+// });
+
 router.get('/:voter_id', (req, res) => {
   const { voter_id } = req.params;
-  console.log('req params', req.params)
   Ballot.find({ voter_id })
     .then(data => {
-      console.log(data);
+      console.log('datain get', data);
 
       res.send(data)
     });
@@ -71,15 +94,17 @@ router.patch('/:voter_id', (req, res) => {
 });
 
 
-router.get('/', async (req, res) => {
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+  console.log('delete it!!!!', id);
   try {
-    const ballot = await Ballot.find();
-    res.status(200).send(ballot);
+    await Ballot.findOneAndDelete({ id });
+    res.status(200).send('DELETED!');
+  } catch (err) {
+    res.status(500);
   }
-  catch (err) {
-    console.error('GET error ballot: ', err);
-    res.status(500).send('GET error ballot: ', err);
-  }
+
+
 });
 
 
