@@ -1,6 +1,6 @@
 import 'regenerator-runtime/runtime';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Homepage from './components/Homepage.jsx';
@@ -14,120 +14,94 @@ import UserForm from './components/MyProfile/UserForm.jsx';
 
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
-class Index extends React.Component {
-  constructor(props) {
-    super(props);
+const Index = () => {
+  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [test, setTest] = useState('');
 
-    this.state = {
-      users: [],
-      user: '',
-      isLoggedIn: false,
-    };
-    // this.loginUser = this.loginUser.bind(this);
-    // this.logOutUser = this.logOutUser.bind(this);
-    this.toggleLogin = this.toggleLogin.bind(this);
-    this.onSignIn = this.onSignIn.bind(this);
-    this.onSignOut = this.onSignOut.bind(this);
-    this.handleLoginUser = this.handleLoginUser.bind(this);
-  }
-
-  componentDidMount() {
-    axios.get('/api/users').then((users) => {
-      const { data } = users;
-      this.setState({
-        users: data,
-      });
-    });
-  }
-
-  toggleLogin = () => {
-    this.setState({
-      isLoggedIn: !this.state.isLoggedIn,
-    });
+  const testFunc = () => {
+    console.log('in test func: ', user);
   };
 
-  onSignIn = (googleUser) => {
-    this.toggleLogin();
+  useEffect((user) => {
+    const getNewUser = localStorage.getItem('newUser'); // Grab the new user from the local storage
+    setUser(JSON.parse(getNewUser)); // Set the state of 'user' to the user that is logged in
+  }, []);
+
+  const toggleLogin = () => {
+    // setUser(user);
+    setIsLoggedIn(!isLoggedIn);
   };
 
-  onSignOut = (googleUser) => {
-    this.toggleLogin();
+  const onSignIn = () => {
+    toggleLogin();
+    const getNewUser = localStorage.getItem('newUser'); // Grab the new user from the local storage
+    console.log('new user', getNewUser);
+    setUser(JSON.parse(getNewUser)); // Set the state of 'user' to the user that is logged in
+    testFunc();
+  };
+
+  const onSignOut = (googleUser) => {
+    toggleLogin();
     console.log(`Signed out ${googleUser}`);
   };
 
-  handleLoginUser = (data) => {
-    this.setState({ user: data.data });
+  const handleLoginUser = (user) => {
+    setUser(user.givenName);
   };
 
-  render() {
-    const { isLoggedIn, user, users, loggedInUser } = this.state;
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route
-            path='/'
-            exact
-            strict
-            render={(props) =>
-              this.state.isLoggedIn ? (
-                <Homepage
-                  {...props}
-                  isLoggedIn={isLoggedIn}
-                  handleLoginUser={this.handleLoginUser}
-                />
-              ) : (
-                <Redirect to='/login' />
-              )
-            }
-          ></Route>
-
-          <Route
-            path='/login'
-            render={() =>
-              this.state.isLoggedIn ? (
-                <Redirect to='/homepage' />
-              ) : (
-                <Login
-                  loginUser={this.loginUser}
-                  isLoggedIn={this.state.isLoggedIn}
-                  onSignIn={this.onSignIn}
-                  handleLoginUser={this.handleLoginUser}
-                />
-              )
-            }
-          ></Route>
-          <Route
-            path='/homepage'
-            render={(props) => (
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route
+          path='/'
+          exact
+          strict
+          render={() =>
+            isLoggedIn ? (
               <Homepage
-                {...props}
-                loginUser={this.loginUser}
-                isLoggedIn={isLoggedIn}
                 user={user}
+                isLoggedIn={isLoggedIn}
+                handleLoginUser={handleLoginUser}
               />
-            )}
-          ></Route>
+            ) : (
+              <Redirect to='/login' />
+            )
+          }
+        ></Route>
 
-          <Route
-            path='/myprofile'
-            render={() => <MyProfile user={user} />}
-          ></Route>
-          <Route path='/userform' component={UserForm}></Route>
-          <Route
-            path='/myelection'
-            render={() => <MyElection user={user} />}
-          ></Route>
-          <Route path='/mysupport' component={MySupport}></Route>
-        </Switch>
-      </BrowserRouter>
-    );
-  }
-}
+        <Route
+          path='/login'
+          render={() =>
+            isLoggedIn ? (
+              <Redirect to='/homepage' />
+            ) : (
+              <Login
+                isLoggedIn={isLoggedIn}
+                onSignIn={onSignIn}
+                handleLoginUser={handleLoginUser}
+              />
+            )
+          }
+        ></Route>
+        <Route
+          path='/homepage'
+          render={() => <Homepage isLoggedIn={isLoggedIn} user={user} />}
+        ></Route>
+
+        <Route path='/myprofile' render={() => <MyProfile />}></Route>
+        <Route path='/userform' render={() => <UserForm />}></Route>
+        <Route
+          path='/myelection'
+          render={() => <MyElection user={user} />}
+        ></Route>
+        <Route path='/mysupport' component={MySupport}></Route>
+      </Switch>
+    </BrowserRouter>
+  );
+};
 
 export default Index;
 
-ReactDOM.render(
-  <Index />,
-
-  document.getElementById('root')
-);
+ReactDOM.render(<Index />, document.getElementById('root'));
