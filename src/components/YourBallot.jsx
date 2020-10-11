@@ -57,18 +57,19 @@ const YourBallot = ({ updateMyBallot, user }) => {
   useEffect(() => {
     // console.log(voter_device_id);
     const testId =
-      '7UXNgDlFXCkyPki7XWpiTsaenrVsM3xXmmqwPPRCcZmaZnGa5veaf4FnHyWzGmfTzwHbkZ4NQsJlKwSVTJA8uTCV';
+      'w4HW8XnLRkQYEIvMxg9wT7pBdVSxfx4PczLl0anKCvFbV5EospeGR3P9Q6yPWkvnRMNU4y4YkCPPRTD1OyYhuhtq';
     getCandidateList(testId, '1217 Magazine St nola la').then(data => {
-      const { ballot_item_list } = data.data;
+      console.log(data)
+      // const { ballot_item_list } = data.data;
 
-      let ballotData = {};
-      ballot_item_list.map(ballot => {
-        if (ballotData[ballot.kind_of_ballot_item]) {
-          ballotData[ballot.kind_of_ballot_item].push(ballot);
-        } else {
-          ballotData[ballot.kind_of_ballot_item] = [ballot];
-        }
-      });
+      // let ballotData = {};
+      // ballot_item_list.map(ballot => {
+      //   if (ballotData[ballot.kind_of_ballot_item]) {
+      //     ballotData[ballot.kind_of_ballot_item].push(ballot);
+      //   } else {
+      //     ballotData[ballot.kind_of_ballot_item] = [ballot];
+      //   }
+      // });
       setBallotList([ballotData]);
       setIsLoading(false);
     });

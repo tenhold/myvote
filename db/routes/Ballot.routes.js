@@ -5,27 +5,29 @@ const Ballot = require('../models/Ballot');
 const handlePost = (async (req, res) => {
   const { voter_id } = req.params;
   const {
-    candidateId,
-    officeId,
-    officeWeVoteId,
-    office,
+    id,
+    contest_office_id,
+    contest_office_we_vote_id,
+    contest_office_name,
     name,
     party,
-    image,
-    ballotItem
+    candidate_photo_url_medium,
+    kind_of_ballot_item,
+    ballotpedia_candidate_url
   } = req.body
 
   const findCandidate = await Ballot
-    .findOneAndUpdate({ voter_id, officeId }, {
+    .findOneAndUpdate({ voter_id, contest_office_id }, {
       voter_id,
-      candidateId,
-      officeId,
-      officeWeVoteId,
-      office,
-      name,
+      id,
+      contest_office_id,
+      contest_office_we_vote_id,
+      contest_office_name,
+      ballot_item_display_name,
       party,
-      image,
-      ballotItem
+      candidate_photo_url_medium,
+      kind_of_ballot_item,
+      ballotpedia_candidate_url
     });
   console.log('find candidate????', findCandidate)
 
@@ -33,14 +35,15 @@ const handlePost = (async (req, res) => {
     const ballot = await Ballot
       .create({
         voter_id,
-        candidateId,
-        officeId,
-        officeWeVoteId,
-        office,
+        id,
+        contest_office_id,
+        contest_office_we_vote_id,
+        contest_office_name,
         name,
         party,
-        image,
-        ballotItem
+        candidate_photo_url_medium,
+        kind_of_ballot_item,
+        ballotpedia_candidate_url
       });
     res.status(201).send(ballot);
   } else {

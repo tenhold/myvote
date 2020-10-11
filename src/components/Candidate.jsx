@@ -33,6 +33,7 @@ const Candidate = ({ candidate, updateMyBallot }) => {
     party,
     candidate_photo_url_medium,
     contest_office_name,
+    
   } = candidate;
 
   const handleSelect = (selectedIndex, e) => {

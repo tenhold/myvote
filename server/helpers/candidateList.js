@@ -4,12 +4,13 @@ const createVoterId = require('./createVoterId');
 
 const getCandidateList = async (voterDeviceId, address) => {
   try {
-    return await axios.get('https://api.wevoteusa.org/apis/v1/voterAddressSave/', {
+    const getList = await axios.get('https://api.wevoteusa.org/apis/v1/voterAddressSave/', {
       params: {
         voter_device_id: voterDeviceId,
         text_for_map_search: address
       }
     });
+    return
   } catch (err) {
     console.error('getCandidateList ERROR: ', err);
   }
