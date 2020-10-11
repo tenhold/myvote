@@ -48,6 +48,17 @@ const handlePost = (async (req, res) => {
   }
 });
 
+router.get('/:voter_id', (req, res) => {
+  const { voter_id } = req.params;
+  console.log('req params', req.params)
+  Ballot.find({ voter_id })
+    .then(data => {
+      console.log(data);
+
+      res.send(data)
+    });
+});
+
 router.post('/:voter_id', (req, res) => {
   handlePost(req, res);
 });

@@ -12,6 +12,7 @@ import {
   Link,
   Grid,
 } from '@material-ui/core';
+import { Image } from 'react-bootstrap';
 
 const useStyles = makeStyles({
   root: {
@@ -30,16 +31,17 @@ const useStyles = makeStyles({
 
 const MyBallot = ({ candidate, removeCandidate }) => {
   const [myCandidates, setCandidates] = useState();
+  console.log('myballot ', candidate)
 
   const classes = useStyles();
 
   const {
-    ballot_item_display_name,
+    name,
     ballotpedia_candidate_url,
     party,
-    candidate_photo_url_medium,
-    contest_office_name,
-    id,
+    image,
+    office,
+    candidateId,
   } = candidate;
 
   return (
@@ -47,7 +49,7 @@ const MyBallot = ({ candidate, removeCandidate }) => {
       <Card className={classes.root} variant='outlined'>
         <Grid container spacing={1}>
           <Grid item xs={12} spacing={1}>
-            <CardContent id={id}>
+            <CardContent id={candidateId}>
               <Typography
                 className={classes.title}
                 color='textSecondary'
@@ -58,15 +60,15 @@ const MyBallot = ({ candidate, removeCandidate }) => {
 
               <Avatar
                 className={classes.marginAutoItem}
-                src={candidate_photo_url_medium}
+                src={image}
               />
 
               <Link href={ballotpedia_candidate_url}>
-                {ballot_item_display_name}
+                {name}
               </Link>
 
               <Typography className={classes.pos} color='textSecondary'>
-                {contest_office_name}
+                {office}
               </Typography>
               <Typography variant='body2' component='p'></Typography>
             </CardContent>
@@ -76,7 +78,7 @@ const MyBallot = ({ candidate, removeCandidate }) => {
                 size='small'
                 color='secondary'
                 variant='outlined'
-                onClick={e => removeCandidate(id, e)}
+                onClick={e => removeCandidate(candidateId, e)}
               >
                 Remove from your ballot
               </Button>
