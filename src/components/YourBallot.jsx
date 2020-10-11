@@ -17,23 +17,6 @@ import {
 import Candidate from './Candidate.jsx';
 // import { ballot_item_list } from './response.json';
 
-const parseBallot = voteId => {
-  getCandidateList(voteId, '1217 Magazine St nola la').then(data => {
-    const { ballot_item_list } = data.data;
-
-    let ballotData = {};
-    ballot_item_list.map(ballot => {
-      if (ballotData[ballot.kind_of_ballot_item]) {
-        ballotData[ballot.kind_of_ballot_item].push(ballot);
-      } else {
-        ballotData[ballot.kind_of_ballot_item] = [ballot];
-      }
-    });
-    console.log('Setting State with', ballotData);
-    setBallotList([ballotData]);
-  });
-};
-
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -53,27 +36,58 @@ const YourBallot = ({ updateMyBallot, user }) => {
   const handleChange = panel => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
-  const { voter_device_id } = user;
+  const { voter_device_id, address } = user;
+  console.log('voter device, address outside of func!!!!!!!!!', !!voter_device_id, !!address, address);
   useEffect(() => {
+    console.log('Hello??????????????????');
     // console.log(voter_device_id);
-    const testId =
-      'w4HW8XnLRkQYEIvMxg9wT7pBdVSxfx4PczLl0anKCvFbV5EospeGR3P9Q6yPWkvnRMNU4y4YkCPPRTD1OyYhuhtq';
-    getCandidateList(testId, '1217 Magazine St nola la').then(data => {
-  
-      const { ballot_item_list } = data.data;
+    // const testId =
+    //   'w4HW8XnLRkQYEIvMxg9wT7pBdVSxfx4PczLl0anKCvFbV5EospeGR3P9Q6yPWkvnRMNU4y4YkCPPRTD1OyYhuhtq';
+    if (voter_device_id) {
+      loadCandidates();
+    }
+  }, [user]);
+
+  const loadCandidates = async () => {
+    try {
+      const candidateList = await getCandidateList(voter_device_id, address);
+      const { ballot_item_list } = candidateList.data;
 
       let ballotData = {};
-      ballot_item_list.map(ballot => {
-        if (ballotData[ballot.kind_of_ballot_item]) {
-          ballotData[ballot.kind_of_ballot_item].push(ballot);
-        } else {
-          ballotData[ballot.kind_of_ballot_item] = [ballot];
-        }
-      });
-      setBallotList([ballotData]);
-      setIsLoading(false);
-    });
-  }, []);
+
+        ballot_item_list.map(ballot => {
+          if (ballotData[ballot.kind_of_ballot_item]) {
+            ballotData[ballot.kind_of_ballot_item].push(ballot);
+          } else {
+            ballotData[ballot.kind_of_ballot_item] = [ballot];
+          }
+        });
+        setBallotList([ballotData]);
+        setIsLoading(false);
+    }
+    catch(err) {
+      console.error(err);
+    }
+  }
+  // const loadCandidates = () => {
+  //   getCandidateList(voter_device_id, address)
+  //     .then(data => {
+  //       console.log('voter device, address inside func?????????', voter_device_id, address);
+  //       const { ballot_item_list } = data.data;
+    
+  //       let ballotData = {};
+  //       ballot_item_list.map(ballot => {
+  //         if (ballotData[ballot.kind_of_ballot_item]) {
+  //           ballotData[ballot.kind_of_ballot_item].push(ballot);
+  //         } else {
+  //           ballotData[ballot.kind_of_ballot_item] = [ballot];
+  //         }
+  //     })
+  //     setBallotList([ballotData]);
+  //     setIsLoading(false);
+  //     })
+  //     .catch(err => console.error(err));
+  // }
 
   return (
     <div className={classes.root}>

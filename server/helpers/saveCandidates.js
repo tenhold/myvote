@@ -14,6 +14,7 @@ const saveCandidates = async (candidate, voter_id) => {
     party,
     candidate_photo_url_medium,
     kind_of_ballot_item,
+    ballotpedia_candidate_url
   } = candidate;
 
   console.log('save candidate', candidate);
@@ -27,7 +28,8 @@ const saveCandidates = async (candidate, voter_id) => {
     ballot_item_display_name,
     party,
     candidate_photo_url_medium,
-    kind_of_ballot_item
+    kind_of_ballot_item,
+    ballotpedia_candidate_url
   });
 };
 
