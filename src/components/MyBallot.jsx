@@ -63,11 +63,11 @@ const MyBallot = ({ candidate, removeCandidate }) => {
               />
 
               <Link href={ballotpedia_candidate_url}>
-                {contest_office_name}
+                {ballot_item_display_name}
               </Link>
 
               <Typography className={classes.pos} color='textSecondary'>
-                {ballot_item_display_name}
+                {contest_office_name}
               </Typography>
               <Typography variant='body2' component='p'></Typography>
             </CardContent>
