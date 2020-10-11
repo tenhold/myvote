@@ -56,9 +56,10 @@ const MyElection = ({ user }) => {
   };
 
   const removeCandidate = (id, e) => {
+    console.log('remove cand', id)
     e.preventDefault();
-    const candidateRemove = myCandidates.filter(
-      candidate => candidate.candidateId !== id
+    const candidateRemove = myCandidates.filter(  
+      candidate => candidate.contest_office_id !== id
 
       // remove from the database
     );
