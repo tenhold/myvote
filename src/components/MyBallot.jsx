@@ -36,12 +36,12 @@ const MyBallot = ({ candidate, removeCandidate }) => {
   const classes = useStyles();
 
   const {
-    name,
+    kind_of_ballot_item,
     ballotpedia_candidate_url,
     party,
-    image,
-    office,
-    candidateId,
+    candidate_photo_url_medium,
+    contest_office_name,
+    contest_office_id,
   } = candidate;
 
   return (
@@ -49,7 +49,7 @@ const MyBallot = ({ candidate, removeCandidate }) => {
       <Card className={classes.root} variant='outlined'>
         <Grid container spacing={1}>
           <Grid item xs={12} spacing={1}>
-            <CardContent id={candidateId}>
+            <CardContent id={contest_office_id}>
               <Typography
                 className={classes.title}
                 color='textSecondary'
@@ -60,15 +60,15 @@ const MyBallot = ({ candidate, removeCandidate }) => {
 
               <Avatar
                 className={classes.marginAutoItem}
-                src={image}
+                src={candidate_photo_url_medium}
               />
 
               <Link href={ballotpedia_candidate_url}>
-                {name}
+                {contest_office_name}
               </Link>
 
               <Typography className={classes.pos} color='textSecondary'>
-                {office}
+                {contest_office_name}
               </Typography>
               <Typography variant='body2' component='p'></Typography>
             </CardContent>
@@ -78,7 +78,7 @@ const MyBallot = ({ candidate, removeCandidate }) => {
                 size='small'
                 color='secondary'
                 variant='outlined'
-                onClick={e => removeCandidate(candidateId, e)}
+                onClick={e => removeCandidate(contest_office_id, e)}
               >
                 Remove from your ballot
               </Button>
