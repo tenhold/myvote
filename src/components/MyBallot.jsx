@@ -36,7 +36,7 @@ const MyBallot = ({ candidate, removeCandidate }) => {
   const classes = useStyles();
 
   const {
-    kind_of_ballot_item,
+    ballot_item_display_name,
     ballotpedia_candidate_url,
     party,
     candidate_photo_url_medium,
@@ -68,7 +68,7 @@ const MyBallot = ({ candidate, removeCandidate }) => {
               </Link>
 
               <Typography className={classes.pos} color='textSecondary'>
-                {contest_office_name}
+                {ballot_item_display_name}
               </Typography>
               <Typography variant='body2' component='p'></Typography>
             </CardContent>
