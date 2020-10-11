@@ -18,8 +18,12 @@ const GoogleLoginButton = ({ isLoggedIn, onSignIn, handleLoginUser }) => {
       givenName,
       familyName
     );
-    console.log('google prof', res.profileObj);
-    localStorage.setItem('newUser', JSON.stringify(res.profileObj)); // Save the new user to the local storage
+
+    // const matchGoogleId = createUser.filter(
+    //   (user) => user.googleId === googleId
+    // );
+    console.log('googleId check', createUser.data);
+    localStorage.setItem('newUser', JSON.stringify(createUser.data)); // Save the new user to the local storage
     refreshTokenId(res);
     // pass the current user to the index state.
     handleLoginUser(createUser); // Stores new users to database
@@ -30,7 +34,6 @@ const GoogleLoginButton = ({ isLoggedIn, onSignIn, handleLoginUser }) => {
   const onFailure = (res) => {
     console.info('[Failed to log into MyVote]', res);
   };
-  // onClick={() => onSignIn()}
   return (
     <div>
       <GoogleLogin

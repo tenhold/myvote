@@ -10,7 +10,7 @@ const Homepage = ({ user }) => {
     <div className='container'>
       <NavBar />
       {!user && <div>Loading name...</div>}
-      {user && <h1>Welcome {user.givenName}</h1>}
+      {user && <h1>Welcome {user.firstName}</h1>}
       <center>
         <img src={logoLg} />
       </center>

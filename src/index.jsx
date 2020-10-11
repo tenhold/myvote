@@ -48,7 +48,6 @@ const Index = () => {
   };
 
   const handleLoginUser = (user) => {
-    console.log(user.givenName);
     setUser(user.givenName);
   };
 
