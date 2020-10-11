@@ -96,9 +96,9 @@ router.patch('/:voter_id', (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
-  console.log('delete it!!!!', id);
   try {
-    await Ballot.findOneAndDelete({ id });
+    const deleteIt = await Ballot.findOneAndDelete({ contest_office_id: id });
+    console.log(deleteIt);
     res.status(200).send('DELETED!');
   } catch (err) {
     res.status(500);

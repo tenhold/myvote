@@ -57,8 +57,8 @@ const MyElection = ({ user }) => {
 
   const removeCandidate = (id, e) => {
     console.log('remove cand', id)
+    axios.delete(`/api/ballots/${id}`)
     e.preventDefault();
-    axios.delete(`/api/ballot/${id}`)
     const candidateRemove = myCandidates.filter(  
       candidate => candidate.contest_office_id !== id
 
