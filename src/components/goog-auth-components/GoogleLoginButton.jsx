@@ -45,7 +45,6 @@ const GoogleLoginButton = ({ isLoggedIn, onSignIn, handleLoginUser }) => {
         style={{ marginTop: '500px' }}
         isSignedIn={true}
       />
-      {console.log('can i plz be logged in now', isLoggedIn)}
     </div>
   );
 };

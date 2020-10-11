@@ -3,17 +3,7 @@ import NavBar from '../style-components/NavBar.jsx';
 import { List, ListItem, ListItemText } from '@material-ui/core';
 import { Grid, Button } from '@material-ui/core';
 
-const MyProfile = ({
-  firstName,
-  lastName,
-  email,
-  address,
-  city,
-  state,
-  zipcode,
-  dob,
-  party_affiliation,
-}) => {
+const MyProfile = ({ firstName, lastName, email, address, dob, party }) => {
   const mystyle = {
     color: 'white',
     backgroundColor: 'Crimson',
@@ -61,25 +51,22 @@ const MyProfile = ({
             <ListItemText primary='Email' secondary={email}></ListItemText>
           </ListItem>
           <ListItem>
-            <ListItemText primary='Address' secondary={address}></ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText primary='City' secondary={city}></ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText primary='State' secondary={state}></ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText primary='Zipcode' secondary={zipcode}></ListItemText>
+            <ListItemText
+              primary='Address, City, State, Zipcode'
+              secondary={address}
+            ></ListItemText>
           </ListItem>
 
           <ListItem>
-            <ListItemText primary='DOB' secondary={dob}></ListItemText>
+            <ListItemText
+              primary='Date of Birth'
+              secondary={dob}
+            ></ListItemText>
           </ListItem>
           <ListItem>
             <ListItemText
-              primary='Party'
-              secondary={party_affiliation}
+              primary='Party Affiliation'
+              secondary={party}
             ></ListItemText>
           </ListItem>
         </List>

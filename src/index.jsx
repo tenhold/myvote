@@ -90,8 +90,13 @@ const Index = () => {
           render={() => <Homepage isLoggedIn={isLoggedIn} user={user} />}
         ></Route>
 
-        <Route path='/myprofile' render={() => <MyProfile />}></Route>
-        <Route path='/userform' render={() => <UserForm />}></Route>
+        <Route
+          path='/myprofile'
+          render={() => <MyProfile user={user} />}
+        ></Route>
+        <Route path='/userform' render={() => <UserForm user={user} />}></Route>
+        <Route path='/confirm' render={() => <Confirm user={user} />}></Route>
+
         <Route
           path='/myelection'
           render={() => <MyElection user={user} />}
