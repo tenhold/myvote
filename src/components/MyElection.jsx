@@ -20,26 +20,24 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.secondary,
   },
 }));
-// const voter_id = '266077';
+
 
 const MyElection = ({ user }) => {
 
   // CHANGE THIS BACK WHEN PROPS ARE BEING PASSED AROUND!!!!!!! 
   const { voter_id } = user;
 
-  // console.log('user in my election!!!', user)
-
   const [myCandidates, setMyCandidates] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [trickState, setTrickState] = useState('');
 
   const classes = useStyles();
-
+  
   useEffect(() => {
-    getDb();
-  }, []);
+    getDb(user);
+  }, [user]);
 
-  const getDb = () => {
+  const getDb = ({ voter_id }) => {
     axios.get(`/api/ballots/${voter_id}`)
     .then(data => {
       const mapCandidate = data.data.map(candidate => candidate);
@@ -56,7 +54,6 @@ const MyElection = ({ user }) => {
   };
 
   const removeCandidate = (id, e) => {
-    console.log('remove cand', id)
     axios.delete(`/api/ballots/${id}`)
     e.preventDefault();
     const candidateRemove = myCandidates.filter(  
@@ -66,7 +63,6 @@ const MyElection = ({ user }) => {
     );
     setMyCandidates(candidateRemove);
   };
-  console.log('state in myElection', myCandidates)
   return (
     <div className='container'>
       <NavBar />

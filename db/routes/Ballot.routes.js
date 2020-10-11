@@ -53,6 +53,7 @@ const handlePost = (async (req, res) => {
 
 
 router.get('/', async (req, res) => {
+  console.log('are you checking????????????????')
   try {
     const ballot = await Ballot.find();
     res.status(200).send(ballot);
@@ -63,24 +64,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-
-// router.get('/:voter_id', async (req, res) => {
-//   const { voter_id } = req.params;
-//   try {
-//     await Ballot.find({ voter_id });
-//     res.sendStatus(200);
-//   } catch (err) {
-//     res.status(500).send('ERROR IN GET VOTER_ID: ', err);
-//   }
-
-// });
-
 router.get('/:voter_id', (req, res) => {
   const { voter_id } = req.params;
   Ballot.find({ voter_id })
     .then(data => {
-      console.log('datain get', data);
-
       res.send(data)
     });
 });
@@ -98,13 +85,10 @@ router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const deleteIt = await Ballot.findOneAndDelete({ contest_office_id: id });
-    console.log(deleteIt);
     res.status(200).send('DELETED!');
   } catch (err) {
     res.status(500);
   }
-
-
 });
 
 
