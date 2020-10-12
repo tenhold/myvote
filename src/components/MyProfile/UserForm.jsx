@@ -1,126 +1,97 @@
-import React, { useState } from 'react';
-import FormUserDetails from './FormUserDetails.jsx';
-import Confirm from './Confirm.jsx';
-import MyProfile from './MyProfile.jsx';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { List, ListItem, ListItemText } from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import AppBar from '@material-ui/core/AppBar';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
-const UserForm = ({ user }) => {
-  const [step, setStep] = useState(1);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
-  const [dob, setDob] = useState('');
-  const [party, setParty] = useState('');
+const Confirm = ({
+  user,
+  values,
+  firstName,
+  lastName,
+  email,
+  address,
+  dob,
+  party,
+  nextStep,
+  previousStep,
+}) => {
+  // console.log('fname2 with values', values.firstName);
+  // Submit profile to page and database
+  const confirmProfile = (event) => {
+    event.preventDefault();
+    // Send data to API
+    axios
+      .patch(`/api/users/${user._id}`, {
+        firstName,
+        lastName,
+        address,
+        dob,
+        party,
+      })
+      .then((data) => {
+        console.log('axios patch', data);
+      })
+      .catch((err) => console.error('USER FORM ERROR: ', err));
 
-  // Proceed to next step in user form
-  const nextStep = () => {
-    // event.preventDefault();
-    setStep(step + 1);
+    nextStep();
+    console.log('in confirm prof function', firstName);
   };
-  // Go back to previous step in form
-  const previousStep = () => {
-    // event.preventDefault();
-    setStep(step - 1);
+
+  const back = (event) => {
+    event.preventDefault();
+    previousStep();
   };
 
-  const handleFields = (input) => (event) => {
-    // setFieldsObj({ [input]: event.target.value });
-    // forEach the state array and set the value if the key matches the .name
-    if (input === 'firstName') {
-      setFirstName(event.target.value);
-    } else if (input === 'lastName') {
-      setLastName(event.target.value);
-    } else if (input === 'email') {
-      setEmail(event.target.value);
-    } else if (input === 'address') {
-      setAddress(event.target.value);
-    } else if (input === 'dob') {
-      setDob(event.target.value);
-    } else if (input === 'party') {
-      setParty(event.target.value);
-    }
-    // const test = [event];
-    // console.log('test in HF', test);
-    // console.log({ [input]: event.target.value });
-  };
-  console.log('all states', firstName, lastName, email, address, dob, party);
-  // console.log('lastName state', lastName);
-
-  const setStateOfInputs = (event) => {
-    console.log('oh hello!');
-    //   if (event.target.name === 'firstName') {
-    //     setFirstName({ ['firstName']: event.target.value });
-    //   } else if (event.target.name === 'lastName') {
-    //     setLastName({ ['lastName']: event.target.value });
-    //   }
-    // setEmail({ ['email']: event.target.value });
-    // setAddress({ ['address']: event.target.value });
-    // setDob({ [event.target.name]: event.target.value });
-    // setParty({ [event.target.name]: event.target.value });
-  };
-  // const { firstName, lastName, email, address, dob, party } = input;
-
-  // console.log('valuesssss', values.firstName);
-  // console.log('fname state', firstName);
-  // console.log('lastName state', lastName);
-  // console.log('input', party, dob);
-  switch (step) {
-    case 1:
-      return (
-        <FormUserDetails
-          nextStep={nextStep}
-          previousStep={previousStep}
-          handleFields={handleFields}
-          setStateOfInputs={setStateOfInputs}
-          // values={values}
-          user={user}
-          firstName={firstName}
-          lastName={lastName}
-          email={email}
-          address={address}
-          dob={dob}
-          party={party}
-        />
-      );
-
-    case 2:
-      return (
-        <Confirm
-          nextStep={nextStep}
-          previousStep={previousStep}
-          handleFields={handleFields}
-          setStateOfInputs={setStateOfInputs}
-          user={user}
-          firstName={firstName}
-          lastName={lastName}
-          email={email}
-          address={address}
-          dob={dob}
-          party={party}
-        />
-      );
-
-    case 3:
-      return (
-        <MyProfile
-          firstName={firstName}
-          lastName={lastName}
-          email={email}
-          address={address}
-          dob={dob}
-          party={party}
-          nextStep={nextStep}
-          previousStep={previousStep}
-          handleFields={handleFields}
-          // values={values}
-          user={user}
-        />
-      );
-    case 4:
-      return <Success />;
-    default:
-      console.log('Hello world');
-  }
+  return (
+    <MuiThemeProvider>
+      <>
+        <Dialog open fullWidth maxWidth='sm'>
+          <AppBar title='Confirmation' />
+          <List>
+            <ListItem>
+              <ListItemText
+                primary='First Name'
+                secondary={firstName}
+              ></ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText
+                primary='Last Name'
+                secondary={lastName}
+              ></ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText primary='Email' secondary={email}></ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText
+                primary='Address, City, State, Zipcode'
+                secondary={address}
+              ></ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText
+                primary='Date of Birth'
+                secondary={dob}
+              ></ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemText primary='Party' secondary={party}></ListItemText>
+            </ListItem>
+          </List>
+          <Button color='primary' variant='contained' onClick={confirmProfile}>
+            Continue to Profile
+          </Button>
+          <Button color='secondary' variant='contained' onClick={back}>
+            Back
+          </Button>
+        </Dialog>
+      </>
+    </MuiThemeProvider>
+  );
 };
 
-export default UserForm;
+export default Confirm;

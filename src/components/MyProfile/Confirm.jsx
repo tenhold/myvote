@@ -1,97 +1,89 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { List, ListItem, ListItemText } from '@material-ui/core';
-import Dialog from '@material-ui/core/Dialog';
-import AppBar from '@material-ui/core/AppBar';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import {
+  Card,
+  CardActions,
+  CardContent,
+  Button,
+  Typography,
+  Avatar,
+  Grid,
+} from '@material-ui/core';
 
-const Confirm = ({
-  user,
-  values,
-  firstName,
-  lastName,
-  email,
-  address,
-  dob,
-  party,
-  nextStep,
-  previousStep,
-}) => {
-  // console.log('fname2 with values', values.firstName);
-  // Submit profile to page and database
-  const confirmProfile = (event) => {
-    event.preventDefault();
-    // Send data to API
-    axios
-      .patch(`/api/users/${user._id}`, {
-        firstName,
-        lastName,
-        address,
-        dob,
-        party,
-      })
-      .then((data) => {
-        console.log('axios patch', data);
-      })
-      .catch((err) => console.error('USER FORM ERROR: ', err));
+const useStyles = makeStyles({
+  root: {
+    minWidth: 275,
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+  marginAutoItem: {
+    margin: 'auto',
+  },
+});
 
-    nextStep();
-    console.log('in confirm prof function', firstName);
-  };
+const Candidate = ({ candidate, updateMyBallot }) => {
+  const classes = useStyles();
+  const {
+    ballot_item_display_name,
+    ballotpedia_candidate_url,
+    party,
+    candidate_photo_url_medium,
+    contest_office_name,
+    
+  } = candidate;
 
-  const back = (event) => {
-    event.preventDefault();
-    previousStep();
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
   };
 
   return (
-    <MuiThemeProvider>
-      <>
-        <Dialog open fullWidth maxWidth='sm'>
-          <AppBar title='Confirmation' />
-          <List>
-            <ListItem>
-              <ListItemText
-                primary='First Name'
-                secondary={firstName}
-              ></ListItemText>
-            </ListItem>
-            <ListItem>
-              <ListItemText
-                primary='Last Name'
-                secondary={lastName}
-              ></ListItemText>
-            </ListItem>
-            <ListItem>
-              <ListItemText primary='Email' secondary={email}></ListItemText>
-            </ListItem>
-            <ListItem>
-              <ListItemText
-                primary='Address, City, State, Zipcode'
-                secondary={address}
-              ></ListItemText>
-            </ListItem>
-            <ListItem>
-              <ListItemText
-                primary='Date of Birth'
-                secondary={dob}
-              ></ListItemText>
-            </ListItem>
-            <ListItem>
-              <ListItemText primary='Party' secondary={party}></ListItemText>
-            </ListItem>
-          </List>
-          <Button color='primary' variant='contained' onClick={confirmProfile}>
-            Continue to Profile
-          </Button>
-          <Button color='secondary' variant='contained' onClick={back}>
-            Back
-          </Button>
-        </Dialog>
-      </>
-    </MuiThemeProvider>
+    <div>
+      <Card className={classes.root} variant='outlined'>
+        <Grid container spacing={1}>
+          <Grid item xs={12} spacing={1}>
+            <CardContent>
+              <Typography
+                className={classes.title}
+                color='textSecondary'
+                gutterBottom
+              >
+                {party}
+              </Typography>
+
+              <Avatar
+                className={classes.marginAutoItem}
+                src={candidate_photo_url_medium}
+              />
+
+              <a href={ballotpedia_candidate_url} target='_blank'>
+                {ballot_item_display_name}
+              </a>
+
+              <Typography className={classes.pos} color='textSecondary'>
+                {contest_office_name}
+              </Typography>
+              <Typography variant='body2' component='p'></Typography>
+            </CardContent>
+            <CardActions>
+              <Button
+                className={classes.marginAutoItem}
+                size='small'
+                color='primary'
+                variant='outlined'
+                onClick={() => updateMyBallot(candidate)}
+              >
+                Add to your ballot
+              </Button>
+            </CardActions>
+          </Grid>
+        </Grid>
+      </Card>
+    </div>
   );
 };
 
-export default Confirm;
+export default Candidate;

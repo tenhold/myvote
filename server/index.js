@@ -35,6 +35,7 @@ app.use(express.static(DIR));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
+
 ////////////////        routes for authentication       ///////////////
 app.use(
   cookieSession({
@@ -58,9 +59,8 @@ app.use(
 // app.use('/auth', authRoutes);
 // app.use('/homepage', homeRoutes);
 ///////////////////////////////////////////////////////////////////////
-
 ///////////////         routes for database            ///////////////
-app.use('/api/users', usersRoute);
+app.use(usersRoute);
 app.use(voterRoute);
 app.use(mayorRoute);
 app.use(sosRoute);

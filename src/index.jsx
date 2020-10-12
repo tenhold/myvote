@@ -23,18 +23,7 @@ const Index = () => {
   useEffect(() => {
     const getNewUser = localStorage.getItem('newUser');
     setUser(JSON.parse(getNewUser));
-    // Grab the new user from the local storage
-    // Set the state of 'user' to the user that is logged in
-
-    // axios.get('/api/users')
-    //   .then(data => {
-    //     setUsers(data.data);
-    //   });
-    //   users.forEach(usr => {
-    //     if (usr.email === newUser.email) {
-    //       setUser(usr);
-    //     }
-    //   });
+   
   }, []);
 
   const toggleLogin = () => {
@@ -43,11 +32,6 @@ const Index = () => {
 
   const onSignIn = () => {
     setIsLoggedIn(!isLoggedIn);
-    // toggleLogin();
-    // const getNewUser = localStorage.getItem('newUser'); // Grab the new user from the local storage
-    // console.log('new user', getNewUser);
-    // setUser(JSON.parse(getNewUser));
-    // Set the state of 'user' to the user that is logged in
   };
 
   const onSignOut = googleUser => {
