@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import moment from 'moment';
+import { Divider } from '@material-ui/core';
 
 const ElectionCountdown = () => {
   const daysUntilElection = () => {
@@ -13,7 +14,7 @@ const ElectionCountdown = () => {
     let daysAway = Math.ceil(
       (presElection.getTime() - today.getTime()) / one_day
     );
-    return `${daysAway} days left until the United States Presidential Election!`;
+    return `Days Until the Presidential Election: ${daysAway}`;
   };
 
   return (
@@ -21,6 +22,8 @@ const ElectionCountdown = () => {
       <div style={{ textAlign: 'center' }}>
         <div className='title'>
           <h2>{daysUntilElection()}</h2>
+          <Divider light />
+          <h3>Election Day</h3>
           <h1>Tuesday, November 3, 2020</h1>
         </div>
       </div>

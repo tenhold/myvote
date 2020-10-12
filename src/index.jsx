@@ -43,7 +43,6 @@ const Index = () => {
 
 
   const toggleLogin = () => {
-    // setUser(user);
     setIsLoggedIn(!isLoggedIn);
   };
 
@@ -114,7 +113,10 @@ const Index = () => {
           path='/myelection'
           render={() => <MyElection user={user} />}
         ></Route>
-        <Route path='/mysupport' component={MySupport}></Route>
+        <Route
+          path='/mysupport'
+          render={() => <MySupport user={user} />}
+        ></Route>
       </Switch>
     </BrowserRouter>
   );
