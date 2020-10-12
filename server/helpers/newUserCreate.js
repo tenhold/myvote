@@ -5,7 +5,7 @@ const getCandidateList = require('./candidateList');
 
 // function to create a new user
 
-const newUserCreate = async (email, googleId, givenName, familyName) => {
+const Create = async (email, googleId, givenName, familyName) => {
   // look in the database to see if the email already exists
   const findUser = await axios.get(`/api/users/${email}`);
 
@@ -17,7 +17,7 @@ const newUserCreate = async (email, googleId, givenName, familyName) => {
     const voterAddress = await getVoterAddress();
     const { voter_location: address } = voterAddress.data;
 
-    const newUser = await axios.post('/api/users/add', {
+    axios.post('/api/users/add', {
       voter_device_id,
       voter_id,
       voter_we_vote_id,
@@ -25,13 +25,13 @@ const newUserCreate = async (email, googleId, givenName, familyName) => {
       googleId,
       givenName,
       familyName,
-      address
+      address,
     });
-    return newUser;
+    return;
   } else {
     console.info('user exists');
     return findUser;
   }
 };
 
-module.exports = newUserCreate;
+module.exports = Create;
