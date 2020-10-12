@@ -23,19 +23,18 @@ const Confirm = ({
   const confirmProfile = (event) => {
     event.preventDefault();
     // Send data to API
-    // axios
-    //   .patch(`/api/users/${user.id}`, {
-    //     firstName,
-    //     lastName,
-    //     email,
-    //     address,
-    //     dob,
-    //     party,
-    //   })
-    //   .then((data) => {
-    //     console.log('axios patch', data);
-    //   })
-    //   .catch((err) => console.error('USER FORM ERROR: ', err));
+    axios
+      .patch(`/api/users/${user._id}`, {
+        firstName,
+        lastName,
+        address,
+        dob,
+        party,
+      })
+      .then((data) => {
+        console.log('axios patch', data);
+      })
+      .catch((err) => console.error('USER FORM ERROR: ', err));
 
     nextStep();
     console.log('in confirm prof function', firstName);
