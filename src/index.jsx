@@ -42,6 +42,7 @@ const Index = () => {
   };
 
   const onSignIn = () => {
+    setIsLoggedIn(!isLoggedIn);
     // toggleLogin();
     // const getNewUser = localStorage.getItem('newUser'); // Grab the new user from the local storage
     // console.log('new user', getNewUser);

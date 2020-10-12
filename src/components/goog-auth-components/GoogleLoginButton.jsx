@@ -27,7 +27,7 @@ const GoogleLoginButton = ({ isLoggedIn, onSignIn, handleLoginUser }) => {
     refreshTokenId(res);
     // pass the current user to the index state.
     // handleLoginUser(createUser); // Stores new users to database
-    toggleLogin(); // Changes state of isLoggedIn
+    onSignIn(); // Changes state of isLoggedIn
     console.info('[Successfully logged in!] currentUser:', res.profileObj);
   };
 
