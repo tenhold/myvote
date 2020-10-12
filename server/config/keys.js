@@ -1,13 +1,10 @@
-require('dotenv').config();
-
-const { CLIENT_ID, CLIENT_SECRET, COOKIE_KEY } = process.env;
-
 module.exports = {
   google: {
-    clientID: CLIENT_ID,
-    clientSecret: CLIENT_SECRET,
+    clientID:
+      '331672915478-f4p3rsmm66jti767omjcf4tdujsbgjum.apps.googleusercontent.com',
+    clientSecret: 'QRSF0ntO80iJvku036BN19L8',
   },
   session: {
-    cookieKey: COOKIE_KEY,
+    cookieKey: 'immersion_10_2020_lima_beans_senior_greenfield',
   },
 };

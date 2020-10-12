@@ -1,86 +1,92 @@
 import React from 'react';
-import NavBar from '../style-components/NavBar.jsx';
+import PageNavBar from '../style-components/PageNavBar.jsx';
+import SettingsIcon from '@material-ui/icons/Settings';
 import { List, ListItem, ListItemText } from '@material-ui/core';
-import { Grid, InputAdornment } from '@material-ui/core';
-import { AccountCircle, LockRounded } from '@material-ui/icons';
-import { withStyles } from '@material-ui/styles';
-// import {
-//   ThemeProvider as MuiThemeProvider,
-//   createMuiTheme,
-// } from '@material-ui/core/styles';
-
-const MyProfile = ({
-  firstName,
-  lastName,
-  email,
-  address,
-  city,
-  state,
-  zipcode,
-  dob,
-  party_affiliation,
-}) => {
+import { Grid, Button } from '@material-ui/core';
+import whiteHouse from '../../../assets/constitution.jpg';
+const MyProfile = ({ firstName, lastName, email, address, dob, party }) => {
   const mystyle = {
     color: 'white',
     backgroundColor: 'Crimson',
     padding: '10px',
-    fontFamily: 'Helvetica',
+    fontFamily: 'HelveticaNeue-CondensedBold',
+  };
+
+  const styles = {
+    root: {
+      margin: '10px auto',
+      padding: '20px',
+      maxWidth: 500,
+      maxHeight: 300,
+    },
+    header: {
+      backgroundImage: `url(${whiteHouse})`,
+      height: '100vh',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+    },
+
+    content: {
+      height: '100%',
+      width: '100%',
+      backgroundColor: 'rgba(0, 0, 0, 0.0)',
+    },
   };
   return (
-    <div className='container'>
-      <NavBar />
-      <p></p>
-      <div className='header'>
-        <h1 style={mystyle}>MyProfile</h1>
-      </div>
-      <Grid
-        container
-        direction='column'
-        item
-        justify='center'
-        alignItems='center'
-        xs={12}
-      >
-        <List>
-          <ListItem>
-            <ListItemText
-              primary='First Name'
-              secondary={firstName}
-            ></ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText
-              primary='Last Name'
-              secondary={lastName}
-            ></ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText primary='Email' secondary={email}></ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText primary='Address' secondary={address}></ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText primary='City' secondary={city}></ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText primary='State' secondary={state}></ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText primary='Zipcode' secondary={zipcode}></ListItemText>
-          </ListItem>
+    <div className='container' style={styles.header}>
+      <PageNavBar />
 
-          <ListItem>
-            <ListItemText primary='DOB' secondary={dob}></ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText
-              primary='Party'
-              secondary={party_affiliation}
-            ></ListItemText>
-          </ListItem>
-        </List>
-      </Grid>
+      <div className='header' style={styles.content}>
+        {/* <Grid> */}
+        <h1 style={mystyle}>
+          MyProfile
+          <SettingsIcon
+            fontSize='large'
+            onClick={(event) =>
+              (window.location.href = 'http://localhost:8080/userform')
+            }
+          />
+        </h1>
+        {/* <SettingsIcon /> */}
+        {/* <Button
+          variant='contained'
+          color='secondary'
+          href='http://localhost:8080/userform'
+        >
+          EDIT PROFILE
+        </Button> */}
+        <div className='table'>
+          <table className='table'>
+            <tbody>
+              <tr>
+                <th scope='row'>First Name</th>
+                <td>{firstName}</td>
+              </tr>
+              <tr>
+                <th scope='row'>Last Name</th>
+                <td>{lastName}</td>
+              </tr>
+              <tr>
+                <th scope='row'>Email</th>
+                <td>{email}</td>
+              </tr>
+              <tr>
+                <th scope='row'>Address</th>
+                <td>{address}</td>
+              </tr>
+              <tr>
+                <th scope='row'>Date of Birth</th>
+                <td>{dob}</td>
+              </tr>
+              <tr>
+                <th scope='row'>Party Affiliation</th>
+                <td>{party}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

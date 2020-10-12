@@ -11,34 +11,41 @@ router.get('/', async (req, res) => {
   }
 });
 
+// only a check to see if the user exists in the database
+router.get('/:email', async (req, res) => {
+  const { email } = req.params;
+  const user = await Users.findOne({ email });
+  res.status(200).send(user)
+});
+
 router.post('/add', async (req, res) => {
-  console.log(req.body);
+  console.log('post request', req.body);
   const {
+    voter_device_id,
+    voter_id,
+    voter_we_vote_id,
     email,
-    password,
-    salt,
+    googleId,
+    givenName,
+    familyName,
     firstName,
     lastName,
     DOB,
     party,
-    address,
-    city,
-    state,
-    zipcode,
+    address
   } = req.body;
   try {
     const user = await Users.create({
+      voter_device_id,
+      voter_id,
+      voter_we_vote_id,
       email,
-      password,
-      salt,
-      firstName,
-      lastName,
+      googleId,
+      firstName: givenName || firstName,
+      lastName: familyName || lastName,
       DOB,
       party,
-      address,
-      city,
-      state,
-      zipcode,
+      address
     });
     res.status(201).send(user);
   } catch (err) {
@@ -52,13 +59,13 @@ router.post('/add', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
   const { id } = req.params;
-
+  console.log(req.body, 'patch!!!!')
+  console.log(id)
   try {
     await Users.findByIdAndUpdate(id, req.body);
-    const getUpdatedUser = await Users.findOne({ _id: id });
+    const getUdatedUser = await Users.findOne({ _id: id });
 
-    getUpdatedUser ? res.status(200).send(getUpdatedUser) : res.sendStatus(404);
-
+    getUdatedUser ? res.status(200).send(getUdatedUser) : res.sendStatus(404);
   } catch (err) {
     console.error('error in patch! ', err);
     res.sendStatus(500);

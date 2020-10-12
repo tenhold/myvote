@@ -1,6 +1,6 @@
 # myvote
 
-![MyVote Logo](assets/myvote_new_tag.png)
+![MyVote Logo](assets/myvote_lg.png)
 
 <!-- # MyVote
 ### Candidate information at your fingertips -->
@@ -39,7 +39,7 @@ _All this and more with MyVote!_
 
 ### Schema
 
-![Schema](assets/myVote.png)
+![Schema](assets/myVote_schema.png)
 
 ### Tech Stack
 

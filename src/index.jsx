@@ -1,101 +1,94 @@
-//////////////////  import bootstrap  ///////////////////////
-import { Container, Row, Col } from 'react-bootstrap';
-import "regenerator-runtime/runtime";
+import 'regenerator-runtime/runtime';
 
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import Friends from './components/Friends.jsx';
 import Homepage from './components/Homepage.jsx';
-import Logout from './components/Logout.jsx';
+import Login from './components/Login.jsx';
 import MyBallot from './components/MyBallot.jsx';
+import MySupport from './components/MySupport.jsx';
 import MyElection from './components/MyElection.jsx';
 import MyProfile from './components/MyProfile/MyProfile.jsx';
-import MySupport from './components/MySupport.jsx';
-import Login from './components/Login.jsx';
+import Logout from './components/Logout.jsx';
 import UserForm from './components/MyProfile/UserForm.jsx';
-import PledgeButton from './components/style-components/Button.jsx';
-import NavBar from './components/style-components/NavBar.jsx';
-import Greeting from './components/style-components/Greeting.jsx';
-import logoLg from '../assets/myvote_lg.png';
-import {
-  BrowserRouter,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-} from 'react-router-dom';
 
-class Index extends React.Component {
-  constructor(props) {
-    super(props);
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
-    this.state = {
-      users: [],
-      user: '', // will load the current logged in user unique id ie. _id,
-      isLoggedIn: true,
-    };
-  }
+const Index = () => {
+  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [test, setTest] = useState('');
 
-  componentDidMount() {
-    axios.get('/api/users').then((users) => {
-      const { data } = users;
-      this.setState({
-        users: data,
-        user: data[0],
-      });
-    });
-  }
+  useEffect(() => {
+    const getNewUser = localStorage.getItem('newUser');
+    setUser(JSON.parse(getNewUser));
+   
+  }, []);
 
-  render() {
-    const { page, user, users } = this.state;
-    return (
-      <div className='Index'>
-        {/* <Greeting page={page} user={user} /> */}
-        {/* <NavBar /> */}
-        <br></br>
-        <BrowserRouter>
-          <div>
-            <ul>
-              <li>
-                <Link to='/login'>Login</Link>
-              </li>
-              <li>
-                <Link to='/homepage'>Home</Link>
-              </li>
-              <li>
-                <Link to='/myprofile'>MyProfile</Link>
-              </li>
-              <li>
-                <Link to='/myballot'>MyBallot</Link>
-              </li>
-              <li>
-                <Link to='/myelection'>MyElection</Link>
-              </li>
-              <li>
-                <Link to='/mysupport'>MySupport</Link>
-              </li>
-              <li>
-                <Link to='/logout'>Logout</Link>
-              </li>
-            </ul>
-          </div>
-          <Route path='/login' component={Login}></Route>
-          <Route path='/homepage' component={Homepage}></Route>
-          {/* <Route path='/myprofile' component={UserForm}></Route> */}
-          <Route path='/myprofile' render={() => <UserForm user={user} />}></Route>
-          <Route path='/myballot' component={MyBallot}></Route>
-          {/* <Route path='/myelection' component={MyElection}></Route> */}
-          <Route path='/myelection' render={() => <MyElection user={user} />}></Route>
-          <Route path='/mysupport' component={MySupport}></Route>
-          <Route path='/logout' component={Logout}></Route>
-          <Route path='/homepage' component={Homepage} />
-        </BrowserRouter>
-      </div>
-    );
-  }
-}
+  const toggleLogin = () => {
+    setIsLoggedIn(!isLoggedIn);
+  };
+
+  const onSignIn = () => {
+    setIsLoggedIn(!isLoggedIn);
+  };
+
+  const onSignOut = googleUser => {
+    toggleLogin();
+    console.log(`Signed out ${googleUser}`);
+  };
+
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route
+          path='/'
+          exact
+          strict
+          render={() =>
+            isLoggedIn ? (
+              <Homepage user={user} isLoggedIn={isLoggedIn} />
+            ) : (
+              <Redirect to='/login' />
+            )
+          }
+        ></Route>
+
+        <Route
+          path='/login'
+          render={() =>
+            isLoggedIn ? (
+              <Redirect to='/homepage' />
+            ) : (
+              <Login isLoggedIn={isLoggedIn} onSignIn={onSignIn} />
+            )
+          }
+        ></Route>
+        <Route
+          path='/homepage'
+          render={() => <Homepage isLoggedIn={isLoggedIn} user={user} />}
+        ></Route>
+
+        <Route
+          path='/myprofile'
+          render={() => <MyProfile user={user} />}
+        ></Route>
+        <Route path='/userform' render={() => <UserForm user={user} />}></Route>
+        <Route path='/confirm' render={() => <Confirm user={user} />}></Route>
+
+        <Route
+          path='/myelection'
+          render={() => <MyElection user={user} />}
+        ></Route>
+        <Route
+          path='/mysupport'
+          render={() => <MySupport user={user} />}
+        ></Route>
+      </Switch>
+    </BrowserRouter>
+  );
+};
 
 export default Index;
 

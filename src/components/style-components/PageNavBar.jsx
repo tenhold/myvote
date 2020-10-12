@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
   '& > *': {
     margin: theme.spacing(5),
   },
-
   logo: {
     width: 195,
     height: 95,
@@ -34,9 +33,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavBar = ({ user }) => {
+const PageNavBar = () => {
   const classes = useStyles();
-  console.log('user in Nav', user);
+
   return (
     <BrowserRouter>
       <nav className={classes.root}>
@@ -48,7 +47,7 @@ const NavBar = ({ user }) => {
               </a>
             </Typography>
             <Typography style={{ flexGrow: 1 }} variant='h4'>
-              Welcome, {user.firstName}!
+              Your vote counts!
             </Typography>
             <Button
               style={{ fontSize: '23px' }}
@@ -89,4 +88,4 @@ const NavBar = ({ user }) => {
   );
 };
 
-export default NavBar;
+export default PageNavBar;

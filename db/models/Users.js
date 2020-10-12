@@ -1,13 +1,21 @@
 const { Schema, model } = require('mongoose');
-const { TRUE } = require('node-sass');
+// const mongoose = require('mongoose');
+// const { TRUE } = require('node-sass');
 
 const usersSchema = new Schema({
   voter_device_id: {
     // retreved from the we vote api
     type: String,
     unique: true,
-    default: null,
     // required: true
+  },
+  voter_id: {
+    type: String,
+    unique: true,
+  },
+  voter_we_vote_id: {
+    type: String,
+    unique: true
   },
   googleId: String,
   email: {
@@ -15,8 +23,6 @@ const usersSchema = new Schema({
     unique: true,
     required: true,
   },
-  password: String,
-  salt: String,
   firstName: {
     type: String,
     required: true,
@@ -37,22 +43,6 @@ const usersSchema = new Schema({
     type: String,
     required: true,
   },
-
-  city: {
-    type: String,
-    required: true,
-  },
-
-  state: {
-    type: String,
-    required: true,
-  },
-
-  zipcode: {
-    type: String,
-    required: true,
-  },
-
   pledge: {
     type: Number,
     default: 1,

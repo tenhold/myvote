@@ -1,44 +1,61 @@
-// import React from 'react';
-
-//////////////////  import bootstrap  ///////////////////////
-import { Container, Row, Col } from 'react-bootstrap';
-
-// import ReactDOM from "react-dom";
-import moment from 'moment';
-import axios from 'axios';
+import React, { useState } from 'react';
 import NavBar from './style-components/NavBar.jsx';
-import Greeting from './style-components/Greeting.jsx';
-import MyProfile from './MyProfile/MyProfile.jsx';
-import MyElection from './MyElection.jsx';
-import MyBallot from './MyBallot.jsx';
-import Login from './Login.jsx';
-import Logout from './Logout.jsx';
-import MySupport from './MySupport.jsx';
-import PledgeButton from './style-components/Button.jsx';
-import Friends from './Friends.jsx';
-import logoLg from '../../assets/myvote_lg.png';
+import ElectionCountdown from '../components/style-components/ElectionCountdown.jsx';
+import logoLg from '../../assets/myvote_sm.png';
+import { Grid, Paper, Typography, Box } from '@material-ui/core';
+import WH4 from '../../assets/WH4.jpg';
+import moment from 'moment';
+import Button from '../components/style-components/Button.jsx';
+import Friends from '../components/Friends.jsx';
 
-const Homepage = ({ page, user, users }) => {
+const Homepage = ({ user }) => {
+  const styles = {
+    root: {
+      margin: '10px auto',
+      padding: '20px',
+      maxWidth: 500,
+      maxHeight: 300,
+    },
+    header: {
+      backgroundImage: `url(${WH4})`,
+      height: '100vh',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+    },
+
+    content: {
+      height: '100%',
+      width: '100%',
+      // backgroundColor: 'rgba(0, 0, 0, 0.0)',
+    },
+  };
+  const m = moment();
+  const date = m.format('dddd, MMMM Do YYYY');
+
+  console.log('user on the homepage', user);
   return (
     <div className='container'>
-      {/* <Greeting user={user} users={users} /> */}
-      <NavBar />
-      <br></br>
-      {/* <div> */}
-      <center>
-        <img src={logoLg} />
-      </center>
-      {/* </div> */}
-      {/* <Container className='pledge' fluid='sm'>
-        <Row>
-          <Col>
-            <PledgeButton user={user} />
-          </Col>
-          <Col>
-            <Friends users={users} />
-          </Col>
-        </Row>
-      </Container> */}
+      <NavBar user={user} />
+      <div style={styles.header}>
+        <div style={styles.content}>
+          <center>
+            <img src={logoLg} />
+            <div className='content'>
+              <Typography component='div'>
+                <Box
+                  fontFamily='HelveticaNeue-CondensedBold'
+                  fontSize='h5.fontSize'
+                  m={5}
+                >
+                  {<h4>{date}</h4>}
+                  <ElectionCountdown />
+                </Box>
+              </Typography>
+            </div>
+          </center>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,8 +1,6 @@
 const axios = require('axios');
 const createVoterId = require('./createVoterId');
 
-const electionData = require('../../data.json');
-
 
 const getCandidateList = async (voterDeviceId, address) => {
   try {

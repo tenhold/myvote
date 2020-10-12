@@ -1,48 +1,16 @@
 const { Schema, model } = require("mongoose");
 
 const ballotSchema = new Schema({
-  // what info do we need to store.
-  userId: {
-    type: String,
-    unique: true,
-    required: true
-  },
-  president: {
-    type: String,
-    default: null
-  },
-  house: {
-    type: String,
-    default: null
-  },
-  senate: {
-    type: String,
-    default: null
-  },
-  districtAttorney: {
-    type: String,
-    default: null
-  },
-  schoolBoard: {
-    type: String,
-    default: null
-  },
-  trafficCourt: {
-    type: String,
-    default: null
-  },
-  juvenileCourt: {
-    type: String,
-    default: null
-  },
-  criminalCourt: {
-    type: String,
-    default: null
-  },
-  civilCourt: {
-    type: String,
-    default: null
-  }
+  voter_id: String,
+  id: Number,
+  contest_office_id: Number,
+  contest_office_we_vote_id: String,
+  contest_office_name: String,
+  ballot_item_display_name: String,
+  party: String,
+  candidate_photo_url_medium: String,
+  kind_of_ballot_item: String,
+  ballotpedia_candidate_url: String
 });
 
 const Ballot = model("Ballot", ballotSchema);
