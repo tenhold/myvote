@@ -6,39 +6,21 @@ import AppBar from '@material-ui/core/AppBar';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
-export class Confirm extends Component {
-
-  componentDidMount = () => {
-    const {
-        firstName,
-        lastName,
-        email,
-        address,
-        city,
-        state,
-        zipcode,
-        dob,
-        party_affiliation
-    } = this.props.values;
-    const { _id } = this.props.user;
-    axios.patch(`/api/users/${_id}`, {
-      firstName,
-        lastName,
-        email,
-        address,
-        city,
-        state,
-        zipcode,
-        dob,
-        party_affiliation
-    })
-      .then((data) => {
-        console.log('axios patch', data);
-      })
-      .catch(err => console.error('USER FORM ERROR: ', err));
-  };
-
-  continue = (event) => {
+const Confirm = ({
+  user,
+  values,
+  firstName,
+  lastName,
+  email,
+  address,
+  dob,
+  party,
+  nextStep,
+  previousStep,
+}) => {
+  // console.log('fname2 with values', values.firstName);
+  // Submit profile to page and database
+  const confirmProfile = (event) => {
     event.preventDefault();
     // Send data to API
     // axios
