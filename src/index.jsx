@@ -30,7 +30,6 @@ const Index = () => {
   }, []);
 
   const toggleLogin = () => {
-    // setUser(user);
     setIsLoggedIn(!isLoggedIn);
   };
 

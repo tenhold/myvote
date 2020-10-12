@@ -44,6 +44,12 @@ const styles = {
 };
 
 const MyElection = ({ user }) => {
+  const mystyle = {
+    color: 'white',
+    backgroundColor: 'Crimson',
+    padding: '10px',
+    fontFamily: 'HelveticaNeue-CondensedBold',
+  };
   // CHANGE THIS BACK WHEN PROPS ARE BEING PASSED AROUND!!!!!!!
   const { voter_id } = user;
 
@@ -113,6 +119,7 @@ const MyElection = ({ user }) => {
     <div className='container' style={styles.header}>
       <PageNavBar />
       <div className={classes.root} style={styles.content}>
+        <h1 style={mystyle}>MyElection</h1>
         <Grid container spacing={3}>
           <Grid item xs={6}>
             <Paper className={classes.paper}>

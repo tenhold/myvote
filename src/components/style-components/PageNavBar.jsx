@@ -46,16 +46,12 @@ const PageNavBar = () => {
                 <img className={classes.logo} src={logo} />
               </a>
             </Typography>
-            <Typography
-              style={{ flexGrow: 1 }}
-              variant='h4'
-              fontFamily='HelveticaNeue-CondensedBold'
-            >
+            <Typography style={{ flexGrow: 1 }} variant='h4'>
               Your vote counts!
             </Typography>
             <Button
               style={{ fontSize: '23px' }}
-              // fullWidth={true}
+              fullWidth={true}
               color='inherit'
               href='http://localhost:8080/mysupport'
               size='large'
@@ -67,7 +63,7 @@ const PageNavBar = () => {
             </Button>
             <Button
               style={{ fontSize: '23px' }}
-              // fullWidth={true}
+              fullWidth={true}
               color='inherit'
               href='http://localhost:8080/myelection'
               size='large'
@@ -77,7 +73,7 @@ const PageNavBar = () => {
             </Button>
             <Button
               style={{ fontSize: '23px' }}
-              // fullWidth={true}
+              fullWidth={true}
               color='inherit'
               href='http://localhost:8080/myprofile'
               size='large'

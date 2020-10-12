@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
   '& > *': {
     margin: theme.spacing(5),
   },
+
   logo: {
     width: 195,
     height: 95,
@@ -46,16 +47,12 @@ const NavBar = ({ user }) => {
                 <img className={classes.logo} src={logo} />
               </a>
             </Typography>
-            <Typography
-              style={{ flexGrow: 1 }}
-              variant='h4'
-              fontFamily='HelveticaNeue-CondensedBold'
-            >
+            <Typography style={{ flexGrow: 1 }} variant='h4'>
               Welcome, {user.firstName}!
             </Typography>
             <Button
               style={{ fontSize: '23px' }}
-              // fullWidth={true}
+              fullWidth={true}
               color='inherit'
               href='http://localhost:8080/mysupport'
               size='large'
@@ -67,7 +64,7 @@ const NavBar = ({ user }) => {
             </Button>
             <Button
               style={{ fontSize: '23px' }}
-              // fullWidth={true}
+              fullWidth={true}
               color='inherit'
               href='http://localhost:8080/myelection'
               size='large'
@@ -77,7 +74,7 @@ const NavBar = ({ user }) => {
             </Button>
             <Button
               style={{ fontSize: '23px' }}
-              // fullWidth={true}
+              fullWidth={true}
               color='inherit'
               href='http://localhost:8080/myprofile'
               size='large'

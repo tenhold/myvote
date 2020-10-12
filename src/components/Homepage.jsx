@@ -5,6 +5,8 @@ import logoLg from '../../assets/myvote_sm.png';
 import { Grid, Paper, Typography, Box } from '@material-ui/core';
 import WH4 from '../../assets/WH4.jpg';
 import moment from 'moment';
+import Button from '../components/style-components/Button.jsx';
+import Friends from '../components/Friends.jsx';
 
 const Homepage = ({ user }) => {
   const styles = {
@@ -25,7 +27,7 @@ const Homepage = ({ user }) => {
     content: {
       height: '100%',
       width: '100%',
-      backgroundColor: 'rgba(0, 0, 0, 0.0)',
+      // backgroundColor: 'rgba(0, 0, 0, 0.0)',
     },
   };
   const m = moment();
@@ -41,14 +43,7 @@ const Homepage = ({ user }) => {
         <div style={styles.content}>
           <center>
             <img src={logoLg} />
-            <div
-              className='content'
-              style={(fontFamily = 'HelveticaNeue-CondensedBold')}
-            >
-              {/* <Grid> */}
-              {/* <Paper style={styles.root} square={false} variant='elevation' >
-              </Paper> */}
-              {/* </Grid> */}
+            <div className='content'>
               <Typography component='div'>
                 <Box
                   fontFamily='HelveticaNeue-CondensedBold'
