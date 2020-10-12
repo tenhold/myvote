@@ -26,8 +26,21 @@ const Index = () => {
 
   useEffect((user) => {
     const getNewUser = localStorage.getItem('newUser'); // Grab the new user from the local storage
+    const newUser = JSON.parse(getNewUser);
     setUser(JSON.parse(getNewUser)); // Set the state of 'user' to the user that is logged in
-  }, []);
+
+    axios.get('/api/users')
+      .then(data => {
+        setUsers(data.data);
+      });
+      users.forEach(usr => {
+        if (usr.email === newUser.email) {
+          setUser(usr);
+        }
+      });
+  }, [user]);
+
+
 
   const toggleLogin = () => {
     // setUser(user);
@@ -110,3 +123,5 @@ const Index = () => {
 export default Index;
 
 ReactDOM.render(<Index />, document.getElementById('root'));
+
+
