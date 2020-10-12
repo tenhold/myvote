@@ -37,8 +37,6 @@ const Homepage = ({ user }) => {
   return (
     <div className='container'>
       <NavBar user={user} />
-      {/* {!user && <div>Loading name...</div>}
-      {user && <h1>Welcome {user.firstName}</h1>} */}
       <div style={styles.header}>
         <div style={styles.content}>
           <center>
@@ -61,32 +59,5 @@ const Homepage = ({ user }) => {
     </div>
   );
 };
-
-// class Homepage extends Component {
-//   constructor(props) {
-//     super(props);
-//   }
-//   render() {
-//     console.log('props homepage', this.props.user);
-//     const { firstName } = this.props.user;
-//     return (
-//       <div className='container'>
-//         <NavBar />
-//         <br></br>
-//         <br></br>
-//         <br></br>
-//         <br></br>
-//         <br></br>
-//         <center>
-//           <img src={logoLg} />
-//         </center>
-//         <p></p>
-//         <p></p>
-//         <h1>Welcome {firstName} </h1>
-//         <ElectionCountdown />
-//       </div>
-//     );
-//   }
-// }
 
 export default Homepage;

@@ -20,47 +20,39 @@ const Index = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [test, setTest] = useState('');
 
-  const testFunc = () => {
-    console.log('in test func: ', user);
-  };
+  useEffect(() => {
+    const getNewUser = localStorage.getItem('newUser');
+    setUser(JSON.parse(getNewUser));
+    // Grab the new user from the local storage
+    // Set the state of 'user' to the user that is logged in
 
-  useEffect((user) => {
-    const getNewUser = localStorage.getItem('newUser'); // Grab the new user from the local storage
-    const newUser = JSON.parse(getNewUser);
-    setUser(JSON.parse(getNewUser)); // Set the state of 'user' to the user that is logged in
-
-    axios.get('/api/users')
-      .then(data => {
-        setUsers(data.data);
-      });
-      users.forEach(usr => {
-        if (usr.email === newUser.email) {
-          setUser(usr);
-        }
-      });
-  }, [user]);
-
-
+    // axios.get('/api/users')
+    //   .then(data => {
+    //     setUsers(data.data);
+    //   });
+    //   users.forEach(usr => {
+    //     if (usr.email === newUser.email) {
+    //       setUser(usr);
+    //     }
+    //   });
+  }, []);
 
   const toggleLogin = () => {
     setIsLoggedIn(!isLoggedIn);
   };
 
   const onSignIn = () => {
-    toggleLogin();
-    const getNewUser = localStorage.getItem('newUser'); // Grab the new user from the local storage
-    console.log('new user', getNewUser);
-    setUser(JSON.parse(getNewUser)); // Set the state of 'user' to the user that is logged in
-    testFunc();
+    setIsLoggedIn(!isLoggedIn);
+    // toggleLogin();
+    // const getNewUser = localStorage.getItem('newUser'); // Grab the new user from the local storage
+    // console.log('new user', getNewUser);
+    // setUser(JSON.parse(getNewUser));
+    // Set the state of 'user' to the user that is logged in
   };
 
-  const onSignOut = (googleUser) => {
+  const onSignOut = googleUser => {
     toggleLogin();
     console.log(`Signed out ${googleUser}`);
-  };
-
-  const handleLoginUser = (user) => {
-    setUser(user.givenName);
   };
 
   return (
@@ -72,11 +64,7 @@ const Index = () => {
           strict
           render={() =>
             isLoggedIn ? (
-              <Homepage
-                user={user}
-                isLoggedIn={isLoggedIn}
-                handleLoginUser={handleLoginUser}
-              />
+              <Homepage user={user} isLoggedIn={isLoggedIn} />
             ) : (
               <Redirect to='/login' />
             )
@@ -89,11 +77,7 @@ const Index = () => {
             isLoggedIn ? (
               <Redirect to='/homepage' />
             ) : (
-              <Login
-                isLoggedIn={isLoggedIn}
-                onSignIn={onSignIn}
-                handleLoginUser={handleLoginUser}
-              />
+              <Login isLoggedIn={isLoggedIn} onSignIn={onSignIn} />
             )
           }
         ></Route>
@@ -125,5 +109,3 @@ const Index = () => {
 export default Index;
 
 ReactDOM.render(<Index />, document.getElementById('root'));
-
-

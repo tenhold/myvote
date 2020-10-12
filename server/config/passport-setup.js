@@ -37,9 +37,9 @@
 //             zipcode: null,
 //           })
 //             .save()
-//             .then((newUser) => {
-//               console.log('Added user: ', newUser);
-//               done(null, newUser);
+//             .then(() => {
+//               console.log('Added user: ', );
+//               done(null, );
 //             })
 //             .catch((err) => {
 //               console.log('Could not save user to database.', err);
